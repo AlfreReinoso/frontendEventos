@@ -5,6 +5,7 @@ import {AppComponent} from "../../app.component";
 import {NavbarComponent} from "../../Components/navbar/navbar.component";
 import {EventosComponent} from "../../Components/eventos/eventos.component";
 import {SalasComponent} from "../../Components/salas/salas.component";
+import {CardModule} from "primeng/card";
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import {SalasComponent} from "../../Components/salas/salas.component";
   imports: [
     CommonModule,
     PrimeNgModule,
+    CardModule,
   ],
   exports:[
     AppComponent,

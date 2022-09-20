@@ -102,7 +102,6 @@
       }
     }
   },
-  "defaultProject": "frontendEventos",
   "cli": {
     "analytics": "9ccd8335-e393-41df-8594-bc7b81dbd206"
   }
