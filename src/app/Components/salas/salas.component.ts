@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Sala} from '../../model/sala';
 import {SalaService} from '../../Services/sala.service';
-import {CardModule} from 'primeng/card';
 
 @Component({
   selector: 'app-salas',

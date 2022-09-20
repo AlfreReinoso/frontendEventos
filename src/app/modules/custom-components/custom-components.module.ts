@@ -6,6 +6,8 @@ import {NavbarComponent} from "../../Components/navbar/navbar.component";
 import {EventosComponent} from "../../Components/eventos/eventos.component";
 import {SalasComponent} from "../../Components/salas/salas.component";
 import {CardModule} from "primeng/card";
+import {RouterModule} from "@angular/router";
+import {ButtonModule} from "primeng/button";
 
 
 @NgModule({
@@ -19,6 +21,8 @@ import {CardModule} from "primeng/card";
     CommonModule,
     PrimeNgModule,
     CardModule,
+    RouterModule,
+    ButtonModule,
   ],
   exports:[
     AppComponent,
