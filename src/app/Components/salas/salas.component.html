@@ -1,17 +1,26 @@
 <div>
-  <table>
-    <caption>Salas</caption>
-    <thead>
-      <tr>
-        <th>Denominacion</th>
-        <th>Cantidad de Personas</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let sala of salas">
-        <td>{{sala.denominacion}}</td>
-        <td>{{sala.capacidad}}</td>
-      </tr>
-    </tbody>
-  </table>
+<!--  <p-table>-->
+<!--    <caption>Salas</caption>-->
+<!--    <thead>-->
+<!--      <tr>-->
+<!--        <th>Denominacion</th>-->
+<!--        <th>Cantidad de Personas</th>-->
+<!--      </tr>-->
+<!--    </thead>-->
+<!--    <tbody>-->
+<!--      <tr *ngFor="let sala of salas">-->
+<!--        <td>{{sala.denominacion}}</td>-->
+<!--        <td>{{sala.capacidad}}</td>-->
+<!--      </tr>-->
+<!--    </tbody>-->
+<!--  </p-table>-->
+  <p-card *ngFor="let sala of salas">
+    <ng-template pTemplate="header">
+      Nombre: {{sala.denominacion}}
+    </ng-template>
+    Body Content
+    <ng-template pTemplate="footer">
+      Cant Personas:{{sala.capacidad}}
+    </ng-template>
+  </p-card>
 </div>
