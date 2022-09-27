@@ -1,4 +1,5 @@
 import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import {PrimeNgModule} from "../prime-ng/prime-ng.module";
 import {AppComponent} from "../../app.component";
@@ -8,6 +9,9 @@ import {SalasComponent} from "../../Components/salas/salas.component";
 import {CardModule} from "primeng/card";
 import {RouterModule} from "@angular/router";
 import {ButtonModule} from "primeng/button";
+import {LoginComponent} from "../../Components/login/login.component";
+import {MenubarModule} from "primeng/menubar";
+import {DialogModule} from "primeng/dialog";
 
 
 @NgModule({
@@ -16,6 +20,7 @@ import {ButtonModule} from "primeng/button";
     NavbarComponent,
     EventosComponent,
     SalasComponent,
+    LoginComponent,
   ],
   imports: [
     CommonModule,
@@ -23,12 +28,16 @@ import {ButtonModule} from "primeng/button";
     CardModule,
     RouterModule,
     ButtonModule,
+    MenubarModule,
+    DialogModule,
+    BrowserAnimationsModule,
   ],
   exports:[
     AppComponent,
     NavbarComponent,
     EventosComponent,
     SalasComponent,
+    LoginComponent,
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

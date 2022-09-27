@@ -1,28 +1,8 @@
-<nav class="navbar navbar-expand-lg bg-light">
-  <div class="container-fluid">
-    <!-- <img src="../../49638-200.png" style="width: 2rem" alt="icon" /> -->
-    <a class="navbar-brand" href="#">Salones</a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-      OnClick = "findEventos"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Contacto</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled">Benedetti-Reinoso</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
+<p-menubar [model]="items">
+  <p-dialog [(visible)]="show">
+    <app-login></app-login>
+  </p-dialog>
+  <p-button (click)="displayLogin()"  label="Log In" icon="pi pi-power-on"></p-button>
+  <button *ngIf="!show" pButton label="Logout" icon="pi pi-power-off"></button>
+
+</p-menubar>
