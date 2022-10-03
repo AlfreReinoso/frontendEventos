@@ -1,11 +1,13 @@
 
 <span class="p-float-label">
-  <input id="float-username" type="text" pInputText>
+  <input id="float-username" type="text" pInputText [(ngModel)]="username">
   <label for="float-username">Username</label>
 </span>
 <span class="p-float-label">
-  <input id="float-password" type="text" pInputText>
+  <input id="float-password" type="text" pInputText [(ngModel)]="password">
   <label for="float-password">Password</label>
 </span>
+<button (click)=handleJWTAuthLogin() class="btn btn-success">Login</button>
+
 
 

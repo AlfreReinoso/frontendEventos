@@ -12,6 +12,7 @@ import {ButtonModule} from "primeng/button";
 import {LoginComponent} from "../../Components/login/login.component";
 import {MenubarModule} from "primeng/menubar";
 import {DialogModule} from "primeng/dialog";
+import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import {DialogModule} from "primeng/dialog";
     MenubarModule,
     DialogModule,
     BrowserAnimationsModule,
+    FormsModule,
   ],
   exports:[
     AppComponent,
