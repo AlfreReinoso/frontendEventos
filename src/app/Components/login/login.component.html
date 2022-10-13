@@ -7,7 +7,8 @@
   <input id="float-password" type="text" pInputText [(ngModel)]="password">
   <label for="float-password">Password</label>
 </span>
-<button (click)=handleJWTAuthLogin() class="btn btn-success">Login</button>
+<p-button (click)=handleJWTAuthLogin() class="btn btn-success">Login</p-button>
+<div *ngIf="invalidLogin">{{message}}</div>
 
 
 

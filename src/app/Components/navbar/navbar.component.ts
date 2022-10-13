@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MenuItem} from "primeng/api";
+import {BasicJWTAuthServicesService} from "../../Services/basic-jwtauth-services.service";
 
 @Component({
   selector: 'app-navbar',
@@ -12,26 +13,26 @@ export class NavbarComponent implements OnInit {
 
   show:boolean = true;
 
-  constructor() { }
+  constructor(private _basicJwtAuthServices: BasicJWTAuthServicesService) { }
 
   ngOnInit(): void {
     this.items = [
       {
-        label: 'File',
+        label: 'Eventos',
         items: [{
-          label: 'New',
+          label: 'Ver',
           icon: 'pi pi-fw pi-plus',
           items: [
-            {label: 'Project'},
-            {label: 'Other'},
+            {label: 'Tipos'},
+            {label: 'Fechas'},
           ]
         },
-          {label: 'Open'},
-          {label: 'Quit'}
+          {label: 'Hola'},
+          {label: 'Chau'}
         ]
       },
       {
-        label: 'Edit',
+        label: 'A',
         icon: 'pi pi-fw pi-pencil',
         items: [
           {label: 'Delete', icon: 'pi pi-fw pi-trash'},
@@ -45,5 +46,10 @@ export class NavbarComponent implements OnInit {
   displayLogin(){
     console.log('funciona el display');
     this.show = true;
+  }
+
+  setShowFalse() {
+    this._basicJwtAuthServices.logout();
+    this.show = false;
   }
 }

@@ -11,7 +11,8 @@ export class LoginComponent implements OnInit {
 
   username: string = '';
   password: string = '';
-  invalidLogin: boolean = true;
+  invalidLogin: boolean = false;
+  message: string = 'Error al loguearse';
 
   constructor(private router: Router,private basicAuthenticationServices: BasicJWTAuthServicesService) { }
 
@@ -23,8 +24,9 @@ export class LoginComponent implements OnInit {
       .subscribe(
           (data: any) => {
           // console.log(data);
-          this.router.navigate(['welcome', this.username]);
+          this.router.navigate(['salas']).then(r => console.log(r));
           this.invalidLogin = false;
+
         },
         (error: any) => {
           // console.log(error);

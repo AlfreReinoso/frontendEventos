@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Sala} from '../../model/sala';
 import {SalaService} from '../../Services/sala.service';
+import {AUTHENTICATED_USER} from "../../Services/basic-jwtauth-services.service";
 
 @Component({
   selector: 'app-salas',
@@ -14,12 +15,15 @@ export class SalasComponent implements OnInit {
   constructor(private salaservice: SalaService ) { }
 
   ngOnInit(): void {
-    this.salaservice.getSalas().subscribe(
+    if(sessionStorage.getItem(AUTHENTICATED_USER)){
+      this.salaservice.getSalas().subscribe(
         (response: Sala[]) => {
           this.salas = response;
           console.log(this.salas);
+          console.log(response);
         }
-    )
+      )
+    }
   }
 
 }

@@ -2,7 +2,7 @@
   <p-dialog [(visible)]="show">
     <app-login></app-login>
   </p-dialog>
-  <p-button (click)="displayLogin()"  label="Log In" icon="pi pi-power-on"></p-button>
-  <button *ngIf="!show" pButton label="Logout" icon="pi pi-power-off"></button>
+  <p-button *ngIf="!show" (click)="displayLogin()"  label="Log In" icon="pi pi-power-on"></p-button>
+  <button *ngIf="show" (click)="setShowFalse()" pButton label="Logout" icon="pi pi-power-off"></button>
 
 </p-menubar>

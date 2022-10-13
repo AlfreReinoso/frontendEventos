@@ -8,7 +8,8 @@ export const AUTHENTICATED_USER = 'authenticateUser';
 @Injectable({
   providedIn: 'root'
 })
-export class BasicJWTAuthServicesService {
+export class
+BasicJWTAuthServicesService {
 
   constructor(private http: HttpClient) { }
 
@@ -17,6 +18,8 @@ export class BasicJWTAuthServicesService {
     (`${API_URL}/authenticate`, {username, password}).pipe(
       map(
         data => {
+          console.log(data);
+          console.log(sessionStorage.getItem(TOKEN));
           sessionStorage.setItem(AUTHENTICATED_USER, username);
           sessionStorage.setItem(TOKEN, `Bearer ${data.token}`);
           return data;
@@ -27,11 +30,12 @@ export class BasicJWTAuthServicesService {
   getAuthenticatedUser() {
     return sessionStorage.getItem(AUTHENTICATED_USER);
   }
-  // getAuthenticatedToken() {
-  //   if (this.getAuthenticatedUser) {
-  //     return sessionStorage.getItem(TOKEN);
-  //   }
-  // }
+  getAuthenticatedToken() {
+    if (sessionStorage.getItem(AUTHENTICATED_USER)) {
+      return sessionStorage.getItem(TOKEN);
+    }
+    return null;
+  }
 
   isUserLoggedIn() {
     let user = sessionStorage.getItem(AUTHENTICATED_USER);
