@@ -13,6 +13,8 @@ import {LoginComponent} from "../../Components/login/login.component";
 import {MenubarModule} from "primeng/menubar";
 import {DialogModule} from "primeng/dialog";
 import {FormsModule} from "@angular/forms";
+import {DataViewModule} from "primeng/dataview";
+import {TableModule} from "primeng/table";
 
 
 @NgModule({
@@ -23,17 +25,19 @@ import {FormsModule} from "@angular/forms";
     SalasComponent,
     LoginComponent,
   ],
-  imports: [
-    CommonModule,
-    PrimeNgModule,
-    CardModule,
-    RouterModule,
-    ButtonModule,
-    MenubarModule,
-    DialogModule,
-    BrowserAnimationsModule,
-    FormsModule,
-  ],
+    imports: [
+        CommonModule,
+        PrimeNgModule,
+        CardModule,
+        RouterModule,
+        ButtonModule,
+        MenubarModule,
+        DialogModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        DataViewModule,
+        TableModule,
+    ],
   exports:[
     AppComponent,
     NavbarComponent,

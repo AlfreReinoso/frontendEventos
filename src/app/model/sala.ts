@@ -1,8 +1,8 @@
 export class Sala {
-     idSala: number = 0;
+     idSalon: number = 0;
      denominacion: string = '' ;
      capacidad: string = '';
-     costopordia: number = 0;
+     costoPorDia: number = 0;
 
      constructor(){
 

@@ -1,14 +1,23 @@
 
+  <tr>
+<!--    <td colspan="3">-->
+    <td>
+<!--      <div class="">-->
+          <p-card  [style]="{'width': '25rem', 'margin-bottom': '2em'}" *ngFor="let sala of salas" class="lg:col-4"
+                  styleClass="shadow-2">
+                      <ng-template pTemplate="header">
+                        Nombre: {{sala.denominacion}}
+                      </ng-template>
+                      <ng-template pTemplate="body">
+                        Costo: {{sala.costoPorDia}} <br>
+                        Cant Personas:{{sala.capacidad}}
+                      </ng-template>
+                      <ng-template pTemplate="footer">
+                        <button (click)="selectSalon(sala.idSalon)" pButton type="button" label="Ver" icon="pi pi-angle-right" iconPos="right" class="p-button-sm"></button>
+                      </ng-template>
+          </p-card>
+<!--      </div>-->
+    </td>
+  </tr>
 
-<p-card *ngFor="let sala of salas">
-    <ng-template pTemplate="header">
-      Nombre: {{sala.denominacion}}
-    </ng-template>
-    <ng-template pTemplate="body">
-      Costo: {{sala.costopordia}} <br>
-      Cant Personas:{{sala.capacidad}}
-    </ng-template>
-    <ng-template pTemplate="footer">
-    <button pButton type="button" label="Reservar" icon="pi pi-angle-right" iconPos="right" class="p-button-sm"></button>
-    </ng-template>
-</p-card>
+

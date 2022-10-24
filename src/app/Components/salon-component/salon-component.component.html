@@ -1,0 +1,13 @@
+<p-card  [style]="{'width': '25rem', 'margin-bottom': '2em'}" class="lg:col-4"
+         styleClass="shadow-2">
+  <ng-template pTemplate="header">
+    Nombre: {{salon.denominacion}}
+  </ng-template>
+  <ng-template pTemplate="body">
+    Costo: {{salon.costoPorDia}} <br>
+    Cant Personas:{{salon.capacidad}}
+  </ng-template>
+  <ng-template pTemplate="footer">
+<!--    <button (click)="selectSalon(sala.idSalon)" pButton type="button" label="Ver" icon="pi pi-angle-right" iconPos="right" class="p-button-sm"></button>-->
+  </ng-template>
+</p-card>

@@ -8,15 +8,19 @@ import {CustomComponentsModule} from "./modules/custom-components/custom-compone
 import {HttpIntercepterBasicAuthService} from "./Services/service/http-authenticate.service";
 import {LoginComponent} from "./Components/login/login.component";
 import {SalasComponent} from "./Components/salas/salas.component";
+import { SalonComponentComponent } from './Components/salon-component/salon-component.component';
+import {CardModule} from "primeng/card";
 
 @NgModule({
   declarations: [
+
+    SalonComponentComponent
   ],
-  imports: [HttpClientModule,
-    BrowserModule,
-    AppRoutingModule,
-    CustomComponentsModule,
-  ],
+    imports: [HttpClientModule,
+        BrowserModule,
+        AppRoutingModule,
+        CustomComponentsModule, CardModule,
+    ],
   providers: [
     {provide:HTTP_INTERCEPTORS, useClass:HttpIntercepterBasicAuthService, multi:true}
   ],
