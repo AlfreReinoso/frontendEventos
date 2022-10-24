@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MenuItem} from "primeng/api";
 import {BasicJWTAuthServicesService} from "../../Services/basic-jwtauth-services.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-navbar',
@@ -9,11 +10,19 @@ import {BasicJWTAuthServicesService} from "../../Services/basic-jwtauth-services
 })
 export class NavbarComponent implements OnInit {
 
+  username: string = '';
+  password: string = '';
+
   items: MenuItem[] = [];
 
-  show:boolean = true;
+  showLogin:boolean = true;
+  showLogOut: boolean = true;
 
-  constructor(private _basicJwtAuthServices: BasicJWTAuthServicesService) { }
+
+  invalidLogin: boolean = false;
+  message: string = 'Error en username / password'
+
+  constructor(private _basicJwtAuthServices: BasicJWTAuthServicesService, private router: Router) { }
 
   ngOnInit(): void {
     this.items = [
@@ -40,16 +49,43 @@ export class NavbarComponent implements OnInit {
         ]
       }
     ];
+
+    if(this._basicJwtAuthServices.getAuthenticatedUser()){
+      this.invalidLogin = false;
+      this.showLogin= false;
+      this.showLogOut = true;
+    }
   }
 
 
   displayLogin(){
     console.log('funciona el display');
-    this.show = true;
+    this.showLogin = false;
+    this.showLogOut = true;
   }
 
   setShowFalse() {
     this._basicJwtAuthServices.logout();
-    this.show = false;
+    this.showLogOut = false;
+    this.showLogin = true;
+    this.router.navigate(['']);
+  }
+
+  handleJWTAuthLogin() {
+    this._basicJwtAuthServices.executeJWTAuthenticationService(this.username, this.password)
+      .subscribe(
+        (data: any) => {
+
+          this.invalidLogin = false;
+          this.showLogin = false;
+          this.showLogOut = true;
+          this.router.navigate(['salas']);
+
+        },
+        (error: any) => {
+          // console.log(error);
+          this.invalidLogin = true;
+        }
+      );
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {BasicJWTAuthServicesService} from "../../Services/basic-jwtauth-services.service";
 import {Router} from "@angular/router";
 
@@ -8,6 +8,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  @Input() showLogin : boolean =  true;
 
   username: string = '';
   password: string = '';
@@ -23,9 +24,11 @@ export class LoginComponent implements OnInit {
     this.basicAuthenticationServices.executeJWTAuthenticationService(this.username, this.password)
       .subscribe(
           (data: any) => {
-          // console.log(data);
-          this.router.navigate(['salas']).then(r => console.log(r));
-          this.invalidLogin = false;
+
+            this.invalidLogin = false;
+            this.showLogin = false;
+          console.log(this.showLogin);
+         // this.router.navigate(['salas']).then(r => console.log(r));
 
         },
         (error: any) => {

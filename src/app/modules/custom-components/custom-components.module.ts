@@ -13,6 +13,10 @@ import {LoginComponent} from "../../Components/login/login.component";
 import {MenubarModule} from "primeng/menubar";
 import {DialogModule} from "primeng/dialog";
 import {FormsModule} from "@angular/forms";
+import {DataViewModule} from "primeng/dataview";
+import {TableModule} from "primeng/table";
+import {InputTextModule} from "primeng/inputtext";
+import {PasswordModule} from "primeng/password";
 
 
 @NgModule({
@@ -33,6 +37,10 @@ import {FormsModule} from "@angular/forms";
     DialogModule,
     BrowserAnimationsModule,
     FormsModule,
+    DataViewModule,
+    TableModule,
+    InputTextModule,
+    PasswordModule,
   ],
   exports:[
     AppComponent,

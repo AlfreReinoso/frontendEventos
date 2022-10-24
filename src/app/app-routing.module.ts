@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {SalasComponent} from "./Components/salas/salas.component";
-import {LoginComponent} from "./Components/login/login.component";
+import {SalonComponentComponent} from "./Components/salon-component/salon-component.component";
+import {NavbarComponent} from "./Components/navbar/navbar.component";
 
 const routes: Routes = [
-  {path:'', component:LoginComponent},
-  {path:'salas', component: SalasComponent}
+  {path:'salas', component: SalasComponent},
+  {path:'salon/:id',component:SalonComponentComponent}
 ];
 
 @NgModule({

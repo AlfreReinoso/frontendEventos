@@ -18,8 +18,8 @@ BasicJWTAuthServicesService {
     (`${API_URL}/authenticate`, {username, password}).pipe(
       map(
         data => {
-          console.log(data);
-          console.log(sessionStorage.getItem(TOKEN));
+          //console.log(data);
+          //console.log(sessionStorage.getItem(TOKEN));
           sessionStorage.setItem(AUTHENTICATED_USER, username);
           sessionStorage.setItem(TOKEN, `Bearer ${data.token}`);
           return data;

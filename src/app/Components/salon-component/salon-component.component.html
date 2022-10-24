@@ -1,0 +1,24 @@
+<h4 *ngIf="id==0">Nuevo Salon</h4>
+<form (ngSubmit)="!todoForm.invalid && saveSalon()" #todoForm="ngForm">
+  <fieldset >
+    <label for="salonDenominacion">Nombre</label>
+    <input type="text" id="salonDenominacion" pInputText
+           [(ngModel)]="salon.denominacion"
+           class="form-control"
+           name="denominacion" required="required" >
+  </fieldset>
+  <fieldset >
+    <label for="salonCostoPorDia">Precio p/dia</label>
+    <input type="text" id="salonCostoPorDia" pInputText [(ngModel)]="salon.costoPorDia"
+           class="form-control"
+           name="costoPorDia" required="required" >
+  </fieldset>
+  <fieldset >
+    <label for="capacidad">Capacidad</label>
+    <input type="text" id="capacidad" pInputText [(ngModel)]="salon.capacidad"
+           class="form-control"
+           name="capacidad" required="required" >
+  </fieldset>
+  <button pButton type="submit" class="p-button-success" >Save</button>
+  <button pButton class="p-button-danger" (click)="deleteSalon()">Delete</button>
+  </form>
