@@ -16,4 +16,10 @@ export class SalaService {
   getSalon(id: number): any {
     return this.http.get<Sala>(`http://localhost:8080/salas/${id}`);
   }
+  updateSalon(salon: Sala): any {
+    return this.http.put<Sala>(`http://localhost:8080/salas/update`, salon);
+  }
+  createSalon(salon: Sala): any {
+    return this.http.post<Sala>(`http://localhost:8080/salas/savesalon`, salon);
+  }
 }

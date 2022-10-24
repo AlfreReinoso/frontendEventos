@@ -15,6 +15,8 @@ import {DialogModule} from "primeng/dialog";
 import {FormsModule} from "@angular/forms";
 import {DataViewModule} from "primeng/dataview";
 import {TableModule} from "primeng/table";
+import {InputTextModule} from "primeng/inputtext";
+import {PasswordModule} from "primeng/password";
 
 
 @NgModule({
@@ -25,19 +27,21 @@ import {TableModule} from "primeng/table";
     SalasComponent,
     LoginComponent,
   ],
-    imports: [
-        CommonModule,
-        PrimeNgModule,
-        CardModule,
-        RouterModule,
-        ButtonModule,
-        MenubarModule,
-        DialogModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        DataViewModule,
-        TableModule,
-    ],
+  imports: [
+    CommonModule,
+    PrimeNgModule,
+    CardModule,
+    RouterModule,
+    ButtonModule,
+    MenubarModule,
+    DialogModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    DataViewModule,
+    TableModule,
+    InputTextModule,
+    PasswordModule,
+  ],
   exports:[
     AppComponent,
     NavbarComponent,
