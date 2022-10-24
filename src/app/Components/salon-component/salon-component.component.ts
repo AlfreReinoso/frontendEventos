@@ -42,6 +42,8 @@ export class SalonComponentComponent implements OnInit {
   }
 
   deleteSalon() {
-    //this._salaService.deleteSalon
+    this._salaService.deleteSalon(this.id).subscribe(
+      (data:any)=> console.log(data)
+    );
   }
 }

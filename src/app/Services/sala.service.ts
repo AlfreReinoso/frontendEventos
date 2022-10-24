@@ -22,4 +22,7 @@ export class SalaService {
   createSalon(salon: Sala): any {
     return this.http.post<Sala>(`http://localhost:8080/salas/savesalon`, salon);
   }
+  deleteSalon(id:number){
+    return this.http.delete<Sala>(`http://localhost:8080/salas/delete/${id}`);
+  }
 }
