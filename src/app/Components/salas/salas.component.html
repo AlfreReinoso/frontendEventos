@@ -1,23 +1,23 @@
-<table >
-  <tr >
-    <td class="" *ngFor="let sala of salas">
-      <p-card  [style]="{'width': '25rem', 'margin-bottom': '2em'}"  class="lg:col-4"
-                 styleClass="shadow-2">
-      <ng-template pTemplate="header">
-        Nombre: {{sala.denominacion}}
-      </ng-template>
-      <ng-template pTemplate="body">
-        Costo: {{sala.costoPorDia}} <br>
-        Cant Personas:{{sala.capacidad}}
-      </ng-template>
-      <ng-template pTemplate="footer">
-        <button (click)="selectSalon(sala.idSalon)" pButton type="button" label="Ver" icon="pi pi-angle-right" iconPos="right" class="p-button-sm"></button>
-      </ng-template>
-    </p-card>
-    </td>
-  </tr>
-</table>
-  <p-button (click)="selectSalon(0)" class="btn btn-sucess" icon="pi pi-plus"></p-button>
+<!--<table >-->
+<!--  <tr >-->
+<!--    <td class="" *ngFor="let sala of salas">-->
+<!--      <p-card  [style]="{'width': '25rem', 'margin-bottom': '2em'}"  class="lg:col-4"-->
+<!--                 styleClass="shadow-2">-->
+<!--      <ng-template pTemplate="header">-->
+<!--        Nombre: {{sala.denominacion}}-->
+<!--      </ng-template>-->
+<!--      <ng-template pTemplate="body">-->
+<!--        Costo: {{sala.costoPorDia}} <br>-->
+<!--        Cant Personas:{{sala.capacidad}}-->
+<!--      </ng-template>-->
+<!--      <ng-template pTemplate="footer">-->
+<!--        <button (click)="selectSalon(sala.idSalon)" pButton type="button" label="Ver" icon="pi pi-angle-right" iconPos="right" class="p-button-sm"></button>-->
+<!--      </ng-template>-->
+<!--    </p-card>-->
+<!--    </td>-->
+<!--  </tr>-->
+<!--</table>-->
+<!--  <p-button (click)="selectSalon(0)" class="btn btn-sucess" icon="pi pi-plus"></p-button>-->
 
 <!--    <td colspan="3">-->
 
@@ -25,5 +25,27 @@
 
 <!--      </div>-->
 
+<div class="grid flex">
+  <div class="col-4" *ngFor="let sala of salas">
+<!--        <p-card>-->
+<!--          {{sala.denominacion}}-->
+<!--          {{sala.costoPorDia}}-->
+<!--          {{sala.capacidad}}-->
+<!--        </p-card>-->
 
+        <p-card  [style]="{'width': '25rem', 'margin-bottom': '2em'}"
+                       styleClass="shadow-2">
+            <ng-template pTemplate="header" >
+              Nombre: {{sala.denominacion}}
+            </ng-template>
+            <ng-template pTemplate="body">
+              Costo: {{sala.costoPorDia}} <br>
+              Cant Personas:{{sala.capacidad}}
+            </ng-template>
+            <ng-template pTemplate="footer">
+              <button (click)="selectSalon(sala.idSalon)" pButton type="button" label="Ver" icon="pi pi-angle-right" iconPos="right" class="p-button-sm"></button>
+            </ng-template>
+        </p-card>
+  </div>
+</div>
 
