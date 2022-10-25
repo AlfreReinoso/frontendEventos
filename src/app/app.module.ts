@@ -13,11 +13,15 @@ import {CardModule} from "primeng/card";
 import {InputTextModule} from "primeng/inputtext";
 import {FormsModule} from "@angular/forms";
 import {ButtonModule} from "primeng/button";
+import { ServiciosComponent } from './servicios/servicios.component';
+import { ServicioComponentComponent } from './servicio-component/servicio-component.component';
 
 @NgModule({
   declarations: [
 
-    SalonComponentComponent
+    SalonComponentComponent,
+     ServiciosComponent,
+     ServicioComponentComponent
   ],
   imports: [HttpClientModule,
     BrowserModule,

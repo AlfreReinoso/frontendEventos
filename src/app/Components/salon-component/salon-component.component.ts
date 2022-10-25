@@ -46,4 +46,8 @@ export class SalonComponentComponent implements OnInit {
       (data:any)=> console.log(data)
     );
   }
+
+  selectSalon() {
+    this.router.navigate(['servicios', this.salon.idSalon]);
+  }
 }
