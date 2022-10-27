@@ -1,5 +1,5 @@
 <button pButton (click)="newOrEditeServicio(0)" class="mt-2" icon="pi pi-plus" label="Nuevo"></button>
-<button  pButton (click)="goToReserva()"></button>
+<button  pButton label="Siguiente" (click)="goToReserva()"></button>
 <div class="grid flex">
   <div class="col-4" *ngFor="let servicio of todosServicios">
     <p-card class="p-4" [style]="{'width': '25rem', 'margin-bottom': '2em'}"
@@ -11,7 +11,7 @@
         Costo: {{servicio.costoPorDia}} <br>
       </ng-template>
       <ng-template pTemplate="footer">
-        <button (click)="selectServicio($event, servicio)" pButton type="button" label="Seleccionar" icon="pi pi-plus" iconPos="right" class="p-button-sm"></button>
+        <button (click)="selectServicio(servicio)" pButton type="button" label="Seleccionar" icon="pi pi-plus" iconPos="right" class="p-button-sm"></button>
         <button pButton (click)="newOrEditeServicio(servicio.idServicio)" label="Edite" class="p-button-sm" icon="pi pi-file-edit"></button>
       </ng-template>
     </p-card>

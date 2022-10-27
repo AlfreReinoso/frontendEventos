@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router, Routes} from "@angular/router";
 import {BasicJWTAuthServicesService} from "../../Services/basic-jwtauth-services.service";
 import {SalaService} from "../../Services/sala.service";
-import {Sala} from "../../model/sala";
+import {Salon} from "../../model/salon";
 
 @Component({
   selector: 'app-salon-component',
@@ -12,7 +12,7 @@ import {Sala} from "../../model/sala";
 export class SalonComponentComponent implements OnInit {
 
   id:number = 0;
-  salon: Sala = new Sala;
+  salon: Salon = new Salon;
 
   constructor(private router:Router,private route : ActivatedRoute, private _salaService : SalaService) { }
 
@@ -21,7 +21,7 @@ export class SalonComponentComponent implements OnInit {
 
     if(this.id > 0){
       this._salaService.getSalon(this.id).subscribe(
-        (response: Sala) => {
+        (response: Salon) => {
           this.salon = response ;
         }
       );

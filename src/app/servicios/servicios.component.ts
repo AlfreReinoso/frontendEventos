@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {ServiciosService} from "../Services/servicios.service";
 import {Servicio} from "../model/servicio";
+import { Store } from '@ngxs/store';
+import { AddServicios, AddServiciosForArray, ServicioState } from '../State/servicio.state';
 
 @Component({
   selector: 'app-servicios',
@@ -15,7 +17,8 @@ export class ServiciosComponent implements OnInit {
 
   constructor(private router : Router,
               private route : ActivatedRoute,
-              private _servicioService : ServiciosService) { }
+              private _servicioService : ServiciosService,
+              private store: Store) { }
 
   ngOnInit(): void {
     this.id_salon = this.route.snapshot.params['id'];
@@ -33,14 +36,18 @@ export class ServiciosComponent implements OnInit {
 
   }
 
-  selectServicio($event: any, servicio: Servicio) : void{
+  selectServicio(servicio: Servicio) : void{
     this.selectedServices.push(servicio);
-    console.log($event);
+    //this.store.dispatch(new AddServicios(servicio));
+    // console.log($event);
     console.log(this.selectedServices);
   }
   goToReserva(){
     console.log('navegando al serviciocomponent');
     // URL PARA RESERVAR EVENTO
+    this.store.dispatch(new AddServiciosForArray(this.selectedServices));
+    let serviciosState = this.store.selectSnapshot(ServicioState.getServicios);
+    console.log(serviciosState);
   }
 
   newOrEditeServicio(id_servicio:number){

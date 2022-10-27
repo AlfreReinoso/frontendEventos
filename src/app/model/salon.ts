@@ -1,4 +1,4 @@
-export class Sala {
+export class Salon {
      idSalon: number = 0;
      denominacion: string = '' ;
      capacidad: string = '';

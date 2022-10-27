@@ -15,6 +15,10 @@ import {FormsModule} from "@angular/forms";
 import {ButtonModule} from "primeng/button";
 import { ServiciosComponent } from './servicios/servicios.component';
 import { ServicioComponentComponent } from './servicio-component/servicio-component.component';
+import {NgxsModule} from "@ngxs/store";
+import {EventosState} from "./State/evento.state";
+import {environment} from "../environments/environment";
+import { ServicioState } from './State/servicio.state';
 
 @NgModule({
   declarations: [
@@ -26,7 +30,14 @@ import { ServicioComponentComponent } from './servicio-component/servicio-compon
   imports: [HttpClientModule,
     BrowserModule,
     AppRoutingModule,
-    CustomComponentsModule, CardModule, InputTextModule, FormsModule, ButtonModule,
+    CustomComponentsModule,
+    CardModule,
+    InputTextModule,
+    FormsModule,
+    ButtonModule,
+    NgxsModule.forRoot([ServicioState], {
+      developmentMode: !environment.production
+    })
   ],
   providers: [
     {provide:HTTP_INTERCEPTORS, useClass:HttpIntercepterBasicAuthService, multi:true}
