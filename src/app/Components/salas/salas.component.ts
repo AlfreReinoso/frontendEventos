@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Sala} from '../../model/sala';
+import {Salon} from '../../model/salon';
 import {SalaService} from '../../Services/sala.service';
 import {AUTHENTICATED_USER} from "../../Services/basic-jwtauth-services.service";
 import {Router} from "@angular/router";
@@ -11,14 +11,14 @@ import {Router} from "@angular/router";
 })
 export class SalasComponent implements OnInit {
 
-  salas: Sala[] = [];
+  salas: Salon[] = [];
 
   constructor(private salaservice: SalaService, private router:Router ) { }
 
   ngOnInit(): void {
     if(sessionStorage.getItem(AUTHENTICATED_USER)){
       this.salaservice.getSalas().subscribe(
-        (response: Sala[]) => {
+        (response: Salon[]) => {
           this.salas = response;
           console.log(this.salas);
           console.log(response);

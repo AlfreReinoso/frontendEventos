@@ -16,7 +16,7 @@ export class NavbarComponent implements OnInit {
   items: MenuItem[] = [];
 
   showLogin:boolean = true;
-  showLogOut: boolean = true;
+  showLogOut: boolean = false;
 
 
   invalidLogin: boolean = false;
