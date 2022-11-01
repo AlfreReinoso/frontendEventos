@@ -11,7 +11,7 @@ import { ServicioState } from './State/servicio.state';
 import { ServiciosFormComponent } from './Components/servicios/servicios-form/servicios-form.component';
 import { ServiciosComponent } from './Components/servicios/servicios.component';
 import { MessageService } from 'primeng/api';
-import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
+import { DialogService } from 'primeng/dynamicdialog';
 import { NgxsModule } from '@ngxs/store';
 
 @NgModule({
