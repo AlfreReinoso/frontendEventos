@@ -12,11 +12,15 @@ import {ButtonModule} from "primeng/button";
 import {LoginComponent} from "../../Components/login/login.component";
 import {MenubarModule} from "primeng/menubar";
 import {DialogModule} from "primeng/dialog";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {DataViewModule} from "primeng/dataview";
 import {TableModule} from "primeng/table";
 import {InputTextModule} from "primeng/inputtext";
 import {PasswordModule} from "primeng/password";
+import { SalonComponentComponent } from 'src/app/Components/salon-component/salon-component.component';
+
+import { ServiciosFormComponent } from 'src/app/Components/servicios/servicios-form/servicios-form.component';
+import { ServiciosComponent } from 'src/app/Components/servicios/servicios.component';
 
 
 @NgModule({
@@ -26,6 +30,9 @@ import {PasswordModule} from "primeng/password";
     EventosComponent,
     SalasComponent,
     LoginComponent,
+    SalonComponentComponent,
+    ServiciosFormComponent,
+    ServiciosComponent
   ],
   imports: [
     CommonModule,
@@ -41,6 +48,7 @@ import {PasswordModule} from "primeng/password";
     TableModule,
     InputTextModule,
     PasswordModule,
+    ReactiveFormsModule,
   ],
   exports:[
     AppComponent,

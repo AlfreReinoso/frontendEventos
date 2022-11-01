@@ -5,7 +5,6 @@ import { AppComponent } from './app.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { CustomComponentsModule } from "./modules/custom-components/custom-components.module";
 import { HttpIntercepterBasicAuthService } from "./Services/service/http-authenticate.service";
-import { SalonComponentComponent } from './Components/salon-component/salon-component.component';
 import { CardModule } from "primeng/card";
 import { InputTextModule } from "primeng/inputtext";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -13,8 +12,6 @@ import { ButtonModule } from "primeng/button";
 import { NgxsModule } from "@ngxs/store";
 import { environment } from "../environments/environment";
 import { ServicioState } from './State/servicio.state';
-import { ServiciosFormComponent } from './Components/servicios/servicios-form/servicios-form.component';
-import { ServiciosComponent } from './Components/servicios/servicios.component';
 import { InputNumberModule } from "primeng/inputnumber";
 import { DropdownModule } from 'primeng/dropdown';
 import { MessagesModule } from 'primeng/messages'
@@ -26,10 +23,6 @@ import { TableModule } from 'primeng/table';
 
 @NgModule({
   declarations: [
-
-    SalonComponentComponent,
-    ServiciosComponent,
-    ServiciosFormComponent
   ],
   imports: [HttpClientModule,
     BrowserModule,
@@ -39,7 +32,6 @@ import { TableModule } from 'primeng/table';
     InputTextModule,
     FormsModule,
     ButtonModule,
-    ReactiveFormsModule,
     InputNumberModule,
     DropdownModule,
     MessagesModule,
