@@ -1,6 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {BasicJWTAuthServicesService} from "../../Services/basic-jwtauth-services.service";
-import {Router} from "@angular/router";
 import { MessageService } from 'primeng/api';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 
@@ -10,15 +9,11 @@ import { DynamicDialogRef } from 'primeng/dynamicdialog';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  @Input() showLogin : boolean =  true;
 
   username: string = '';
   password: string = '';
-  invalidLogin: boolean = false;
-  message: string = 'Error al loguearse';
 
   constructor(
-    private router: Router,
     private basicAuthenticationServices: BasicJWTAuthServicesService,
     private _messageService: MessageService, 
     public loginDialog: DynamicDialogRef,
@@ -32,10 +27,11 @@ export class LoginComponent implements OnInit {
       .subscribe(
           (data: any) => {
 
-            this.invalidLogin = false;
-            this.showLogin = false;
-          console.log(this.showLogin);
-          this.loginDialog.close();
+          //   this.invalidLogin = false;
+          //   this.showLogin = false;
+          // console.log(this.showLogin);
+          //this.isUserLoggedIn.emit(true);
+          this.loginDialog.close(true);
          //this.router.navigate(['salas']).then(r => console.log(r));
           
         },
@@ -50,5 +46,4 @@ export class LoginComponent implements OnInit {
     this._messageService.clear();
     this._messageService.add({ severity:'error', summary: 'Error', detail: 'Usuario o Contraseña incorrecta' });
   }
-
 }

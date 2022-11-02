@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ComponentRef, OnInit } from '@angular/core';
 import {MenuItem} from "primeng/api";
 import {BasicJWTAuthServicesService} from "../../Services/basic-jwtauth-services.service";
 import {Router} from "@angular/router";
@@ -13,22 +13,57 @@ import { LoginComponent } from '../login/login.component';
 export class NavbarComponent implements OnInit {
 
   public loginDialog?: DynamicDialogRef;
-
-  username: string = '';
-  password: string = '';
-
+  
+  isUserLoggedIn: boolean = false;
   items: MenuItem[] = [];
 
-  showLogin:boolean = true;
-  showLogOut: boolean = false;
-
-
-  invalidLogin: boolean = false;
-  message: string = 'Error en username / password'
-
-  constructor(private _basicJwtAuthServices: BasicJWTAuthServicesService, private router: Router, private _dialogService: DialogService) { }
+  constructor(
+    private router: Router,
+    private _basicJwtAuthServices: BasicJWTAuthServicesService,
+    private _dialogService: DialogService
+    ) { }
 
   ngOnInit(): void {
+    // if(this._basicJwtAuthServices.getAuthenticatedUser()){
+    //   this.invalidLogin = false;
+    //   this.showLogin= false;
+    //   this.showLogOut = true;
+    // }
+  }
+
+
+  displayLogin(){
+    // console.log('funciona el display');
+    // this.showLogin = false;
+    // this.showLogOut = true;
+    this.loginDialog = this._dialogService.open(LoginComponent, {
+      header: 'Ingresar',
+      width: '18rem',
+      data: {isUserLoggedIn: this.isUserLoggedIn},
+    });
+
+    this.loginDialog.onClose.subscribe(isUserLoggedIn => {
+      if (isUserLoggedIn) {
+        this.isUserLoggedIn = isUserLoggedIn
+        this.showMenu(true);
+      } else {
+        this.isUserLoggedIn = false
+        this.showMenu(false);
+      }
+    });
+  }
+
+  logOut() {
+    this._basicJwtAuthServices.logout();
+    this.isUserLoggedIn = false;
+    this.showMenu(false);
+    // this.showLogOut = false;
+    // this.showLogin = true;
+    this.router.navigate(['']);
+  }
+
+  showMenu(b: Boolean) {
+    if (b) {
     this.items = [
       {
         label: 'Inicio',
@@ -63,47 +98,26 @@ export class NavbarComponent implements OnInit {
           ]
       }
     ];
-
-    if(this._basicJwtAuthServices.getAuthenticatedUser()){
-      this.invalidLogin = false;
-      this.showLogin= false;
-      this.showLogOut = true;
+    } else {
+      this.items = [];
     }
   }
 
+  // handleJWTAuthLogin() {
+  //   this._basicJwtAuthServices.executeJWTAuthenticationService(this.username, this.password)
+  //     .subscribe(
+  //       (data: any) => {
 
-  displayLogin(){
-    console.log('funciona el display');
-    this.showLogin = false;
-    this.showLogOut = true;
-    this.loginDialog = this._dialogService.open(LoginComponent, {
-      header: 'Ingresar',
-      width: '18rem',
-    });
-  }
+  //         this.invalidLogin = false;
+  //         this.showLogin = false;
+  //         this.showLogOut = true;
+  //         this.router.navigate(['salas']);
 
-  setShowFalse() {
-    this._basicJwtAuthServices.logout();
-    this.showLogOut = false;
-    this.showLogin = true;
-    this.router.navigate(['']);
-  }
-
-  handleJWTAuthLogin() {
-    this._basicJwtAuthServices.executeJWTAuthenticationService(this.username, this.password)
-      .subscribe(
-        (data: any) => {
-
-          this.invalidLogin = false;
-          this.showLogin = false;
-          this.showLogOut = true;
-          this.router.navigate(['salas']);
-
-        },
-        (error: any) => {
-          // console.log(error);
-          this.invalidLogin = true;
-        }
-      );
-  }
+  //       },
+  //       (error: any) => {
+  //         // console.log(error);
+  //         this.invalidLogin = true;
+  //       }
+  //     );
+  // }
 }

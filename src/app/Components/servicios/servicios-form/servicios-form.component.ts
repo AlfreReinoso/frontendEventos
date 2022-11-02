@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -26,6 +27,7 @@ export class ServiciosFormComponent implements OnInit {
     private _messageService: MessageService,
     private _servicioService: ServicioService,
     private _tipoServicioService: TipoServicioService,
+    private _location: Location
   ) { }
 
   ngOnInit(): void {
@@ -56,7 +58,7 @@ export class ServiciosFormComponent implements OnInit {
   }
 
   cancelar() {
-    this.router.navigate(['salas']);
+    this._location.back();
   }
 
   mensajeExitoso() {
