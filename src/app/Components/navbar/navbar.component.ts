@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {MenuItem} from "primeng/api";
 import {BasicJWTAuthServicesService} from "../../Services/basic-jwtauth-services.service";
 import {Router} from "@angular/router";
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-navbar',
@@ -9,6 +11,8 @@ import {Router} from "@angular/router";
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+
+  public loginDialog?: DynamicDialogRef;
 
   username: string = '';
   password: string = '';
@@ -22,31 +26,41 @@ export class NavbarComponent implements OnInit {
   invalidLogin: boolean = false;
   message: string = 'Error en username / password'
 
-  constructor(private _basicJwtAuthServices: BasicJWTAuthServicesService, private router: Router) { }
+  constructor(private _basicJwtAuthServices: BasicJWTAuthServicesService, private router: Router, private _dialogService: DialogService) { }
 
   ngOnInit(): void {
     this.items = [
       {
+        label: 'Inicio',
+        icon: 'pi pi-home'
+      },
+      {
         label: 'Eventos',
-        items: [{
-          label: 'Ver',
-          icon: 'pi pi-fw pi-plus',
-          items: [
-            {label: 'Tipos'},
-            {label: 'Fechas'},
+        items: [
+          { label: 'Ver eventos', icon:'pi pi-list' },
+          { label: 'Nuevo evento', icon:'pi pi-plus-circle' }
           ]
-        },
-          {label: 'Hola'},
-          {label: 'Chau'}
+      },
+      {
+      label: 'Salones',
+      items: [
+        { label: 'Ver salones', icon:'pi pi-list', routerLink:'salas' },
+        { label: 'Nuevo salón', icon:'pi pi-plus-circle' }
         ]
       },
       {
-        label: 'A',
-        icon: 'pi pi-fw pi-pencil',
+        label: 'Servicios',
         items: [
-          {label: 'Delete', icon: 'pi pi-fw pi-trash'},
-          {label: 'Refresh', icon: 'pi pi-fw pi-refresh'}
+          { label: 'Ver servicios', icon:'pi pi-list', routerLink:'servicios' },
+          { label: 'Nuevo servicio', icon:'pi pi-plus-circle', routerLink:'serviciosForm' },
         ]
+      },
+      {
+        label: 'Tipos de servicio',
+        items: [
+          { label: 'Ver tipos', icon:'pi pi-list' },
+          { label: 'Nuevo tipo', icon:'pi pi-plus-circle' }
+          ]
       }
     ];
 
@@ -62,6 +76,10 @@ export class NavbarComponent implements OnInit {
     console.log('funciona el display');
     this.showLogin = false;
     this.showLogOut = true;
+    this.loginDialog = this._dialogService.open(LoginComponent, {
+      header: 'Ingresar',
+      width: '18rem',
+    });
   }
 
   setShowFalse() {

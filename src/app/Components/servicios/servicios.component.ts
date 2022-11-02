@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { Store } from '@ngxs/store';
+import { MessageService } from 'primeng/api';
 import { Servicio } from 'src/app/model/servicio';
+import { TipoServicio } from 'src/app/model/tiposervicio';
 import { ServicioService } from 'src/app/Services/servicios.service';
+import { TipoServicioService } from 'src/app/Services/tipo-servicio.service';
 
 @Component({
   selector: 'app-servicios',
@@ -14,12 +17,16 @@ export class ServiciosComponent implements OnInit {
   // todosServicios: any[] = [];
   // selectedServices : Servicio[] = [];
   servicios: Servicio[] = [];
+  tiposDeServicios: String[] = [];
+  servicioSinModificar: Servicio = new Servicio();
 
   constructor(
     private router : Router,
     private route : ActivatedRoute,
     private store: Store,
+    private _messageService: MessageService,
     private _servicioService : ServicioService,
+    private _tipoServicioService: TipoServicioService,
   ) { }
 
   // ngOnInit(): void {
@@ -59,5 +66,31 @@ export class ServiciosComponent implements OnInit {
     this._servicioService.findAll().subscribe(serviciosBack => {
       this.servicios = serviciosBack;
     })
+
+    this._tipoServicioService.findAll().subscribe(tipos => {
+      this.tiposDeServicios = tipos.map(tipo => { return tipo.denominacion});
+    });
+  }
+
+  editar(servicio: Servicio) {
+    this.servicioSinModificar = {...servicio};
+  }
+
+  guardar(servicio: Servicio) {
+    if (servicio.denominacion != "" && servicio.costoPorDia != null) {
+      this._servicioService.update(servicio).subscribe(servicioBackend =>
+        this._messageService.add({ severity:'success', summary: 'Éxito', detail: 'Servicio actualizado correctamente' }));
+    } else {
+      this._messageService.clear();
+      this._messageService.add({  key: 'atencion', severity:'warn', summary: 'Atención', detail: 'Debe ingresar todos los campos requeridos' });
+    }
+  }
+
+  cancelar(servicio: Servicio, indiceFila: number) {
+    this.servicios[indiceFila] = this.servicioSinModificar;
+  }
+
+  volver() {
+    this.router.navigate(['salas']);
   }
 }

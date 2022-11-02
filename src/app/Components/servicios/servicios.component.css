@@ -1,9 +1,9 @@
-/* .p-button{
-
-} */
-
 .centrar {
     margin: 0 auto;
     margin-top: 4rem;
     max-width: 95%;
+}
+
+#volver {
+    margin-top: 2rem;
 }

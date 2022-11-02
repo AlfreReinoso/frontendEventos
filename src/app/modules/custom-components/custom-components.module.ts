@@ -1,8 +1,7 @@
-import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { PrimeNgModule } from "../prime-ng/prime-ng.module";
-import { AppComponent } from "../../app.component";
 import { NavbarComponent } from "../../Components/navbar/navbar.component";
 import { EventosComponent } from "../../Components/eventos/eventos.component";
 import { SalasComponent } from "../../Components/salas/salas.component";
@@ -23,15 +22,21 @@ import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { ToastModule } from 'primeng/toast';
-
+import { ServiciosComponent } from 'src/app/Components/servicios/servicios.component';
+import { ServiciosFormComponent } from 'src/app/Components/servicios/servicios-form/servicios-form.component';
+import { SalonComponent } from 'src/app/Components/salon/salon.component';
+import { MenuComponent } from 'src/app/Components/menu/menu.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    NavbarComponent,
     EventosComponent,
-    SalasComponent,
     LoginComponent,
+    MenuComponent,
+    NavbarComponent,
+    SalasComponent,
+    SalonComponent,
+    ServiciosComponent,
+    ServiciosFormComponent,
   ],
   imports: [
     CommonModule,
@@ -58,16 +63,19 @@ import { ToastModule } from 'primeng/toast';
     MessageModule,
     DynamicDialogModule,
     ToastModule,
-    TableModule,
+    TableModule
   ],
   exports:[
-    AppComponent,
-    NavbarComponent,
     EventosComponent,
-    SalasComponent,
     LoginComponent,
+    MenuComponent,
+    NavbarComponent,
+    SalasComponent,
+    SalonComponent,
+    ServiciosComponent,
+    ServiciosFormComponent,
+    ToastModule
   ],
-
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class CustomComponentsModule { }

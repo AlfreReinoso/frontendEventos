@@ -1,5 +1,5 @@
 <p-menubar [model]="items">
-  <p-dialog [(visible)]="showLogin">
+  <!-- <p-dialog [(visible)]="showLogin">
     <tr>
       <label for="username">Username</label>
       <input id="username" type="text" pInputText [(ngModel)]="username">
@@ -8,12 +8,11 @@
       <label for="password">Password</label>
       <input id="password" type="text" pPassword [(ngModel)]="password">
     </tr>
-
-
     <p-button (click)=handleJWTAuthLogin() class="btn btn-success">Login</p-button>
     <div *ngIf="invalidLogin">{{message}}</div>
-  </p-dialog>
-  <p-button *ngIf="showLogin" (click)="displayLogin()"  label="LogIn" icon="pi pi-power-on"></p-button>
-  <button *ngIf="showLogOut" (click)="setShowFalse()" pButton label="LogOut" icon="pi pi-power-off"></button>
-
+  </p-dialog> -->
+  <!-- <p-button *ngIf="showLogin" (click)="displayLogin()" label="LogIn" icon="pi pi-power-on"></p-button> -->
+  <button *ngIf="showLogin" (click)="displayLogin()" pButton type="button" label="LogIn" class="p-button-outlined"></button>
+  <button *ngIf="showLogOut" (click)="setShowFalse()" pButton type="button" label="LogOut" icon="pi pi-power-off" class="p-button-outlined"></button>
+  <!-- <button *ngIf="showLogOut" (click)="setShowFalse()" pButton label="LogOut" icon="pi pi-power-off"></button> -->
 </p-menubar>

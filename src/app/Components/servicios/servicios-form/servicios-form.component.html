@@ -30,7 +30,7 @@
         </div>
 
         <div id="rowBotones" class="grid justify-content-between">
-            <button pButton pRipple type="button" label="Cancelar" class="md:col-2 p-button-raised p-button-secondary p-button-text"></button>
+            <button pButton pRipple type="button" label="Cancelar" class="md:col-2 p-button-raised p-button-secondary p-button-text" (click)="cancelar()"></button>
             <button pButton pRipple type="button" label="Guardar" class="md:col-2 p-button-raised" (click)="guardarServicio()" 
                 [disabled]="!(servicioForm.controls.denominacion.valid && servicioForm.controls.costoPorDia.valid && servicioForm.controls.tipoServicio.valid)">
             </button>
@@ -38,5 +38,5 @@
 
     </p-card>
     </div>
-
+    
 </form>
