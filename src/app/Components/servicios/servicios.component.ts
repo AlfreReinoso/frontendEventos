@@ -76,6 +76,12 @@ export class ServiciosComponent implements OnInit {
     this.servicioSinModificar = {...servicio};
   }
 
+  eliminar(servicio: Servicio) {
+    this.servicioSinModificar = servicio;
+    this._messageService.clear();
+    this._messageService.add({ key: 'confirmar-c', sticky: true, severity:'warn', summary:'Desea eliminar el servicio?', detail:'Confirma para proceder' });
+  }
+
   guardar(servicio: Servicio) {
     if (servicio.denominacion != "" && servicio.costoPorDia != null) {
       this._servicioService.update(servicio).subscribe(servicioBackend =>
@@ -92,5 +98,17 @@ export class ServiciosComponent implements OnInit {
 
   volver() {
     this.router.navigate(['salas']);
+  }
+
+  aceptarMsj() {
+    this._servicioService.delete(this.servicioSinModificar).subscribe(value => {
+      this.servicios.splice(this.servicios.indexOf(this.servicioSinModificar), 1);
+      this._messageService.clear();
+      this._messageService.add({ severity:'success', summary: 'Éxito', detail: 'Servicio eliminado correctamente' })
+    });
+  }
+
+  cancelarMsj() {
+    this._messageService.clear();
   }
 }
