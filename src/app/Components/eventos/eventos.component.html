@@ -1,13 +1,98 @@
-<div class="row row-cols-1 row-cols-md-2">
-  <div class="col mb-2" *ngFor="let evento of eventos">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">{{ this.evento.nomEvento }}</h5>
-        <p class="card-text">Descripcion</p>
-      </div>
-    </div>
-  </div>
-</div>
-<button (click)="getSaludo('alfre')">Tocar para recibir saludo</button>
-<h1>{{message}}</h1>
 
+<div class="centrar">
+  <p-card header="Eventos">
+    <p-table [value]="eventos" dataKey="id" editMode="row" responsiveLayout="scroll" sortMode="multiple">
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="nroReserva">Nro. Reserva<p-sortIcon field="nroReserva"></p-sortIcon></th>
+          <th pSortableColumn="cantidadPersonas">Cant. Personas<p-sortIcon field="cantidadPersonas"></p-sortIcon></th>
+          <th pSortableColumn="cliente.apellido">Apellido<p-sortIcon field="cliente.apellido"></p-sortIcon></th>
+          <th pSortableColumn="fechaEvento">Fecha Evento<p-sortIcon field="fechaEvento"></p-sortIcon></th>
+          <th pSortableColumn="fechaReserva">Fecha Reserva<p-sortIcon field="fechaReserva"></p-sortIcon></th>
+          <th pSortableColumn="salon.denominacion">Salon<p-sortIcon field="salon.denominacion"></p-sortIcon></th>
+          <th pSortableColumn="servicios.denominacion">Servicios<p-sortIcon field="servicios.denominacion"></p-sortIcon></th>
+          <th style="width:8rem"></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-evento let-editing="editing" let-ri="rowIndex">
+        <tr [pEditableRow]="evento">
+          <td>
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input pInputText type="text" [(ngModel)]="evento.nroReserva" disabled>
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{evento.nroReserva}}
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td>
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input pInputText type="text" [(ngModel)]="evento.cantidadPersonas">
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{evento.cantidadPersonas}}
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td>
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input pInputText type="text" [(ngModel)]="evento.cliente.apellido">
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{evento.cliente.apellido}}
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td>
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input pInputText type="text" [(ngModel)]="evento.fechaEvento">
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{evento.fechaEvento}}
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td>
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input pInputText type="text" [(ngModel)]="evento.fechaReserva">
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{evento.fechaReserva}}
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td>
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input pInputText type="text" [(ngModel)]="evento.salon.denominacion">
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{evento.salon.denominacion}}
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td *ngFor="let servicio of evento.servicios">
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input pInputText type="text" [(ngModel)]="servicio.denominacion">
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{servicio.denominacion}}
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td style="text-align:center">
+            <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil" class="p-button-rounded p-button-text"></button>
+            <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check" class="p-button-rounded p-button-text p-button-success mr-2"></button>
+            <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times" class="p-button-rounded p-button-text p-button-danger"></button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-card>
+</div>
