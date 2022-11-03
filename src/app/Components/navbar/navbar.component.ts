@@ -13,7 +13,7 @@ import { LoginComponent } from '../login/login.component';
 export class NavbarComponent implements OnInit {
 
   public loginDialog?: DynamicDialogRef;
-  
+
   isUserLoggedIn: boolean = false;
   items: MenuItem[] = [];
 
@@ -72,7 +72,7 @@ export class NavbarComponent implements OnInit {
       {
         label: 'Eventos',
         items: [
-          { label: 'Ver eventos', icon:'pi pi-list' },
+          { label: 'Ver eventos', icon:'pi pi-list', routerLink: 'eventos' },
           { label: 'Nuevo evento', icon:'pi pi-plus-circle' }
           ]
       },
