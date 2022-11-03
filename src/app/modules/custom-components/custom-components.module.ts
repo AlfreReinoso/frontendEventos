@@ -1,6 +1,7 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
+
 import { PrimeNgModule } from "../prime-ng/prime-ng.module";
 import { NavbarComponent } from "../../Components/navbar/navbar.component";
 import { EventosComponent } from "../../Components/eventos/eventos.component";
@@ -27,6 +28,7 @@ import { ServiciosFormComponent } from 'src/app/Components/servicios/servicios-f
 import { SalonComponent } from 'src/app/Components/salon/salon.component';
 import { MenuComponent } from 'src/app/Components/menu/menu.component';
 
+
 @NgModule({
   declarations: [
     EventosComponent,
@@ -37,6 +39,7 @@ import { MenuComponent } from 'src/app/Components/menu/menu.component';
     SalonComponent,
     ServiciosComponent,
     ServiciosFormComponent,
+
   ],
   imports: [
     CommonModule,
@@ -52,7 +55,7 @@ import { MenuComponent } from 'src/app/Components/menu/menu.component';
     TableModule,
     InputTextModule,
     PasswordModule,
-    CardModule,
+  CardModule,
     InputTextModule,
     FormsModule,
     ButtonModule,
