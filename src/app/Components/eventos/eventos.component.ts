@@ -11,26 +11,20 @@ import { EventoServicesService } from 'src/app/Services/evento-services.service'
 export class EventosComponent implements OnInit {
   message: String = '' +
     '';
-  eventos = [
-    { idEvento: 1, nomEvento: 'Aires' },
-    { idEvento: 2, nomEvento: 'Tamarindo' },
-    { idEvento: 3, nomEvento: 'DelCielo' },
-    { idEvento: 5, nomEvento: 'Cristal' },
-  ];
+  eventos : Evento[] = [];
 
   constructor(private route:ActivatedRoute, private service:EventoServicesService) {
 
   }
 
-  ngOnInit(): void {}
-
-  getSaludo(nombre: String){
-    //console.log('Aloha');
-    console.log(this.service.getDataEventos(nombre));
-    this.service.getDataEventos(nombre).subscribe(
-        (response: any) => {console.log(response);
-      this.message = response.message;}
+  ngOnInit(): void {
+    this.service.getDataEventos().subscribe(
+      (response: any) => {console.log(response);
+        console.log(response);
+        this.eventos = response;
+        this.message = response.message;}
     );
-
   }
+
+
 }

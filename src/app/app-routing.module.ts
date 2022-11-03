@@ -4,12 +4,14 @@ import { SalasComponent } from "./Components/salas/salas.component";
 import { SalonComponentComponent } from "./Components/salon-component/salon-component.component";
 import { ServiciosFormComponent } from './Components/servicios/servicios-form/servicios-form.component';
 import { ServiciosComponent } from './Components/servicios/servicios.component';
+import {EventosComponent} from "./Components/eventos/eventos.component";
 
 const routes: Routes = [
   {path:'salas', component: SalasComponent},
   {path:'salon/:id',component:SalonComponentComponent},
   {path:'servicios/:id',component:ServiciosComponent},
-  {path:'serviciosForm/:id', component:ServiciosFormComponent}
+  {path:'serviciosForm/:id', component:ServiciosFormComponent},
+  {path:'eventos',component:EventosComponent}
 ];
 
 @NgModule({
