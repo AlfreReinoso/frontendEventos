@@ -8,8 +8,8 @@ export class EventoServicesService {
 
   constructor(private http: HttpClient) { }
 
-  getDataEventos(nombre: String){
-    return this.http.get(`http://localhost:8080/helloworld/path-variable/${nombre}`);
+  getDataEventos(){
+    return this.http.get(`http://localhost:8080/eventos/findEventos`);
     //console.log("Hello");
   }
 }
