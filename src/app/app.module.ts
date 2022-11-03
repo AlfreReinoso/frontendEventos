@@ -25,9 +25,9 @@ import { CustomComponentsModule } from './modules/custom-components/custom-compo
   ],
   providers: [
     {provide:HTTP_INTERCEPTORS, useClass:HttpIntercepterBasicAuthService, multi:true},
+    Location,
     MessageService,
-    DialogService,
-    Location
+    DialogService
   ],
   bootstrap: [AppComponent]
 })

@@ -26,6 +26,8 @@ import { ServiciosComponent } from 'src/app/Components/servicios/servicios.compo
 import { ServiciosFormComponent } from 'src/app/Components/servicios/servicios-form/servicios-form.component';
 import { SalonComponent } from 'src/app/Components/salon/salon.component';
 import { MenuComponent } from 'src/app/Components/menu/menu.component';
+import { TipoServicioFormComponent } from 'src/app/Components/tipo-servicio/tipo-servicio-form/tipo-servicio-form.component';
+import { TipoServicioComponent } from 'src/app/Components/tipo-servicio/tipo-servicio.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,8 @@ import { MenuComponent } from 'src/app/Components/menu/menu.component';
     SalonComponent,
     ServiciosComponent,
     ServiciosFormComponent,
+    TipoServicioComponent,
+    TipoServicioFormComponent
   ],
   imports: [
     CommonModule,
@@ -74,6 +78,8 @@ import { MenuComponent } from 'src/app/Components/menu/menu.component';
     SalonComponent,
     ServiciosComponent,
     ServiciosFormComponent,
+    TipoServicioComponent,
+    TipoServicioFormComponent,
     ToastModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

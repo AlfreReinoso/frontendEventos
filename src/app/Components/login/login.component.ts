@@ -1,5 +1,5 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {BasicJWTAuthServicesService} from "../../Services/basic-jwtauth-services.service";
+import { Component } from '@angular/core';
+import { BasicJWTAuthServicesService } from "../../Services/basic-jwtauth-services.service";
 import { MessageService } from 'primeng/api';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 
@@ -8,7 +8,7 @@ import { DynamicDialogRef } from 'primeng/dynamicdialog';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
   username: string = '';
   password: string = '';
@@ -19,24 +19,13 @@ export class LoginComponent implements OnInit {
     public loginDialog: DynamicDialogRef,
     ) { }
 
-  ngOnInit(): void {
-  }
-
   handleJWTAuthLogin(){
     this.basicAuthenticationServices.executeJWTAuthenticationService(this.username, this.password)
       .subscribe(
           (data: any) => {
-
-          //   this.invalidLogin = false;
-          //   this.showLogin = false;
-          // console.log(this.showLogin);
-          //this.isUserLoggedIn.emit(true);
           this.loginDialog.close(true);
-         //this.router.navigate(['salas']).then(r => console.log(r));
-          
         },
         (error: any) => {
-          // console.log(error);
           this.mensajeError();
         }
       );
