@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ComponentRef, OnInit } from '@angular/core';
 import {MenuItem} from "primeng/api";
 import {BasicJWTAuthServicesService} from "../../Services/basic-jwtauth-services.service";
 import {Router} from "@angular/router";
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-navbar',
@@ -10,82 +12,112 @@ import {Router} from "@angular/router";
 })
 export class NavbarComponent implements OnInit {
 
-  username: string = '';
-  password: string = '';
-
+  public loginDialog?: DynamicDialogRef;
+  
+  isUserLoggedIn: boolean = false;
   items: MenuItem[] = [];
 
-  showLogin:boolean = true;
-  showLogOut: boolean = false;
-
-
-  invalidLogin: boolean = false;
-  message: string = 'Error en username / password'
-
-  constructor(private _basicJwtAuthServices: BasicJWTAuthServicesService, private router: Router) { }
+  constructor(
+    private router: Router,
+    private _basicJwtAuthServices: BasicJWTAuthServicesService,
+    private _dialogService: DialogService
+    ) { }
 
   ngOnInit(): void {
-    this.items = [
-      {
-        label: 'Eventos',
-        items: [{
-          label: 'Ver',
-          icon: 'pi pi-fw pi-plus',
-          items: [
-            {label: 'Tipos'},
-            {label: 'Fechas'},
-          ]
-        },
-          {label: 'Hola'},
-          {label: 'Chau'}
-        ]
-      },
-      {
-        label: 'A',
-        icon: 'pi pi-fw pi-pencil',
-        items: [
-          {label: 'Delete', icon: 'pi pi-fw pi-trash'},
-          {label: 'Refresh', icon: 'pi pi-fw pi-refresh'}
-        ]
-      }
-    ];
-
-    if(this._basicJwtAuthServices.getAuthenticatedUser()){
-      this.invalidLogin = false;
-      this.showLogin= false;
-      this.showLogOut = true;
-    }
+    // if(this._basicJwtAuthServices.getAuthenticatedUser()){
+    //   this.invalidLogin = false;
+    //   this.showLogin= false;
+    //   this.showLogOut = true;
+    // }
   }
 
 
   displayLogin(){
-    console.log('funciona el display');
-    this.showLogin = false;
-    this.showLogOut = true;
+    // console.log('funciona el display');
+    // this.showLogin = false;
+    // this.showLogOut = true;
+    this.loginDialog = this._dialogService.open(LoginComponent, {
+      header: 'Ingresar',
+      width: '18rem',
+      data: {isUserLoggedIn: this.isUserLoggedIn},
+    });
+
+    this.loginDialog.onClose.subscribe(isUserLoggedIn => {
+      if (isUserLoggedIn) {
+        this.isUserLoggedIn = isUserLoggedIn
+        this.showMenu(true);
+      } else {
+        this.isUserLoggedIn = false
+        this.showMenu(false);
+      }
+    });
   }
 
-  setShowFalse() {
+  logOut() {
     this._basicJwtAuthServices.logout();
-    this.showLogOut = false;
-    this.showLogin = true;
+    this.isUserLoggedIn = false;
+    this.showMenu(false);
+    // this.showLogOut = false;
+    // this.showLogin = true;
     this.router.navigate(['']);
   }
 
-  handleJWTAuthLogin() {
-    this._basicJwtAuthServices.executeJWTAuthenticationService(this.username, this.password)
-      .subscribe(
-        (data: any) => {
-
-          this.invalidLogin = false;
-          this.showLogin = false;
-          this.showLogOut = true;
-          this.router.navigate(['salas']);
-
-        },
-        (error: any) => {
-          // console.log(error);
-          this.invalidLogin = true;
-        }
-      );
+  showMenu(b: Boolean) {
+    if (b) {
+    this.items = [
+      {
+        label: 'Inicio',
+        icon: 'pi pi-home'
+      },
+      {
+        label: 'Eventos',
+        items: [
+          { label: 'Ver eventos', icon:'pi pi-list' },
+          { label: 'Nuevo evento', icon:'pi pi-plus-circle' }
+          ]
+      },
+      {
+      label: 'Salones',
+      items: [
+        { label: 'Ver salones', icon:'pi pi-list', routerLink:'salas' },
+        { label: 'Nuevo salón', icon:'pi pi-plus-circle' }
+        ]
+      },
+      {
+        label: 'Servicios',
+        items: [
+          { label: 'Ver servicios', icon:'pi pi-list', routerLink:'servicios' },
+          { label: 'Nuevo servicio', icon:'pi pi-plus-circle', routerLink:'serviciosForm' },
+        ]
+      },
+      {
+        label: 'Tipos de servicio',
+        items: [
+          { label: 'Ver tipos', icon:'pi pi-list' },
+          { label: 'Nuevo tipo', icon:'pi pi-plus-circle' }
+          ]
+      }
+    ];
+    } else {
+      this.items = [];
+    }
   }
+
+  // handleJWTAuthLogin() {
+  //   this._basicJwtAuthServices.executeJWTAuthenticationService(this.username, this.password)
+  //     .subscribe(
+  //       (data: any) => {
+
+  //         this.invalidLogin = false;
+  //         this.showLogin = false;
+  //         this.showLogOut = true;
+  //         this.router.navigate(['salas']);
+
+  //       },
+  //       (error: any) => {
+  //         // console.log(error);
+  //         this.invalidLogin = true;
+  //       }
+  //     );
+  // }
 }

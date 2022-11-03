@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router, Routes} from "@angular/router";
-import {BasicJWTAuthServicesService} from "../../Services/basic-jwtauth-services.service";
+import {ActivatedRoute, Router} from "@angular/router";
 import {SalaService} from "../../Services/sala.service";
 import {Salon} from "../../model/salon";
 
 @Component({
-  selector: 'app-salon-component',
-  templateUrl: './salon-component.component.html',
-  styleUrls: ['./salon-component.component.css']
+  selector: 'app-salon',
+  templateUrl: './salon.component.html',
+  styleUrls: ['./salon.component.css']
 })
-export class SalonComponentComponent implements OnInit {
+export class SalonComponent implements OnInit {
 
   id:number = 0;
   salon: Salon = new Salon;

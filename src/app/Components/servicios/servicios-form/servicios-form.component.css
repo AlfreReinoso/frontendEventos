@@ -4,6 +4,10 @@
     max-width: 95%;
 }
 
+.centrarBtn {
+    text-align: center;
+}
+
 #rowBotones {
     margin-top: 2rem;
 }
