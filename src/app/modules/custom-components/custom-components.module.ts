@@ -1,6 +1,7 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
+
 import { PrimeNgModule } from "../prime-ng/prime-ng.module";
 import { NavbarComponent } from "../../Components/navbar/navbar.component";
 import { EventosComponent } from "../../Components/eventos/eventos.component";
@@ -28,6 +29,7 @@ import { SalonComponent } from 'src/app/Components/salon/salon.component';
 import { MenuComponent } from 'src/app/Components/menu/menu.component';
 import { TipoServicioFormComponent } from 'src/app/Components/tipo-servicio/tipo-servicio-form/tipo-servicio-form.component';
 import { TipoServicioComponent } from 'src/app/Components/tipo-servicio/tipo-servicio.component';
+
 
 @NgModule({
   declarations: [
