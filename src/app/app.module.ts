@@ -13,10 +13,11 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { NgxsModule } from '@ngxs/store';
 import { Location } from '@angular/common';
 import { CustomComponentsModule } from './modules/custom-components/custom-components.module';
+import { EventoFormComponent } from './Components/evento-form/evento-form.component';
 
 @NgModule({
 
-  declarations: [AppComponent],
+  declarations: [AppComponent, EventoFormComponent],
   imports: [
     CustomComponentsModule,
     HttpClientModule,

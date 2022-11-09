@@ -80,7 +80,7 @@ export class NavbarComponent implements OnInit {
       label: 'Salones',
       items: [
         { label: 'Ver salones', icon:'pi pi-list', routerLink:'salas' },
-        { label: 'Nuevo salón', icon:'pi pi-plus-circle' }
+        { label: 'Nuevo salón', icon:'pi pi-plus-circle', routerLink: ['/salon',0] }
         ]
       },
       {

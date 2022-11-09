@@ -28,6 +28,7 @@ import { ServiciosFormComponent } from 'src/app/Components/servicios/servicios-f
 import { SalonComponent } from 'src/app/Components/salon/salon.component';
 import { MenuComponent } from 'src/app/Components/menu/menu.component';
 import {RippleModule} from "primeng/ripple";
+import {BadgeModule} from "primeng/badge";
 
 
 @NgModule({
@@ -68,7 +69,8 @@ import {RippleModule} from "primeng/ripple";
         DynamicDialogModule,
         ToastModule,
         TableModule,
-        RippleModule
+        RippleModule,
+        BadgeModule
     ],
   exports:[
     EventosComponent,
