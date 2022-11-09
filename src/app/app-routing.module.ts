@@ -6,14 +6,17 @@ import { SalonComponent } from './Components/salon/salon.component';
 import { ServiciosFormComponent } from './Components/servicios/servicios-form/servicios-form.component';
 import { ServiciosComponent } from './Components/servicios/servicios.component';
 import {EventosComponent} from "./Components/eventos/eventos.component";
+import {EventoFormComponent} from "./Components/evento-form/evento-form.component";
+import {RouteGuardService} from "./Services/route-guard.service";
 
 const routes: Routes = [
-  {path:'salas', component: SalasComponent},
-  {path:'salon/:id',component:SalonComponent},
-  {path:'servicios',component:ServiciosComponent},
-  {path:'servicios/:id',component:ServiciosComponent},
-{path:'serviciosForm', component:ServiciosFormComponent},
-  {path:'eventos', component:EventosComponent}
+  {path:'salas', component: SalasComponent, canActivate:[RouteGuardService]},
+  {path:'salon/:id',component:SalonComponent, canActivate:[RouteGuardService]},
+  {path:'servicios',component:ServiciosComponent, canActivate:[RouteGuardService]},
+  {path:'servicios/:id',component:ServiciosComponent, canActivate:[RouteGuardService]},
+{path:'serviciosForm', component:ServiciosFormComponent, canActivate:[RouteGuardService]},
+  {path:'eventos', component:EventosComponent, canActivate:[RouteGuardService]},
+  {path:'eventoForm', component:EventoFormComponent, canActivate:[RouteGuardService]},
 ];
 
 @NgModule({
