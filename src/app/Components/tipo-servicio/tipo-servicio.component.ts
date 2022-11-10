@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { TipoServicio } from 'src/app/model/tiposervicio';
 import { TipoServicioService } from 'src/app/Services/tipo-servicio.service';
+import { TipoServicioFormComponent } from './tipo-servicio-form/tipo-servicio-form.component';
 
 @Component({
   selector: 'app-tipo-servicio',
@@ -11,16 +13,24 @@ import { TipoServicioService } from 'src/app/Services/tipo-servicio.service';
 })
 export class TipoServicioComponent implements OnInit {
 
+  public tipoServicioFormDialog?: DynamicDialogRef;
+
   tiposDeServicios: TipoServicio[] = [];
   tipoServicioSinModificar: TipoServicio = new TipoServicio();
 
   constructor(
     private router : Router,
+    private _dialogService: DialogService,
     private _messageService: MessageService,
     private _tipoServicioService: TipoServicioService,
     ) { }
 
   ngOnInit(): void {
+    this.buscarTipos();
+    if (this.router.url == '/tipoServicioForm') { this.nuevoTipoServicio(); }
+  }
+
+  buscarTipos() {
     this._tipoServicioService.findAll().subscribe(tipos => {
       this.tiposDeServicios = tipos;
     });
@@ -47,6 +57,16 @@ export class TipoServicioComponent implements OnInit {
     }
   }
 
+  nuevoTipoServicio() {
+    this.tipoServicioFormDialog = this._dialogService.open(TipoServicioFormComponent, {
+      header: 'Nuevo tipo de servicio',
+    });
+
+    this.tipoServicioFormDialog.onClose.subscribe(x => {
+      this.buscarTipos();
+    });
+  }
+
   cancelar(tipoServicio: TipoServicio, indiceFila: number) {
     this.tiposDeServicios[indiceFila] = this.tipoServicioSinModificar;
   }
@@ -57,7 +77,6 @@ export class TipoServicioComponent implements OnInit {
 
   aceptarMsj() {
     this._tipoServicioService.delete(this.tipoServicioSinModificar).subscribe(value => {
-      console.log("hola");
       this.tiposDeServicios.splice(this.tiposDeServicios.indexOf(this.tipoServicioSinModificar), 1);
       this._messageService.clear();
       this._messageService.add({ severity:'success', summary: 'Éxito', detail: 'Tipo de servicio eliminado correctamente' })

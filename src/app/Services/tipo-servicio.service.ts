@@ -10,9 +10,8 @@ export class TipoServicioService {
 
   constructor(private http: HttpClient) { }
 
-
-
-  saveServicio(tipoServicio: TipoServicio): Observable<TipoServicio> {
+  
+  saveTipoServicio(tipoServicio: TipoServicio): Observable<TipoServicio> {
     return this.http.post<TipoServicio>("http://localhost:8080/tipoServicio/save", tipoServicio);
   }
 

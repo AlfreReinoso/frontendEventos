@@ -51,7 +51,7 @@ export class ServiciosFormComponent implements OnInit {
       servicio = Object.assign(servicio, this.servicioForm.value);
       this._servicioService.saveServicio(servicio).subscribe(servicioBack => {
         this.mensajeExitoso();
-        this.router.navigate(['..']);
+        this.router.navigateByUrl('/servicios');
       });
     }
     else { this.mensajeError(); }

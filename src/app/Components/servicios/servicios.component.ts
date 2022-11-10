@@ -53,6 +53,10 @@ export class ServiciosComponent implements OnInit {
     }
   }
 
+  nuevoServicio() {
+    this.router.navigateByUrl('/serviciosForm');
+  }
+
   cancelar(servicio: Servicio, indiceFila: number) {
     this.servicios[indiceFila] = this.servicioSinModificar;
   }

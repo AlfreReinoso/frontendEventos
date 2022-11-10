@@ -1,7 +1,7 @@
 <form [formGroup]="servicioForm">
 
     <div class="centrar">
-    <p-card header="Nuevo Servicio" >
+    <p-card header="Nuevo servicio" >
 
         <div class="grid flex">
             <div class="col-12 md:col-4">
@@ -29,9 +29,9 @@
             </div>
         </div>
 
-        <div id="rowBotones" class="grid justify-content-between">
-            <button pButton pRipple type="button" label="Cancelar" class="md:col-2 p-button-raised p-button-secondary p-button-text" (click)="cancelar()"></button>
-            <button pButton pRipple type="button" label="Guardar" class="md:col-2 p-button-raised" (click)="guardarServicio()" 
+        <div class="flex justify-content-between" [style]="{'margin-top':'2rem'}">
+            <button pButton pRipple type="button" label="Cancelar" class="p-button-raised p-button-secondary p-button-text" (click)="cancelar()"></button>
+            <button pButton pRipple type="button" label="Guardar" class="p-button-raised" (click)="guardarServicio()" 
                 [disabled]="!(servicioForm.controls.denominacion.valid && servicioForm.controls.costoPorDia.valid && servicioForm.controls.tipoServicio.valid)">
             </button>
         </div>
