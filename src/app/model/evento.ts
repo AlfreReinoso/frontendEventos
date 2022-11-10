@@ -7,7 +7,7 @@ export class Evento {
     nroReserva: number = 0 ;
     fechaReserva?: Date;
     fechaEvento?: Date ;
-    cantPersonas: number = 0;
+    cantidadPersonas: number = 0;
     salon : Salon = new Salon();
     cliente : Cliente = new Cliente();
     servicios: Servicio[] = [];

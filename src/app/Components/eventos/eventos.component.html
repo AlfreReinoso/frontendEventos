@@ -1,7 +1,7 @@
 
 <div class="centrar">
   <p-card header="Eventos">
-    <p-table [value]="eventos" dataKey="id" editMode="row" responsiveLayout="scroll" sortMode="multiple">
+    <p-table [value]="eventos" dataKey="nroReserva" editMode="row" responsiveLayout="scroll" sortMode="multiple">
       <ng-template pTemplate="header">
         <tr>
           <th pSortableColumn="nroReserva">Nro. Reserva<p-sortIcon field="nroReserva"></p-sortIcon></th>
@@ -74,22 +74,29 @@
               <ng-template pTemplate="output">
                 {{evento.salon.denominacion}}
               </ng-template>
-            </p-cellEditor>
+            </p-cellEditor> 
           </td>
           <td >
-            <div class="align-items-center">
-              <button pButton type="button"  icon="pi pi-plus" (click)="agregarServicio(evento)" *ngIf="mostrarButtonAgregar"></button>
-            </div>
-            <p-cellEditor *ngFor="let servicio of evento.servicios; let i = index">
-              <ng-template pTemplate="input">
-                <button pButton type="button" icon="pi pi-trash" (click)="eliminarServicio(evento, i)" class="p-button-danger"></button>
-                <input pInputText type="text" [(ngModel)]="servicio.denominacion">
+            <!-- <p-cellEditor> -->
+              <!-- <ng-template pTemplate="input">
+                <p-multiSelect [options]="servicios" [(ngModel)]="selectedServicios" appendTo="body" display="chip"></p-multiSelect>
               </ng-template>
               <ng-template pTemplate="output">
-                -
-                {{servicio.denominacion}}
-              </ng-template>
-            </p-cellEditor>
+                {{selectedServicios}}
+              </ng-template> -->
+              <div class="align-items-center"> 
+                  <button pButton type="button"  icon="pi pi-plus" (click)="agregarServicio(evento)" *ngIf="mostrarButtonAgregar"></button>
+              </div>
+              <p-cellEditor *ngFor="let servicio of evento.servicios; let i = index">
+                      <ng-template pTemplate="input">
+                        <button pButton type="button" icon="pi pi-trash" (click)="eliminarServicio(evento, i)" class="p-button-danger"></button>
+                          <input pInputText type="text" [(ngModel)]="servicio.denominacion">
+                      </ng-template>
+                      <ng-template pTemplate="output">
+                      {{servicio.denominacion}}
+                      </ng-template>
+              </p-cellEditor>
+           <!--  </p-cellEditor> -->
           </td>
           <td style="text-align:center">
             <button *ngIf="!editing" pButton pRipple type="button" (click)="editar(evento)" pInitEditableRow icon="pi pi-pencil" class="p-button-rounded p-button-text"></button>

@@ -20,6 +20,8 @@ export class EventosComponent implements OnInit {
   message: String = '' +
     '';
   eventos : Evento[] = [];
+  servicios: String[]=[];
+  selectedServicios: Servicio[]=[];
 
   constructor(private route:ActivatedRoute,
               private service:EventoServicesService,
@@ -32,6 +34,10 @@ export class EventosComponent implements OnInit {
 
   ngOnInit(): void {
     this.listar();
+    this._servicioService.findAll().subscribe((servicioBackend) => {
+      this.servicios = servicioBackend.map(value => value.denominacion);
+    })
+
   }
   listar(){
     this.service.getDataEventos().subscribe(
@@ -39,6 +45,7 @@ export class EventosComponent implements OnInit {
         this.eventos = response;
         this.message = response.message;}
     );
+    // this.selectedServicios = this.eventos.map(evento=>evento.servicios);
   }
 
   editar(evento: Evento) {
@@ -60,7 +67,7 @@ export class EventosComponent implements OnInit {
     this.mostrarButtonAgregar = false;
     if (evento.salon.denominacion != '' &&
         evento.cliente.apellido != '' &&
-        evento.cantPersonas !== 0)
+        evento.cantidadPersonas !== 0)
     {
       this._eventoService.updateEventos(evento).subscribe((eventoBackend) => {
           console.log("evento del backend",eventoBackend);

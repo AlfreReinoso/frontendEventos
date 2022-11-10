@@ -31,10 +31,10 @@ export class SalonComponent implements OnInit {
   saveSalon(){
     if(this.id > 1 ){
       this._salaService.updateSalon(this.salon).subscribe(
-          (data: any) => console.log(data));
+          (data: any) => {});
     }else {
       this._salaService.createSalon(this.salon).subscribe(
-        (data:any)=> console.log(data));
+        (data:any)=> {});
     }
     this.router.navigate(['salas']);;
 

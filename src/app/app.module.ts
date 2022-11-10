@@ -14,10 +14,16 @@ import { NgxsModule } from '@ngxs/store';
 import { Location } from '@angular/common';
 import { CustomComponentsModule } from './modules/custom-components/custom-components.module';
 import { EventoFormComponent } from './Components/evento-form/evento-form.component';
+import {CardModule} from "primeng/card";
+import {ReactiveFormsModule} from "@angular/forms";
+import {InputNumberModule} from "primeng/inputnumber";
+import {DropdownModule} from "primeng/dropdown";
+import {RippleModule} from "primeng/ripple";
+import {ButtonModule} from "primeng/button";
 
 @NgModule({
 
-  declarations: [AppComponent, EventoFormComponent],
+  declarations: [AppComponent],
   imports: [
     CustomComponentsModule,
     HttpClientModule,
@@ -26,7 +32,13 @@ import { EventoFormComponent } from './Components/evento-form/evento-form.compon
 
     NgxsModule.forRoot([ServicioState], {
       developmentMode: !environment.production
-    })
+    }),
+    CardModule,
+    ReactiveFormsModule,
+    InputNumberModule,
+    DropdownModule,
+    RippleModule,
+    ButtonModule
   ],
   providers: [
     {provide:HTTP_INTERCEPTORS, useClass:HttpIntercepterBasicAuthService, multi:true},

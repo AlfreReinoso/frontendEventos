@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Evento} from "../model/evento";
 import {Observable} from "rxjs";
-import {Servicio} from "../model/servicio";
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +22,9 @@ export class EventoServicesService {
   }
   deleteEventos(id: number){
     return this.http.delete<Evento>(`http://localhost:8080/eventos/deleteEventos/${id}`);
+  }
+  insertEvento(evento:Evento):Observable<Evento>{
+    return this.http.post<Evento>(`http://localhost:8080/eventos`, evento);
   }
 
 }

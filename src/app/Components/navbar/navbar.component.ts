@@ -62,7 +62,7 @@ export class NavbarComponent implements OnInit {
         label: 'Eventos',
         items: [
           { label: 'Ver eventos', icon:'pi pi-list', routerLink: 'eventos' },
-          { label: 'Nuevo evento', icon:'pi pi-plus-circle' }
+          { label: 'Nuevo evento', icon:'pi pi-plus-circle',routerLink: 'eventoForm' }
           ]
       },
       {
