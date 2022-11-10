@@ -1,7 +1,7 @@
-import { Component, ComponentRef, OnInit } from '@angular/core';
-import {MenuItem} from "primeng/api";
-import {BasicJWTAuthServicesService} from "../../Services/basic-jwtauth-services.service";
-import {Router} from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import {MenuItem } from "primeng/api";
+import {BasicJWTAuthServicesService } from "../../Services/basic-jwtauth-services.service";
+import {Router } from "@angular/router";
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { LoginComponent } from '../login/login.component';
 
@@ -23,23 +23,14 @@ export class NavbarComponent implements OnInit {
     private _dialogService: DialogService
     ) { }
 
-  ngOnInit(): void {
-    // if(this._basicJwtAuthServices.getAuthenticatedUser()){
-    //   this.invalidLogin = false;
-    //   this.showLogin= false;
-    //   this.showLogOut = true;
-    // }
+  ngOnInit() {
+    this.logIn();
   }
 
-
-  displayLogin(){
-    // console.log('funciona el display');
-    // this.showLogin = false;
-    // this.showLogOut = true;
+  logIn(){
     this.loginDialog = this._dialogService.open(LoginComponent, {
       header: 'Ingresar',
       width: '18rem',
-      data: {isUserLoggedIn: this.isUserLoggedIn},
     });
 
     this.loginDialog.onClose.subscribe(isUserLoggedIn => {
@@ -57,8 +48,6 @@ export class NavbarComponent implements OnInit {
     this._basicJwtAuthServices.logout();
     this.isUserLoggedIn = false;
     this.showMenu(false);
-    // this.showLogOut = false;
-    // this.showLogin = true;
     this.router.navigate(['']);
   }
 
@@ -79,6 +68,7 @@ export class NavbarComponent implements OnInit {
       {
       label: 'Salones',
       items: [
+
         { label: 'Ver salones', icon:'pi pi-list', routerLink:'salas' },
         { label: 'Nuevo salón', icon:'pi pi-plus-circle', routerLink: ['/salon',0] }
         ]
@@ -86,15 +76,15 @@ export class NavbarComponent implements OnInit {
       {
         label: 'Servicios',
         items: [
-          { label: 'Ver servicios', icon:'pi pi-list', routerLink:'servicios' },
-          { label: 'Nuevo servicio', icon:'pi pi-plus-circle', routerLink:'serviciosForm' },
+          { label: 'Ver servicios', icon:'pi pi-list', routerLink:['/servicios'] },
+          { label: 'Nuevo servicio', icon:'pi pi-plus-circle', routerLink:['/serviciosForm'] },
         ]
       },
       {
         label: 'Tipos de servicio',
         items: [
-          { label: 'Ver tipos', icon:'pi pi-list' },
-          { label: 'Nuevo tipo', icon:'pi pi-plus-circle' }
+          { label: 'Ver tipos', icon:'pi pi-list', routerLink:['/tipoServicio'] },
+          { label: 'Nuevo tipo', icon:'pi pi-plus-circle', routerLink:['/tipoServicioForm'] }
           ]
       }
     ];
@@ -102,22 +92,4 @@ export class NavbarComponent implements OnInit {
       this.items = [];
     }
   }
-
-  // handleJWTAuthLogin() {
-  //   this._basicJwtAuthServices.executeJWTAuthenticationService(this.username, this.password)
-  //     .subscribe(
-  //       (data: any) => {
-
-  //         this.invalidLogin = false;
-  //         this.showLogin = false;
-  //         this.showLogOut = true;
-  //         this.router.navigate(['salas']);
-
-  //       },
-  //       (error: any) => {
-  //         // console.log(error);
-  //         this.invalidLogin = true;
-  //       }
-  //     );
-  // }
 }

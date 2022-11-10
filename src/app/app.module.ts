@@ -30,9 +30,9 @@ import { EventoFormComponent } from './Components/evento-form/evento-form.compon
   ],
   providers: [
     {provide:HTTP_INTERCEPTORS, useClass:HttpIntercepterBasicAuthService, multi:true},
+    Location,
     MessageService,
-    DialogService,
-    Location
+    DialogService
   ],
   bootstrap: [AppComponent]
 })

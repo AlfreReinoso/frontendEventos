@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {Salon} from '../../model/salon';
-import {SalaService} from '../../Services/sala.service';
-import {AUTHENTICATED_USER} from "../../Services/basic-jwtauth-services.service";
-import {Router} from "@angular/router";
+import { Salon } from '../../model/salon';
+import { SalaService } from '../../Services/sala.service';
+import { AUTHENTICATED_USER } from "../../Services/basic-jwtauth-services.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-salas',
@@ -13,7 +13,10 @@ export class SalasComponent implements OnInit {
 
   salas: Salon[] = [];
 
-  constructor(private salaservice: SalaService, private router:Router ) { }
+  constructor(
+    private salaservice: SalaService, 
+    private router:Router 
+    ) { }
 
   ngOnInit(): void {
     if(sessionStorage.getItem(AUTHENTICATED_USER)){

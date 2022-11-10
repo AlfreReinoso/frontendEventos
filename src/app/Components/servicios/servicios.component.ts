@@ -20,7 +20,7 @@ export class ServiciosComponent implements OnInit {
     private _messageService: MessageService,
     private _servicioService : ServicioService,
     private _tipoServicioService: TipoServicioService,
-  ) { }
+    ) { }
 
   ngOnInit() {
     this._servicioService.findAll().subscribe(serviciosBack => {
@@ -45,10 +45,11 @@ export class ServiciosComponent implements OnInit {
   guardar(servicio: Servicio) {
     if (servicio.denominacion != "" && servicio.costoPorDia != null) {
       this._servicioService.update(servicio).subscribe(servicioBackend =>
-        this._messageService.add({ severity:'success', summary: 'Éxito', detail: 'Servicio actualizado correctamente' }));
+        this._messageService.add({ severity:'success', summary: 'Éxito', detail: 'Servicio actualizado correctamente' })
+      );
     } else {
       this._messageService.clear();
-      this._messageService.add({  key: 'atencion', severity:'warn', summary: 'Atención', detail: 'Debe ingresar todos los campos requeridos' });
+      this._messageService.add({ key: 'atencion', severity:'warn', summary: 'Atención', detail: 'Debe ingresar todos los campos requeridos' });
     }
   }
 

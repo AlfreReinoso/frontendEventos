@@ -27,8 +27,11 @@ import { ServiciosComponent } from 'src/app/Components/servicios/servicios.compo
 import { ServiciosFormComponent } from 'src/app/Components/servicios/servicios-form/servicios-form.component';
 import { SalonComponent } from 'src/app/Components/salon/salon.component';
 import { MenuComponent } from 'src/app/Components/menu/menu.component';
+import { TipoServicioFormComponent } from 'src/app/Components/tipo-servicio/tipo-servicio-form/tipo-servicio-form.component';
+import { TipoServicioComponent } from 'src/app/Components/tipo-servicio/tipo-servicio.component';
 import {RippleModule} from "primeng/ripple";
 import {BadgeModule} from "primeng/badge";
+
 
 
 @NgModule({
@@ -41,37 +44,38 @@ import {BadgeModule} from "primeng/badge";
     SalonComponent,
     ServiciosComponent,
     ServiciosFormComponent,
-
+    TipoServicioComponent,
+    TipoServicioFormComponent
   ],
-    imports: [
-        CommonModule,
-        PrimeNgModule,
-        CardModule,
-        RouterModule,
-        ButtonModule,
-        MenubarModule,
-        DialogModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        DataViewModule,
-        TableModule,
-        InputTextModule,
-        PasswordModule,
-        CardModule,
-        InputTextModule,
-        FormsModule,
-        ButtonModule,
-        ReactiveFormsModule,
-        InputNumberModule,
-        DropdownModule,
-        MessagesModule,
-        MessageModule,
-        DynamicDialogModule,
-        ToastModule,
-        TableModule,
-        RippleModule,
-        BadgeModule
-    ],
+  imports: [
+    CommonModule,
+    PrimeNgModule,
+    CardModule,
+    RouterModule,
+    ButtonModule,
+    MenubarModule,
+    DialogModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    DataViewModule,
+    TableModule,
+    InputTextModule,
+    PasswordModule,
+    CardModule,
+    InputTextModule,
+    FormsModule,
+    ButtonModule,
+    ReactiveFormsModule,
+    InputNumberModule,
+    DropdownModule,
+    MessagesModule,
+    MessageModule,
+    DynamicDialogModule,
+    ToastModule,
+    TableModule,
+    RippleModule,
+    BadgeModule
+  ],
   exports:[
     EventosComponent,
     LoginComponent,
@@ -81,6 +85,8 @@ import {BadgeModule} from "primeng/badge";
     SalonComponent,
     ServiciosComponent,
     ServiciosFormComponent,
+    TipoServicioComponent,
+    TipoServicioFormComponent,
     ToastModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
