@@ -29,6 +29,9 @@ import { SalonComponent } from 'src/app/Components/salon/salon.component';
 import { MenuComponent } from 'src/app/Components/menu/menu.component';
 import { TipoServicioFormComponent } from 'src/app/Components/tipo-servicio/tipo-servicio-form/tipo-servicio-form.component';
 import { TipoServicioComponent } from 'src/app/Components/tipo-servicio/tipo-servicio.component';
+import {RippleModule} from "primeng/ripple";
+import {BadgeModule} from "primeng/badge";
+
 
 
 @NgModule({
@@ -69,7 +72,9 @@ import { TipoServicioComponent } from 'src/app/Components/tipo-servicio/tipo-ser
     MessageModule,
     DynamicDialogModule,
     ToastModule,
-    TableModule
+    TableModule,
+    RippleModule,
+    BadgeModule
   ],
   exports:[
     EventosComponent,
