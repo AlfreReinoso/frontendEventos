@@ -1,8 +1,9 @@
-<button pButton (click)="selectSalon(0)" class="mt-2" icon="pi pi-plus" label="Nuevo"></button>
-<div class="grid flex">
-  <div class="col-4" *ngFor="let sala of salas">
-        <p-card class="p-4" [style]="{'width': '25rem', 'margin-bottom': '2em'}"
-                       styleClass="shadow-2">
+
+
+<button pButton (click)="selectSalon(0)" class="mt-2 " icon="pi pi-plus" label="Nuevo"></button>
+<div>
+  <div class="flex-1 md:flex-none flex align-items-center justify-content-center font-bold text-white m-2 px-5 py-3 border-round" *ngFor="let sala of salas">
+        <p-card class="col-5 text-center" styleClass="shadow-2">
             <ng-template pTemplate="header" >
               Nombre: {{sala.denominacion}}
             </ng-template>

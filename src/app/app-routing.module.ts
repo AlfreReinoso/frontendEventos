@@ -8,6 +8,9 @@ import { ServiciosFormComponent } from './Components/servicios/servicios-form/se
 import { ServiciosComponent } from './Components/servicios/servicios.component';
 import { TipoServicioFormComponent } from './Components/tipo-servicio/tipo-servicio-form/tipo-servicio-form.component';
 import { TipoServicioComponent } from './Components/tipo-servicio/tipo-servicio.component';
+import {EventosComponent} from "./Components/eventos/eventos.component";
+import {EventoFormComponent} from "./Components/evento-form/evento-form.component";
+import {RouteGuardService} from "./Services/route-guard.service";
 
 const routes: Routes = [
   { path:'login', component: LoginComponent},
@@ -18,6 +21,8 @@ const routes: Routes = [
   { path:'serviciosForm', component:ServiciosFormComponent, canActivate:[AuthenticationGuard] },
   { path:'tipoServicio', component:TipoServicioComponent, canActivate:[AuthenticationGuard] },
   { path:'tipoServicioForm', component:TipoServicioFormComponent, canActivate:[AuthenticationGuard] },
+  {path:'eventos', component:EventosComponent, canActivate:[RouteGuardService]},
+  {path:'eventoForm', component:EventoFormComponent, canActivate:[RouteGuardService]},
   { path:'', component: LoginComponent},
   // { path: '**', component: SalasComponent }
 ];

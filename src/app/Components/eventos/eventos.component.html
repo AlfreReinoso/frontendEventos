@@ -14,7 +14,7 @@
           <th style="width:8rem"></th>
         </tr>
       </ng-template>
-      <ng-template pTemplate="body" let-evento let-editing="editing" let-ri="rowIndex">
+      <ng-template pTemplate="body" let-evento let-editing="editing" let-indiceFila="rowIndex">
         <tr [pEditableRow]="evento">
           <td>
             <p-cellEditor>
@@ -76,20 +76,26 @@
               </ng-template>
             </p-cellEditor>
           </td>
-          <td *ngFor="let servicio of evento.servicios">
-            <p-cellEditor>
+          <td >
+            <div class="align-items-center">
+              <button pButton type="button"  icon="pi pi-plus" (click)="agregarServicio(evento)" *ngIf="mostrarButtonAgregar"></button>
+            </div>
+            <p-cellEditor *ngFor="let servicio of evento.servicios; let i = index">
               <ng-template pTemplate="input">
+                <button pButton type="button" icon="pi pi-trash" (click)="eliminarServicio(evento, i)" class="p-button-danger"></button>
                 <input pInputText type="text" [(ngModel)]="servicio.denominacion">
               </ng-template>
               <ng-template pTemplate="output">
+                -
                 {{servicio.denominacion}}
               </ng-template>
             </p-cellEditor>
           </td>
           <td style="text-align:center">
-            <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil" class="p-button-rounded p-button-text"></button>
-            <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check" class="p-button-rounded p-button-text p-button-success mr-2"></button>
-            <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times" class="p-button-rounded p-button-text p-button-danger"></button>
+            <button *ngIf="!editing" pButton pRipple type="button" (click)="editar(evento)" pInitEditableRow icon="pi pi-pencil" class="p-button-rounded p-button-text"></button>
+            <button *ngIf="!editing" pButton pRipple type="button" (click)="eliminar(evento)" icon="pi pi-trash" class="p-button-rounded p-button-text p-button-danger"></button>
+            <button *ngIf="editing" pButton pRipple type="button" (click)="guardar(evento)" pSaveEditableRow icon="pi pi-check" class="p-button-rounded p-button-text p-button-success mr-2"></button>
+            <button *ngIf="editing" pButton pRipple type="button" (click)="cancelar(evento, indiceFila)" pCancelEditableRow icon="pi pi-times" class="p-button-rounded p-button-text p-button-danger"></button>
           </td>
         </tr>
       </ng-template>
