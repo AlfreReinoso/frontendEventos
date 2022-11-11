@@ -54,16 +54,12 @@ export class EventosComponent implements OnInit {
   }
 
   eliminar(evento: Evento) {
-    //console.log(evento);
     this.eventoSinModificar = evento;
     this._messageService.clear();
     this._messageService.add({ key: 'confirmar-c', sticky: true, severity:'warn', summary:'Desea eliminar el servicio?', detail:'Confirma para proceder' });
-    this._eventoService.deleteEventos(evento.nroReserva).subscribe();
-    this.listar();
   }
 
   guardar(evento: Evento) {
-    //console.log(evento);
     this.mostrarButtonAgregar = false;
     if (evento.salon.denominacion != '' &&
         evento.cliente.apellido != '' &&
@@ -75,8 +71,7 @@ export class EventosComponent implements OnInit {
             severity: 'success',
             summary: 'Éxito',
             detail: `Evento del dia ${eventoBackend.fechaEvento} actualizado correctamente`
-                                    });
-
+          });
         },(error)=>{
           this._messageService.add({  key: 'atencion', severity:'warn', summary: 'Atención', detail: `${error.error.message}` }
           );
@@ -88,11 +83,10 @@ export class EventosComponent implements OnInit {
     }
   }
 
-  cancelar(servicio: Servicio, indiceFila: number) {
+  cancelar(evento: Evento, indiceFila: number) {
     this.mostrarButtonAgregar = false;
     this.eventos[indiceFila] = this.eventoSinModificar;
   }
-
 
   eliminarServicio(evento: Evento, i : number) {
     evento.servicios.splice(i,1);
@@ -100,5 +94,17 @@ export class EventosComponent implements OnInit {
 
   agregarServicio(evento: Evento) {
     evento.servicios.push(new Servicio());
+  }
+
+  aceptarMsj() {
+    this._eventoService.deleteEventos(this.eventoSinModificar).subscribe(value => {
+      this.eventos.splice(this.eventos.indexOf(this.eventoSinModificar), 1);
+      this._messageService.clear();
+      this._messageService.add({ severity:'success', summary: 'Éxito', detail: 'Servicio eliminado correctamente' })
+    });
+  }
+
+  cancelarMsj() {
+    this._messageService.clear();
   }
 }

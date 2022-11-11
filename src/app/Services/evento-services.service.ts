@@ -12,17 +12,16 @@ export class EventoServicesService {
 
   getDataEventos(){
     return this.http.get(`http://localhost:8080/eventos/findEventos`);
-    //console.log("Hello");
   }
-
 
   updateEventos(evento: Evento): Observable<Evento>{
-    console.log("en el service", evento);
     return this.http.put<Evento>(`http://localhost:8080/eventos/putEventos`, evento);
   }
-  deleteEventos(id: number){
-    return this.http.delete<Evento>(`http://localhost:8080/eventos/deleteEventos/${id}`);
+
+  deleteEventos(evento: Evento){
+    return this.http.post<Evento>(`http://localhost:8080/eventos/deleteEventos`, evento);
   }
+
   insertEvento(evento:Evento):Observable<Evento>{
     return this.http.post<Evento>(`http://localhost:8080/eventos`, evento);
   }

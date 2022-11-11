@@ -23,18 +23,17 @@ import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { ToastModule } from 'primeng/toast';
+import { MultiSelectModule } from 'primeng/multiselect';
 import { ServiciosComponent } from 'src/app/Components/servicios/servicios.component';
 import { ServiciosFormComponent } from 'src/app/Components/servicios/servicios-form/servicios-form.component';
 import { SalonComponent } from 'src/app/Components/salon/salon.component';
 import { MenuComponent } from 'src/app/Components/menu/menu.component';
-import {RippleModule} from "primeng/ripple";
-import {BadgeModule} from "primeng/badge";
-import {TipoServicioComponent} from "../../Components/tipo-servicio/tipo-servicio.component";
-import {
-  TipoServicioFormComponent
-} from "../../Components/tipo-servicio/tipo-servicio-form/tipo-servicio-form.component";
-import {EventoFormComponent} from "../../Components/evento-form/evento-form.component";
-import {MultiSelectModule} from "primeng/multiselect";
+import { RippleModule } from "primeng/ripple";
+import { BadgeModule } from "primeng/badge";
+import { TipoServicioComponent } from 'src/app/Components/tipo-servicio/tipo-servicio.component';
+import { TipoServicioFormComponent } from 'src/app/Components/tipo-servicio/tipo-servicio-form/tipo-servicio-form.component';
+import { EventoFormComponent } from 'src/app/Components/eventos/evento-form/evento-form.component';
+
 
 @NgModule({
   declarations: [
@@ -92,7 +91,7 @@ import {MultiSelectModule} from "primeng/multiselect";
     ToastModule,
     EventoFormComponent,
     TipoServicioComponent,
-    TipoServicioFormComponent,
+    TipoServicioFormComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

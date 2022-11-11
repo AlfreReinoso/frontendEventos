@@ -8,7 +8,7 @@ import { ServiciosFormComponent } from './Components/servicios/servicios-form/se
 import { ServiciosComponent } from './Components/servicios/servicios.component';
 import { TipoServicioComponent } from './Components/tipo-servicio/tipo-servicio.component';
 import {EventosComponent} from "./Components/eventos/eventos.component";
-import {EventoFormComponent} from "./Components/evento-form/evento-form.component";
+import {EventoFormComponent} from "./Components/eventos/evento-form/evento-form.component";
 import {RouteGuardService} from "./Services/route-guard.service";
 
 const routes: Routes = [
