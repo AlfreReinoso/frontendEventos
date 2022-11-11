@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import {Evento} from "../../model/evento"
-import {Servicio} from "../../model/servicio";
-import {EventoServicesService} from "../../Services/evento-services.service";
+import {Evento} from "../../../model/evento"
+import {Servicio} from "../../../model/servicio";
+import {EventoServicesService} from "../../../Services/evento-services.service";
 import {MessageService} from "primeng/api";
-import {ServicioService} from "../../Services/servicios.service";
-import {Salon} from "../../model/salon";
-import {SalaService} from "../../Services/sala.service";
-import {ClientesService} from "../../Services/clientes.service";
-import {Cliente} from "../../model/cliente";
+import {ServicioService} from "../../../Services/servicios.service";
+import {Salon} from "../../../model/salon";
+import {SalaService} from "../../../Services/sala.service";
+import {ClientesService} from "../../../Services/clientes.service";
+import {Cliente} from "../../../model/cliente";
 
 @Component({
   selector: 'app-evento-form',
@@ -29,12 +29,13 @@ export class EventoFormComponent implements OnInit {
 
   clientes : Cliente[]=[];
 
-  constructor( private service:EventoServicesService,
-               private _messageService: MessageService,
-               private _eventoService: EventoServicesService,
-               private _servicioService: ServicioService,
-               private _salonesService: SalaService,
-               private _clienteService: ClientesService,
+  constructor( 
+    private service:EventoServicesService,
+    private _messageService: MessageService,
+    private _eventoService: EventoServicesService,
+    private _servicioService: ServicioService,
+    private _salonesService: SalaService,
+    private _clienteService: ClientesService,
   ) { }
 
   ngOnInit(): void {

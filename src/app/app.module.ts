@@ -13,7 +13,7 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { NgxsModule } from '@ngxs/store';
 import { Location } from '@angular/common';
 import { CustomComponentsModule } from './modules/custom-components/custom-components.module';
-import { EventoFormComponent } from './Components/evento-form/evento-form.component';
+import { EventoFormComponent } from './Components/eventos/evento-form/evento-form.component';
 import {CardModule} from "primeng/card";
 import {ReactiveFormsModule} from "@angular/forms";
 import {InputNumberModule} from "primeng/inputnumber";
