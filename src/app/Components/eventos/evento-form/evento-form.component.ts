@@ -9,6 +9,7 @@ import {Salon} from "../../../model/salon";
 import {SalaService} from "../../../Services/sala.service";
 import {ClientesService} from "../../../Services/clientes.service";
 import {Cliente} from "../../../model/cliente";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-evento-form',
@@ -29,13 +30,14 @@ export class EventoFormComponent implements OnInit {
 
   clientes : Cliente[]=[];
 
-  constructor( 
+  constructor(
     private service:EventoServicesService,
     private _messageService: MessageService,
     private _eventoService: EventoServicesService,
     private _servicioService: ServicioService,
     private _salonesService: SalaService,
     private _clienteService: ClientesService,
+    private route : Router
   ) { }
 
   ngOnInit(): void {
@@ -74,6 +76,7 @@ export class EventoFormComponent implements OnInit {
     this._eventoService.insertEvento(this.evento).subscribe(
       (data)=>{console.log('Evento del backend',data)}
     );
+    this.route.navigate(['eventos']);
     }
 
 
