@@ -65,7 +65,7 @@
             </p-cellEditor>
           </td>
           <td >
-              <div class="align-items-center">
+              <div *ngIf="editing" class="align-items-center">
                   <button pButton type="button"  icon="pi pi-plus" (click)="agregarServicio(evento)" *ngIf="mostrarButtonAgregar"></button>
               </div>
               <p-cellEditor *ngFor="let servicio of evento.servicios; let i = index">
