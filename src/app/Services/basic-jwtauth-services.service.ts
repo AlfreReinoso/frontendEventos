@@ -27,9 +27,11 @@ BasicJWTAuthServicesService {
       )
     );
   }
+
   getAuthenticatedUser() {
     return sessionStorage.getItem(AUTHENTICATED_USER);
   }
+  
   getAuthenticatedToken() {
     if (sessionStorage.getItem(AUTHENTICATED_USER)) {
       return sessionStorage.getItem(TOKEN);

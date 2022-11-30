@@ -1,9 +1,9 @@
 .centrar {
     margin: 0 auto;
     margin-top: 4rem;
-    max-width: 95%;
+    max-width: 70%;
 }
 
-#rowBotones {
-    margin-top: 2rem;
+.centrarBtn {
+    text-align: center;
 }

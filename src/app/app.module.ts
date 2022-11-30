@@ -3,48 +3,46 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
-import { CustomComponentsModule } from "./modules/custom-components/custom-components.module";
 import { HttpIntercepterBasicAuthService } from "./Services/service/http-authenticate.service";
-import { CardModule } from "primeng/card";
-import { InputTextModule } from "primeng/inputtext";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { ButtonModule } from "primeng/button";
-import { NgxsModule } from "@ngxs/store";
+
 import { environment } from "../environments/environment";
 import { ServicioState } from './State/servicio.state';
-import { InputNumberModule } from "primeng/inputnumber";
-import { DropdownModule } from 'primeng/dropdown';
-import { MessagesModule } from 'primeng/messages'
-import { MessageModule } from 'primeng/message';
+
 import { MessageService } from 'primeng/api';
-import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
-import { ToastModule } from 'primeng/toast';
-import { TableModule } from 'primeng/table';
+import { DialogService } from 'primeng/dynamicdialog';
+import { NgxsModule } from '@ngxs/store';
+import { Location } from '@angular/common';
+import { CustomComponentsModule } from './modules/custom-components/custom-components.module';
+import { EventoFormComponent } from './Components/eventos/evento-form/evento-form.component';
+import {CardModule} from "primeng/card";
+import {ReactiveFormsModule} from "@angular/forms";
+import {InputNumberModule} from "primeng/inputnumber";
+import {DropdownModule} from "primeng/dropdown";
+import {RippleModule} from "primeng/ripple";
+import {ButtonModule} from "primeng/button";
 
 @NgModule({
-  declarations: [
-  ],
-  imports: [HttpClientModule,
+
+  declarations: [AppComponent],
+  imports: [
+    CustomComponentsModule,
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
-    CustomComponentsModule,
-    CardModule,
-    InputTextModule,
-    FormsModule,
-    ButtonModule,
-    InputNumberModule,
-    DropdownModule,
-    MessagesModule,
-    MessageModule,
-    DynamicDialogModule,
-    ToastModule,
-    TableModule,
+
     NgxsModule.forRoot([ServicioState], {
       developmentMode: !environment.production
-    })
+    }),
+    CardModule,
+    ReactiveFormsModule,
+    InputNumberModule,
+    DropdownModule,
+    RippleModule,
+    ButtonModule
   ],
   providers: [
     {provide:HTTP_INTERCEPTORS, useClass:HttpIntercepterBasicAuthService, multi:true},
+    Location,
     MessageService,
     DialogService
   ],

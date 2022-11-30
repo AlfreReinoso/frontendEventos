@@ -1,12 +1,17 @@
+
+ <div class="flex m-3 justify-content-center">
+    <button pButton routerLink='/salas'>Volver</button>
+ </div>
+<p-card class="flex justify-content-center mt-2">
 <h4 *ngIf="id==0">Nuevo Salon</h4>
-<div class="flex justify-content-center m-4">
+<div class="flex justify-content-center m-4 centrar">
 <form (ngSubmit)="!todoForm.invalid && saveSalon()" #todoForm="ngForm">
   <fieldset >
     <label for="salonDenominacion">Nombre</label>
     <input type="text" id="salonDenominacion" pInputText
            [(ngModel)]="salon.denominacion"
            class="form-control"
-           name="denominacion" required="required" >
+           name="denominacion" required="required">
   </fieldset>
   <fieldset >
     <label for="salonCostoPorDia">Precio p/dia</label>
@@ -27,3 +32,4 @@
   </div>
   </form>
 </div>
+</p-card>

@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -26,6 +27,7 @@ export class ServiciosFormComponent implements OnInit {
     private _messageService: MessageService,
     private _servicioService: ServicioService,
     private _tipoServicioService: TipoServicioService,
+    private _location: Location
   ) { }
 
   ngOnInit(): void {
@@ -40,6 +42,7 @@ export class ServiciosFormComponent implements OnInit {
       costoPorDia: [,Validators.required],
       tipoServicio: [,Validators.required]
     });
+
   }
 
   guardarServicio() {
@@ -47,19 +50,25 @@ export class ServiciosFormComponent implements OnInit {
       let servicio = new Servicio();
       servicio = Object.assign(servicio, this.servicioForm.value);
       this._servicioService.saveServicio(servicio).subscribe(servicioBack => {
-        // this.mensajeExitoso();
-        this.router.navigate(['..']);
+        this.mensajeExitoso();
+        this.router.navigateByUrl('/servicios');
       });
     }
+    else { this.mensajeError(); }
   }
 
-  // mensajeExitoso() {
-  //   this._messageService.clear();
-  //   this._messageService.add({ key: 'exito', severity:'success', summary: 'Éxito', detail: 'Servicio creado correctamente' });
-  // }
+  cancelar() {
+    this._location.back();
+  }
 
-  // mensajeError() {
-  //   this._messageService.add({ severity:'error', summary: 'Error', detail: 'El servicio no pudo ser creado' });
-  // }
+  mensajeExitoso() {
+    this._messageService.clear();
+    this._messageService.add({ severity:'success', summary: 'Éxito', detail: 'Servicio creado correctamente' });
+  }
+
+  mensajeError() {
+    this._messageService.clear();
+    this._messageService.add({ severity:'error', summary: 'Error', detail: 'El servicio no pudo ser creado' });
+  }
 
 }
