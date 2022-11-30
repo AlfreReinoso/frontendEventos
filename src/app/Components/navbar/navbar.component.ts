@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {MenuItem } from "primeng/api";
-import {BasicJWTAuthServicesService } from "../../Services/basic-jwtauth-services.service";
-import {Router } from "@angular/router";
+import { MenuItem } from "primeng/api";
+import { BasicJWTAuthServicesService } from "../../Services/basic-jwtauth-services.service";
+import { Router } from "@angular/router";
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { LoginComponent } from '../login/login.component';
 
@@ -12,7 +12,7 @@ import { LoginComponent } from '../login/login.component';
 })
 export class NavbarComponent implements OnInit {
 
-  public loginDialog?: DynamicDialogRef;
+  loginDialog: DynamicDialogRef;
 
   isUserLoggedIn: boolean = false;
   items: MenuItem[] = [];

@@ -13,7 +13,7 @@ import { TipoServicioFormComponent } from './tipo-servicio-form/tipo-servicio-fo
 })
 export class TipoServicioComponent implements OnInit {
 
-  public tipoServicioFormDialog?: DynamicDialogRef;
+  tipoServicioFormDialog: DynamicDialogRef;
 
   tiposDeServicios: TipoServicio[] = [];
   tipoServicioSinModificar: TipoServicio = new TipoServicio();

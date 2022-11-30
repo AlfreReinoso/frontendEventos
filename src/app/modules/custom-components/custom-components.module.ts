@@ -1,7 +1,6 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
-
 import { PrimeNgModule } from "../prime-ng/prime-ng.module";
 import { NavbarComponent } from "../../Components/navbar/navbar.component";
 import { EventosComponent } from "../../Components/eventos/eventos.component";
@@ -21,7 +20,6 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { DropdownModule } from 'primeng/dropdown';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
-import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { ToastModule } from 'primeng/toast';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { ServiciosComponent } from 'src/app/Components/servicios/servicios.component';
@@ -33,6 +31,7 @@ import { BadgeModule } from "primeng/badge";
 import { TipoServicioComponent } from 'src/app/Components/tipo-servicio/tipo-servicio.component';
 import { TipoServicioFormComponent } from 'src/app/Components/tipo-servicio/tipo-servicio-form/tipo-servicio-form.component';
 import { EventoFormComponent } from 'src/app/Components/eventos/evento-form/evento-form.component';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
 
 
 @NgModule({
@@ -57,6 +56,7 @@ import { EventoFormComponent } from 'src/app/Components/eventos/evento-form/even
         ButtonModule,
         MenubarModule,
         DialogModule,
+        DynamicDialogModule,
         BrowserAnimationsModule,
         FormsModule,
         DataViewModule,
@@ -72,7 +72,6 @@ import { EventoFormComponent } from 'src/app/Components/eventos/evento-form/even
         DropdownModule,
         MessagesModule,
         MessageModule,
-        DynamicDialogModule,
         ToastModule,
         TableModule,
         RippleModule,
