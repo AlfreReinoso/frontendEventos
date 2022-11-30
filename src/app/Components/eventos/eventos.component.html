@@ -1,6 +1,6 @@
 <div class="centrar">
   <p-card header="Eventos">
-    <p-table [value]="eventos" dataKey="nroReserva" editMode="row" responsiveLayout="scroll" sortMode="multiple">
+    <p-table [value]="eventos" dataKey="nroReserva" editMode="row" responsiveLayout="stack" sortMode="multiple">
       <ng-template pTemplate="header">
         <tr>
           <th pSortableColumn="cantidadPersonas">Cant. Personas<p-sortIcon field="cantidadPersonas"></p-sortIcon></th>
@@ -17,7 +17,7 @@
           <td>
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <input pInputText type="text" [(ngModel)]="evento.cantidadPersonas">
+                <input pInputText type="text" [(ngModel)]="evento.cantidadPersonas" maxlength="6">
               </ng-template>
               <ng-template pTemplate="output">
                 {{evento.cantidadPersonas}}
@@ -62,10 +62,10 @@
               <ng-template pTemplate="output">
                 {{evento.salon.denominacion}}
               </ng-template>
-            </p-cellEditor> 
+            </p-cellEditor>
           </td>
           <td >
-              <div class="align-items-center"> 
+              <div class="align-items-center">
                   <button pButton type="button"  icon="pi pi-plus" (click)="agregarServicio(evento)" *ngIf="mostrarButtonAgregar"></button>
               </div>
               <p-cellEditor *ngFor="let servicio of evento.servicios; let i = index">
