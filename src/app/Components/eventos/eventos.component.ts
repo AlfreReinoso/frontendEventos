@@ -66,7 +66,7 @@ export class EventosComponent implements OnInit {
         evento.cantidadPersonas !== 0)
     {
       this._eventoService.updateEventos(evento).subscribe((eventoBackend) => {
-          console.log("evento del backend",eventoBackend);
+          // console.log("evento del backend",eventoBackend);
           this._messageService.add({
             severity: 'success',
             summary: 'Éxito',

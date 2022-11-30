@@ -17,18 +17,18 @@
     <label for="salonCostoPorDia">Precio p/dia</label>
     <input type="text" id="salonCostoPorDia" pInputText [(ngModel)]="salon.costoPorDia"
            class="form-control"
-           name="costoPorDia" required="required" >
+           name="costoPorDia" required="required" maxlength="5" >
   </fieldset>
   <fieldset >
     <label for="capacidad">Capacidad</label>
     <input type="text" id="capacidad" pInputText [(ngModel)]="salon.capacidad"
            class="form-control"
-           name="capacidad" required="required" >
+           name="capacidad" required="required" maxlength="5" >
   </fieldset>
-  <div class="m-2">
-    <button pButton type="submit" class="p-button-success " >Save</button>
-    <button pButton class="p-button-info justify-content-between" (click)="selectSalon()">Select</button>
-    <button pButton *ngIf="id>0" class="p-button-danger justify-content-end" (click)="deleteSalon()">Delete</button>
+  <div class="m-2 justify-content-center align-items-center">
+    <button pButton type="submit" class="p-button-success m-2 justify-content-start" >Save</button>
+<!--    <button pButton class="p-button-info justify-content-between" (click)="selectSalon()">Select</button>-->
+    <button pButton *ngIf="id>0" class="p-button-danger justify-content-end m-2" (click)="deleteSalon()">Delete</button>
   </div>
   </form>
 </div>
