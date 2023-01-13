@@ -97,7 +97,7 @@ export class EventosComponent implements OnInit {
   }
 
   aceptarMsj() {
-    this._eventoService.deleteEventos(this.eventoSinModificar).subscribe(value => {
+    this._eventoService.deleteEventos(this.eventoSinModificar.nroReserva).subscribe(value => {
       this.eventos.splice(this.eventos.indexOf(this.eventoSinModificar), 1);
       this._messageService.clear();
       this._messageService.add({ severity:'success', summary: 'Éxito', detail: 'Servicio eliminado correctamente' })

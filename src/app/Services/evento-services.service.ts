@@ -18,8 +18,8 @@ export class EventoServicesService {
     return this.http.put<Evento>(`http://localhost:8080/eventos/putEventos`, evento);
   }
 
-  deleteEventos(evento: Evento){
-    return this.http.post<Evento>(`http://localhost:8080/eventos/deleteEventos`, evento);
+  deleteEventos(id: number){
+    return this.http.delete<Evento>(`http://localhost:8080/eventos/deleteEventos/${id}`);
   }
 
   insertEvento(evento:Evento):Observable<Evento>{

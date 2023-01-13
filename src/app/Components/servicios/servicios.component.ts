@@ -66,7 +66,7 @@ export class ServiciosComponent implements OnInit {
   }
 
   aceptarMsj() {
-    this._servicioService.delete(this.servicioSinModificar).subscribe(value => {
+    this._servicioService.delete(this.servicioSinModificar.idServicio).subscribe(value => {
       this.servicios.splice(this.servicios.indexOf(this.servicioSinModificar), 1);
       this._messageService.clear();
       this._messageService.add({ severity:'success', summary: 'Éxito', detail: 'Servicio eliminado correctamente' })
