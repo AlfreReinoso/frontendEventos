@@ -1,6 +1,7 @@
 import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {Evento} from "../model/evento";
 import { Servicio } from '../model/servicio';
+import {Salon} from "../model/salon";
 
 export class AddEvento {
   static readonly type = '[EVENTO] Add'
@@ -8,18 +9,24 @@ export class AddEvento {
   constructor(public evento: Evento) {
   }
 }
+export class AddSalon {
+  static readonly type = '[SALON] Add'
+
+  constructor(public salon  : Salon) {
+  }
+}
 
 
 
 export class EventoStateModel {
-   public eventos: Evento = new Evento;
-   /* salones : Salon[] = [];
-   servicios : Servicio[] = []; */
+   public eventos: Evento ;
+   public salones : Salon ;
+   public servicios : Servicio[] = [];
 }
 const resumenEventosModel :  EventoStateModel = {
-   eventos: new Evento
-  /* salones : [],
-   servicios : [], */
+  eventos: new Evento,
+  salones : new Salon,
+  servicios : [],
 };
 
 @State<EventoStateModel>({
@@ -32,6 +39,10 @@ export class EventosState {
   @Selector()
   static getEventos(state: EventoStateModel){
     return state.eventos;
+  }
+  @Selector()
+  static getSalon(state: EventoStateModel){
+    return state.salones;
   }
 
   /* @Action(AddEvento)
@@ -46,5 +57,11 @@ export class EventosState {
         ctx.patchState({eventos: action.evento});
     }
 
- 
+
+  @Action(AddSalon)
+  setSalonAction(ctx: StateContext<EventoStateModel>, action:AddSalon) {
+    ctx.setState({...ctx.getState(), salones: action.salon});
+  }
+
+
 }

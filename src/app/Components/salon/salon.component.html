@@ -21,11 +21,13 @@
            class="form-control"
            name="capacidad" required="required" >
   </fieldset>
-  <div class="m-2">
-    <button pButton type="submit" class="p-button-success " >Save</button>
-    <button pButton class="p-button-info justify-content-between" (click)="selectSalon()">Select</button>
-    <button pButton *ngIf="id>0" class="p-button-danger justify-content-end" (click)="deleteSalon()">Delete</button>
+  <div class="flex justify-content-center m-2">
+    <button pButton type="submit" class="m-2 p-button-success " >Save</button>
+    <button pButton class="m-2 p-button-info justify-content-between" (click)="selectSalon()">Select</button>
+    <button pButton *ngIf="id>0" class="m-2 p-button-danger justify-content-end" (click)="deleteSalon()">Delete</button>
   </div>
   </form>
 </div>
 </p-card>
+<app-volver></app-volver>
+

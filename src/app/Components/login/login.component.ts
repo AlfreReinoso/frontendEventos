@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { BasicJWTAuthServicesService } from "../../Services/basic-jwtauth-services.service";
 import { MessageService } from 'primeng/api';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -15,8 +16,9 @@ export class LoginComponent {
 
   constructor(
     private basicAuthenticationServices: BasicJWTAuthServicesService,
-    private _messageService: MessageService, 
+    private _messageService: MessageService,
     public loginDialog: DynamicDialogRef,
+    private router: Router,
     ) { }
 
   handleJWTAuthLogin(){
@@ -24,6 +26,7 @@ export class LoginComponent {
       .subscribe(
           (data: any) => {
           this.loginDialog.close(true);
+          this.router.navigate(['/salas']);
         },
         (error: any) => {
           this.mensajeError();

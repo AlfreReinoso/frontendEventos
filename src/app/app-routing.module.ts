@@ -9,6 +9,7 @@ import { TipoServicioComponent } from './Components/tipo-servicio/tipo-servicio.
 import { EventosComponent } from "./Components/eventos/eventos.component";
 import { EventoFormComponent } from "./Components/eventos/evento-form/evento-form.component";
 import { RouteGuardService } from "./Services/route-guard.service";
+import {ErrorComponent} from "./Components/error/error.component";
 
 const routes: Routes = [
   { path:'salas', component: SalasComponent, canActivate:[AuthenticationGuard] },
@@ -20,7 +21,7 @@ const routes: Routes = [
   { path:'tipoServicioForm', component:TipoServicioComponent, canActivate:[AuthenticationGuard], canLoad:[AuthenticationGuard] },
   { path:'eventos', component:EventosComponent, canActivate:[RouteGuardService] },
   { path:'eventoForm', component:EventoFormComponent, canActivate:[RouteGuardService] },
-  // { path: '**', component: SalasComponent }
+  { path: '**', component: ErrorComponent }
 ];
 
 @NgModule({

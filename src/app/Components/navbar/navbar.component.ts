@@ -56,7 +56,8 @@ export class NavbarComponent implements OnInit {
     this.items = [
       {
         label: 'Inicio',
-        icon: 'pi pi-home'
+        icon: 'pi pi-home',
+        routerLink:'salas'
       },
       {
         label: 'Eventos',

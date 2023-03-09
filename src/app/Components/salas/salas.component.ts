@@ -14,8 +14,8 @@ export class SalasComponent implements OnInit {
   salas: Salon[] = [];
 
   constructor(
-    private salaservice: SalaService, 
-    private router:Router 
+    private salaservice: SalaService,
+    private router:Router
     ) { }
 
   ngOnInit(): void {
@@ -34,4 +34,6 @@ export class SalasComponent implements OnInit {
     console.log('navegando al saloncomponent', idSala);
     this.router.navigate(['/salon',idSala]);
   }
+
+
 }

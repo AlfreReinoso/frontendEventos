@@ -9,6 +9,7 @@ import {Salon} from "../../../model/salon";
 import {SalaService} from "../../../Services/sala.service";
 import {ClientesService} from "../../../Services/clientes.service";
 import {Cliente} from "../../../model/cliente";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-evento-form',
@@ -29,7 +30,7 @@ export class EventoFormComponent implements OnInit {
 
   clientes : Cliente[]=[];
 
-  constructor( 
+  constructor(private router:Router,
     private service:EventoServicesService,
     private _messageService: MessageService,
     private _eventoService: EventoServicesService,
@@ -71,8 +72,20 @@ export class EventoFormComponent implements OnInit {
     this.evento.fechaReserva = new Date();
     this.evento.cantidadPersonas = Number(this.evento.cantidadPersonas);
     console.log('evento antes de insertar',this.evento);
+    // this._messageService.
     this._eventoService.insertEvento(this.evento).subscribe(
-      (data)=>{console.log('Evento del backend',data)}
+      (data)=> {
+        this._messageService.clear();
+        this._messageService.add({ severity:'success', summary:'Exito!',detail: 'Se guardo correctamente'});
+        this.router.navigate(['eventos'])
+        console.log('Evento del backend',data)
+      }, error =>{
+        console.log(error)
+        this._messageService.clear();
+        this._messageService.add({ severity:'error', summary: 'Error!',
+          detail: error.error.message }
+        );
+      }
     );
     }
 
