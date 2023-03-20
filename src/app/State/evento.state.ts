@@ -15,6 +15,13 @@ export class AddSalon {
   constructor(public salon  : Salon) {
   }
 }
+export class AddServicio {
+  static readonly type = '[SERVCICIO] Add'
+
+  constructor(public servicio  : Servicio[]) {
+  }
+}
+
 
 
 
@@ -61,6 +68,10 @@ export class EventosState {
   @Action(AddSalon)
   setSalonAction(ctx: StateContext<EventoStateModel>, action:AddSalon) {
     ctx.setState({...ctx.getState(), salones: action.salon});
+  }
+  @Action(AddServicio)
+  setServicioAction(ctx: StateContext<EventoStateModel>, action:AddServicio) {
+    ctx.setState({...ctx.getState(), servicios: action.servicio});
   }
 
 
