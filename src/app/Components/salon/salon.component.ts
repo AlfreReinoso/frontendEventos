@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {SalaService} from "../../Services/sala.service";
 import {Salon} from "../../model/salon";
+import {Store} from "@ngxs/store";
+import {AddSalon, EventosState} from "../../State/evento.state";
 
 @Component({
   selector: 'app-salon',
@@ -13,7 +15,7 @@ export class SalonComponent implements OnInit {
   id:number = 0;
   salon: Salon = new Salon;
 
-  constructor(private router:Router,private route : ActivatedRoute, private _salaService : SalaService) { }
+  constructor(private store: Store,private router:Router,private route : ActivatedRoute, private _salaService : SalaService) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
@@ -47,7 +49,8 @@ export class SalonComponent implements OnInit {
   }
 
   selectSalon() {
-
+    this.store.dispatch(new AddSalon(this.salon))
+    console.log(this.store.selectSnapshot(EventosState))
     this.router.navigate(['servicios', this.salon.idSalon]);
   }
 

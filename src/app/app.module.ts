@@ -17,6 +17,7 @@ import {InputNumberModule} from "primeng/inputnumber";
 import {DropdownModule} from "primeng/dropdown";
 import {RippleModule} from "primeng/ripple";
 import {ButtonModule} from "primeng/button";
+import {EventosState} from "./State/evento.state";
 
 @NgModule({
   declarations: [AppComponent],
@@ -32,6 +33,9 @@ import {ButtonModule} from "primeng/button";
     CardModule,
     ButtonModule,
     NgxsModule.forRoot([ServicioState], {
+      developmentMode: !environment.production
+    }),
+    NgxsModule.forRoot([EventosState], {
       developmentMode: !environment.production
     }),
   ],

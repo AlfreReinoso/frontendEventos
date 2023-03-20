@@ -4,6 +4,9 @@ import { MessageService } from 'primeng/api';
 import { Servicio } from 'src/app/model/servicio';
 import { ServicioService } from 'src/app/Services/servicios.service';
 import { TipoServicioService } from 'src/app/Services/tipo-servicio.service';
+import {Store} from "@ngxs/store";
+import {AddServicios} from "../../State/servicio.state";
+import {AddServicio, EventosState} from "../../State/evento.state";
 
 @Component({
   selector: 'app-servicios',
@@ -17,6 +20,7 @@ export class ServiciosComponent implements OnInit {
 
   constructor(
     private router : Router,
+    private store: Store,
     private _messageService: MessageService,
     private _servicioService : ServicioService,
     private _tipoServicioService: TipoServicioService,
@@ -63,6 +67,11 @@ export class ServiciosComponent implements OnInit {
 
   volver() {
     this.router.navigate(['salas']);
+  }
+  siguiente(){
+    this.store.dispatch(new AddServicio(this.servicios));
+    console.log(this.store.selectSnapshot(EventosState));
+    this.router.navigate(['eventos'])
   }
 
   aceptarMsj() {
