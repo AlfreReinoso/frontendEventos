@@ -10,6 +10,7 @@ import { EventosComponent } from "./Components/eventos/eventos.component";
 import { EventoFormComponent } from "./Components/eventos/evento-form/evento-form.component";
 import { RouteGuardService } from "./Services/route-guard.service";
 import {ErrorComponent} from "./Components/error/error.component";
+import {ReservaComponent} from "./Components/reserva/reserva.component";
 
 const routes: Routes = [
   { path:'salas', component: SalasComponent, canActivate:[AuthenticationGuard] },
@@ -21,6 +22,9 @@ const routes: Routes = [
   { path:'tipoServicioForm', component:TipoServicioComponent, canActivate:[AuthenticationGuard], canLoad:[AuthenticationGuard] },
   { path:'eventos', component:EventosComponent, canActivate:[RouteGuardService] },
   { path:'eventoForm', component:EventoFormComponent, canActivate:[RouteGuardService] },
+  { path:'eventoForm/:id', component:EventoFormComponent, canActivate:[RouteGuardService] },
+  { path:'reserva', component:ReservaComponent, canActivate:[RouteGuardService] },
+
   { path: '**', component: ErrorComponent }
 ];
 

@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { HttpIntercepterBasicAuthService } from "./Services/service/http-authenticate.service";
 import { environment } from "../environments/environment";
-import { ServicioState } from './State/servicio.state';
+// import { ServicioState } from './State/servicio.state';
 import { MessageService } from 'primeng/api';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { NgxsModule } from '@ngxs/store';
@@ -18,6 +18,7 @@ import {DropdownModule} from "primeng/dropdown";
 import {RippleModule} from "primeng/ripple";
 import {ButtonModule} from "primeng/button";
 import {EventosState} from "./State/evento.state";
+import { ReservaComponent } from './Components/reserva/reserva.component';
 
 @NgModule({
   declarations: [AppComponent],
@@ -32,9 +33,9 @@ import {EventosState} from "./State/evento.state";
     RippleModule,
     CardModule,
     ButtonModule,
-    NgxsModule.forRoot([ServicioState], {
-      developmentMode: !environment.production
-    }),
+    // NgxsModule.forRoot([ServicioState], {
+    //   developmentMode: !environment.production
+    // }),
     NgxsModule.forRoot([EventosState], {
       developmentMode: !environment.production
     }),

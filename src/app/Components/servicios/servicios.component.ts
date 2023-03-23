@@ -5,7 +5,7 @@ import { Servicio } from 'src/app/model/servicio';
 import { ServicioService } from 'src/app/Services/servicios.service';
 import { TipoServicioService } from 'src/app/Services/tipo-servicio.service';
 import {Store} from "@ngxs/store";
-import {AddServicios} from "../../State/servicio.state";
+// import {AddServicios} from "../../State/servicio.state";
 import {AddServicio, EventosState} from "../../State/evento.state";
 
 @Component({
@@ -71,7 +71,7 @@ export class ServiciosComponent implements OnInit {
   siguiente(){
     this.store.dispatch(new AddServicio(this.servicios));
     console.log(this.store.selectSnapshot(EventosState));
-    this.router.navigate(['eventos'])
+    this.router.navigate(['eventoForm/1'])
   }
 
   aceptarMsj() {

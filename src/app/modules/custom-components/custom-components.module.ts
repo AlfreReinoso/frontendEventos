@@ -34,6 +34,8 @@ import { EventoFormComponent } from 'src/app/Components/eventos/evento-form/even
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import {VolverComponent} from "../../Components/volver/volver.component";
 import {ErrorComponent} from "../../Components/error/error.component";
+import {ReservaComponent} from "../../Components/reserva/reserva.component";
+import {CalendarModule} from "primeng/calendar";
 
 
 @NgModule({
@@ -50,38 +52,40 @@ import {ErrorComponent} from "../../Components/error/error.component";
     TipoServicioFormComponent,
     EventoFormComponent,
     VolverComponent,
-    ErrorComponent
+    ErrorComponent,
+    ReservaComponent
   ],
-    imports: [
-        CommonModule,
-        PrimeNgModule,
-        CardModule,
-        RouterModule,
-        ButtonModule,
-        MenubarModule,
-        DialogModule,
-        DynamicDialogModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        DataViewModule,
-        TableModule,
-        InputTextModule,
-        PasswordModule,
-        CardModule,
-        InputTextModule,
-        FormsModule,
-        ButtonModule,
-        ReactiveFormsModule,
-        InputNumberModule,
-        DropdownModule,
-        MessagesModule,
-        MessageModule,
-        ToastModule,
-        TableModule,
-        RippleModule,
-        BadgeModule,
-        MultiSelectModule
-    ],
+  imports: [
+    CommonModule,
+    PrimeNgModule,
+    CardModule,
+    RouterModule,
+    ButtonModule,
+    MenubarModule,
+    DialogModule,
+    DynamicDialogModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    DataViewModule,
+    TableModule,
+    InputTextModule,
+    PasswordModule,
+    CardModule,
+    InputTextModule,
+    FormsModule,
+    ButtonModule,
+    ReactiveFormsModule,
+    InputNumberModule,
+    DropdownModule,
+    MessagesModule,
+    MessageModule,
+    ToastModule,
+    TableModule,
+    RippleModule,
+    BadgeModule,
+    MultiSelectModule,
+    CalendarModule
+  ],
   exports:[
     EventosComponent,
     LoginComponent,
@@ -96,7 +100,8 @@ import {ErrorComponent} from "../../Components/error/error.component";
     TipoServicioComponent,
     TipoServicioFormComponent,
     VolverComponent,
-    ErrorComponent
+    ErrorComponent,
+    ReservaComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

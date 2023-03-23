@@ -51,6 +51,10 @@ export class EventosState {
   static getSalon(state: EventoStateModel){
     return state.salones;
   }
+  @Selector()
+  static getServicio(state: EventoStateModel){
+    return state.servicios;
+  }
 
   /* @Action(AddEvento)
   add({getState, patchState}: StateContext<EventoStateModel>, {evento}:AddEvento){

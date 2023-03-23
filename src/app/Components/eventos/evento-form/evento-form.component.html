@@ -1,11 +1,11 @@
 <p-card class="flex justify-content-center mt-5">
-  <div class="grid flex">
+  <div class="grid">
     <form (ngSubmit)="!todoForm.invalid" #todoForm="ngForm">
       <tr>
         <td >
           <div  class="m-3">
               <label for="eventoCantPersonas">Cantidad de Personas</label>
-              <input type="text" id="eventoCantPersonas" pInputText
+              <input type="text" id="eventoCantPersonas" pInputText maxlength="5"
               [(ngModel)]="evento.cantidadPersonas"
               class="form-control"
               name="cantidadPersonas" required="required">
@@ -32,8 +32,14 @@
         <td>
           <div class="m-3 ">
           <label for="idServicio">Servicios</label>
-          <p-multiSelect id="idServicio" [options]="servicios" [(ngModel)]="evento.servicios"
-                         optionLabel="denominacion" class="form-control flex" name="evento.servicios" appendTo="body" display="chip"></p-multiSelect>
+<!--          <p-multiSelect id="idServicio" [options]="servicios" [(ngModel)]="evento.servicios"-->
+<!--                         optionLabel="denominacion" class="form-control absolute"-->
+<!--                         name="evento.servicios" appendTo="body"-->
+<!--                         display="chip" [selectedItemsLabel]="'{servicios.length} items selected'"></p-multiSelect>-->
+            <p-multiSelect id="idServicio" [options]="servicios" [(ngModel)]="evento.servicios"
+                           optionLabel="denominacion" class="form-control absolute" [maxSelectedLabels]="4"
+                           [selectedItemsLabel]="'{0} items selected'"
+                            name="evento.servicios"></p-multiSelect>
           </div>
         </td>
         <td>
