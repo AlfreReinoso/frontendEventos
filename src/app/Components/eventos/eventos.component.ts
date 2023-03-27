@@ -5,6 +5,8 @@ import { EventoServicesService } from 'src/app/Services/evento-services.service'
 import {Servicio} from "../../model/servicio";
 import {MessageService} from "primeng/api";
 import {ServicioService} from "../../Services/servicios.service";
+import {Salon} from "../../model/salon";
+import {SalaService} from "../../Services/sala.service";
 
 @Component({
   selector: 'app-eventos',
@@ -20,14 +22,15 @@ export class EventosComponent implements OnInit {
   message: String = '' +
     '';
   eventos : Evento[] = [];
-  servicios: String[]=[];
-  selectedServicios: Servicio[]=[];
+  servicios: Servicio[]=[];
+  salas : Salon[]=[]
 
   constructor(private route:ActivatedRoute,
               private service:EventoServicesService,
               private _messageService: MessageService,
               private _eventoService: EventoServicesService,
               private _servicioService: ServicioService,
+              private _salasService: SalaService,
   ) {
 
   }
@@ -35,17 +38,23 @@ export class EventosComponent implements OnInit {
   ngOnInit(): void {
     this.listar();
     this._servicioService.findAll().subscribe((servicioBackend) => {
-      this.servicios = servicioBackend.map(value => value.denominacion);
+      this.servicios = servicioBackend;
     })
+    this._salasService.getSalas().subscribe(
+      (response: Salon[]) => {
+        console.log(response)
+        this.salas = response;
+      }
+    )
 
   }
   listar(){
     this.service.getDataEventos().subscribe(
       (response: any) =>{
+        console.log(response)
         this.eventos = response;
         this.message = response.message;}
     );
-    // this.selectedServicios = this.eventos.map(evento=>evento.servicios);
   }
 
   editar(evento: Evento) {

@@ -57,25 +57,27 @@
           <td>
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <input pInputText type="text" [(ngModel)]="evento.salon.denominacion">
+                <p-dropdown [(ngModel)]="evento.salon" [options]="salas" optionLabel="denominacion" appendTo="body" styleClass="dropdown"></p-dropdown>
               </ng-template>
               <ng-template pTemplate="output">
                 {{evento.salon.denominacion}}
               </ng-template>
-            </p-cellEditor> 
+            </p-cellEditor>
           </td>
           <td >
-              <div class="align-items-center"> 
-                  <button pButton type="button"  icon="pi pi-plus" (click)="agregarServicio(evento)" *ngIf="mostrarButtonAgregar"></button>
-              </div>
-              <p-cellEditor *ngFor="let servicio of evento.servicios; let i = index">
+                <p-cellEditor >
                       <ng-template pTemplate="input">
-                        <button pButton type="button" icon="pi pi-trash" (click)="eliminarServicio(evento, i)" class="p-button-danger"></button>
-                          <input pInputText type="text" [(ngModel)]="servicio.denominacion">
+                        <p-multiSelect [options]="servicios" [(ngModel)]="evento.servicios"
+                                       optionLabel="denominacion" class="form-control " [maxSelectedLabels]="2"
+                                       [selectedItemsLabel]="'{0} items selected'"
+                                       name="evento.servicios"></p-multiSelect>
                       </ng-template>
-                      <ng-template pTemplate="output">
-                      {{servicio.denominacion}}
-                      </ng-template>
+                    <ng-template  pTemplate="output">
+                      <div *ngFor="let servicio of evento.servicios;">
+                        {{servicio.denominacion}},
+                      </div>
+                    </ng-template>
+
               </p-cellEditor>
           </td>
           <td style="text-align:center">

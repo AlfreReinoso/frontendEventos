@@ -5,9 +5,7 @@
 <div class="grid">
   <div class="col-4" *ngFor="let sala of salas">
         <p-card header="{{sala.denominacion}}" styleClass="shadow-2 ">
-<!--            <ng-template pTemplate="header"  >-->
-<!--              {{sala.denominacion}}-->
-<!--            </ng-template>-->
+
             <ng-template pTemplate="body">
               Costo: {{sala.costoPorDia}} <br>
               Cant Personas:{{sala.capacidad}}
@@ -20,23 +18,3 @@
 </div>
 
 
-<!--<div class="card">-->
-<!--  <div class="card-container overflow-hidden">-->
-<!--    <div class="flex">-->
-<!--      <div class="flex-1 flex align-items-center justify-content-center m-1 px-1 py-1 border-round" *ngFor="let sala of salas">-->
-<!--        <p-card class="text-center" styleClass="shadow-2">-->
-<!--          <ng-template pTemplate="header" >-->
-<!--            Nombre: {{sala.denominacion}}-->
-<!--          </ng-template>-->
-<!--          <ng-template pTemplate="body">-->
-<!--            Costo: {{sala.costoPorDia}} <br>-->
-<!--            Cant Personas:{{sala.capacidad}}-->
-<!--          </ng-template>-->
-<!--          <ng-template pTemplate="footer">-->
-<!--            <button (click)="selectSalon(sala.idSalon)" pButton type="button" label="Ver" icon="pi pi-angle-right" iconPos="right" class="p-button-sm"></button>-->
-<!--          </ng-template>-->
-<!--        </p-card>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->

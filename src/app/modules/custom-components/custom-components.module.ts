@@ -34,7 +34,6 @@ import { EventoFormComponent } from 'src/app/Components/eventos/evento-form/even
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import {VolverComponent} from "../../Components/volver/volver.component";
 import {ErrorComponent} from "../../Components/error/error.component";
-import {ReservaComponent} from "../../Components/reserva/reserva.component";
 import {CalendarModule} from "primeng/calendar";
 
 
@@ -53,7 +52,7 @@ import {CalendarModule} from "primeng/calendar";
     EventoFormComponent,
     VolverComponent,
     ErrorComponent,
-    ReservaComponent
+
   ],
   imports: [
     CommonModule,
@@ -101,7 +100,7 @@ import {CalendarModule} from "primeng/calendar";
     TipoServicioFormComponent,
     VolverComponent,
     ErrorComponent,
-    ReservaComponent
+
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

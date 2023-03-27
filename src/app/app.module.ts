@@ -18,7 +18,6 @@ import {DropdownModule} from "primeng/dropdown";
 import {RippleModule} from "primeng/ripple";
 import {ButtonModule} from "primeng/button";
 import {EventosState} from "./State/evento.state";
-import { ReservaComponent } from './Components/reserva/reserva.component';
 
 @NgModule({
   declarations: [AppComponent],
