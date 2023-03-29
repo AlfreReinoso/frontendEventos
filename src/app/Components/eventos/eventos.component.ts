@@ -7,6 +7,8 @@ import {MessageService} from "primeng/api";
 import {ServicioService} from "../../Services/servicios.service";
 import {Salon} from "../../model/salon";
 import {SalaService} from "../../Services/sala.service";
+import {ClientesService} from "../../Services/clientes.service";
+import {Cliente} from "../../model/cliente";
 
 @Component({
   selector: 'app-eventos',
@@ -24,6 +26,7 @@ export class EventosComponent implements OnInit {
   eventos : Evento[] = [];
   servicios: Servicio[]=[];
   salas : Salon[]=[]
+  clientes: Cliente[]=[];
 
   constructor(private route:ActivatedRoute,
               private service:EventoServicesService,
@@ -31,6 +34,7 @@ export class EventosComponent implements OnInit {
               private _eventoService: EventoServicesService,
               private _servicioService: ServicioService,
               private _salasService: SalaService,
+              private _clienteService: ClientesService,
   ) {
 
   }
@@ -44,6 +48,11 @@ export class EventosComponent implements OnInit {
       (response: Salon[]) => {
         console.log(response)
         this.salas = response;
+      }
+    )
+    this._clienteService.getClientes().subscribe(
+      (data:any)=>{
+        this.clientes = data;
       }
     )
 
@@ -65,7 +74,7 @@ export class EventosComponent implements OnInit {
   eliminar(evento: Evento) {
     this.eventoSinModificar = evento;
     this._messageService.clear();
-    this._messageService.add({ key: 'confirmar-c', sticky: true, severity:'warn', summary:'Desea eliminar el servicio?', detail:'Confirma para proceder' });
+    this._messageService.add({ key: 'confirmar-c', sticky: true, severity:'warn', summary:'Desea eliminar el evnto?', detail:'Confirma para proceder' });
   }
 
   guardar(evento: Evento) {
@@ -109,7 +118,7 @@ export class EventosComponent implements OnInit {
     this._eventoService.deleteEventos(this.eventoSinModificar.nroReserva).subscribe(value => {
       this.eventos.splice(this.eventos.indexOf(this.eventoSinModificar), 1);
       this._messageService.clear();
-      this._messageService.add({ severity:'success', summary: 'Éxito', detail: 'Servicio eliminado correctamente' })
+      this._messageService.add({ severity:'success', summary: 'Éxito', detail: 'Evento eliminado correctamente' })
     });
   }
 
