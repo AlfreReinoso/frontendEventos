@@ -23,15 +23,12 @@ export class SalasComponent implements OnInit {
       this.salaservice.getSalas().subscribe(
         (response: Salon[]) => {
           this.salas = response;
-          console.log(this.salas);
-          console.log(response);
         }
       )
     }
   }
 
   selectSalon(idSala: number) : void{
-    console.log('navegando al saloncomponent', idSala);
     this.router.navigate(['/salon',idSala]);
   }
 
