@@ -18,6 +18,8 @@ import {DropdownModule} from "primeng/dropdown";
 import {RippleModule} from "primeng/ripple";
 import {ButtonModule} from "primeng/button";
 import {EventosState} from "./State/evento.state";
+import {AdministrativoState} from "./State/adm.state";
+import {ClienteState} from "./State/cliente.state";
 
 @NgModule({
   declarations: [AppComponent],
@@ -35,9 +37,15 @@ import {EventosState} from "./State/evento.state";
     // NgxsModule.forRoot([ServicioState], {
     //   developmentMode: !environment.production
     // }),
-    NgxsModule.forRoot([EventosState], {
+    NgxsModule.forRoot([EventosState, ClienteState, AdministrativoState], {
       developmentMode: !environment.production
     }),
+    // NgxsModule.forRoot([AdministrativoState], {
+    //   developmentMode: !environment.production
+    // }),
+    // NgxsModule.forRoot([ClienteState], {
+    //   developmentMode: !environment.production
+    // }),
   ],
   providers: [
     {provide:HTTP_INTERCEPTORS, useClass:HttpIntercepterBasicAuthService, multi:true},

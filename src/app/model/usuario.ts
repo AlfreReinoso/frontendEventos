@@ -6,5 +6,5 @@ export class Usuario {
   nombre: string = '';
   mail : string = '';
   telefono : string = '';
-
+  usuarioName: string ='';
 }

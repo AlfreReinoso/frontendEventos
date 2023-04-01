@@ -5,9 +5,9 @@ import {map} from "rxjs";
 import {ClientesService} from "./clientes.service";
 import {Store} from "@ngxs/store";
 import {AddSalon} from "../State/evento.state";
-import {AddCliente} from "../State/cliente.state";
+import {AddCliente, ClienteResetAction, ClienteState} from "../State/cliente.state";
 import {AdministrativoService} from "./administrativo.service";
-import {AddAdministrativo} from "../State/adm.state";
+import {AddAdministrativo, AdministrativoState, AdmResetAction} from "../State/adm.state";
 export const TOKEN = 'token';
 export const AUTHENTICATED_USER = 'authenticateUser';
 
@@ -25,7 +25,7 @@ BasicJWTAuthServicesService {
     (`${API_URL}/authenticate`, {username, password}).pipe(
       map(
         data => {
-          //console.log(sessionStorage.getItem(TOKEN));
+          // console.log(data);
           sessionStorage.setItem(AUTHENTICATED_USER, username);
           sessionStorage.setItem(TOKEN, `Bearer ${data.token}`);
           this._clienteService.getCliente(username).subscribe(
@@ -33,6 +33,8 @@ BasicJWTAuthServicesService {
               console.log(response)
               if(response){
                 this.store.dispatch(new AddCliente(response))
+                console.log(this.store.selectSnapshot(ClienteState.getCliente));
+
               }
             }
           );
@@ -41,6 +43,7 @@ BasicJWTAuthServicesService {
               console.log(response)
               if(response){
                 this.store.dispatch(new AddAdministrativo(response))
+                console.log(this.store.selectSnapshot(AdministrativoState.getAdministrativo))
               }
             }
           )
@@ -70,6 +73,8 @@ BasicJWTAuthServicesService {
 
   logout() {
     sessionStorage.removeItem(AUTHENTICATED_USER);
+    this.store.dispatch(new ClienteResetAction())
+    this.store.dispatch(new AdmResetAction())
   }
 }
 export class AuthenticationBean {

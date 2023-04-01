@@ -2,6 +2,7 @@ import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {Evento} from "../model/evento";
 import { Servicio } from '../model/servicio';
 import {Salon} from "../model/salon";
+import {Injectable} from "@angular/core";
 
 export class AddEvento {
   static readonly type = '[EVENTO] Add'
@@ -40,7 +41,7 @@ const resumenEventosModel :  EventoStateModel = {
   name:'eventos',
   defaults: resumenEventosModel
 })
-
+@Injectable()
 export class EventosState {
 
   @Selector()
