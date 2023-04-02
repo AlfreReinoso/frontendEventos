@@ -1,22 +1,22 @@
 import {Action, Selector, State, StateContext} from "@ngxs/store";
 import {Injectable} from "@angular/core";
+import {MenuItem} from "primeng/api";
 
 
 export class AddMenu {
   static readonly type = '[MENU] Add'
 
-  constructor(public menu: []) {
-  }
+  constructor(public menu: any){}
 }
 export class MenuResetAction {
   static readonly type = '[MENU] ResetMenu';
 }
 
 export class MenuStateModel{
-  public menu: any;
+  public menu: [];
 }
 const resumenMenuModel :  MenuStateModel = {
-  menu:  [],
+  menu: [],
 };
 @State<MenuStateModel>({
   name:'menu',

@@ -8,6 +8,7 @@ import {AddSalon} from "../State/evento.state";
 import {AddCliente, ClienteResetAction, ClienteState} from "../State/cliente.state";
 import {AdministrativoService} from "./administrativo.service";
 import {AddAdministrativo, AdministrativoState, AdmResetAction} from "../State/adm.state";
+import {AddMenu, MenuState} from "../State/menu.state";
 export const TOKEN = 'token';
 export const AUTHENTICATED_USER = 'authenticateUser';
 
@@ -33,8 +34,6 @@ BasicJWTAuthServicesService {
               console.log(response)
               if(response){
                 this.store.dispatch(new AddCliente(response))
-                console.log(this.store.selectSnapshot(ClienteState.getCliente));
-
               }
             }
           );
@@ -43,7 +42,6 @@ BasicJWTAuthServicesService {
               console.log(response)
               if(response){
                 this.store.dispatch(new AddAdministrativo(response))
-                console.log(this.store.selectSnapshot(AdministrativoState.getAdministrativo))
               }
             }
           )

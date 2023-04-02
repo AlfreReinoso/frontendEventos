@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import { BasicJWTAuthServicesService } from "../../Services/basic-jwtauth-services.service";
 import { MessageService } from 'primeng/api';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
@@ -18,6 +18,8 @@ import {AddMenu} from "../../State/menu.state";
 export class LoginComponent {
 
   @Input() islogeado: boolean;
+  @Output() estaLogeado = new EventEmitter<boolean>();
+
   username: string = '';
   password: string = '';
 
@@ -35,32 +37,14 @@ export class LoginComponent {
     this.basicAuthenticationServices.executeJWTAuthenticationService(this.username, this.password)
       .subscribe(
           (data: any) => {
-            // this._clienteService.getCliente(this.username).subscribe(
-            //   (response)=>{
-            //     console.log(response)
-            //     if(response){
-            //       this.store.dispatch(new AddCliente(response))
-            //       // this.store.dispatch(new AddMenu())
-            //     }
-            //   }
-            // );
-            // this._administrativoService.getAdministrativo(this.username).subscribe(
-            //   (response)=>{
-            //     console.log(response)
-            //     if(response){
-            //       this.store.dispatch(new AddAdministrativo(response))
-            //       console.log(this.store.selectSnapshot(AdministrativoState.getAdministrativo))
-            //     }
-            //   }
-            // )
-
             this.islogeado = true;
+            this.estaLogeado.emit(true)
             this.router.navigate(['/salas']);
-
         },
         (error: any) => {
           this.mensajeError();
           this.islogeado= false
+          this.estaLogeado.emit(false)
         }
       );
   }

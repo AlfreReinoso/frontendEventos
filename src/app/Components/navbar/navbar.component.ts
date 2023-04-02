@@ -20,7 +20,7 @@ import {MenuState} from "../../State/menu.state";
 export class NavbarComponent implements OnInit, AfterViewInit {
 
   // @Select(ClienteState.getCliente) isCliente$: Observable<Cliente>;
-  @Select(MenuState.getMenu) items$: Observable<MenuItem[]>;
+  // @Select(MenuState.getMenu) items$: Observable<MenuItem[]>;
 
 
 
@@ -41,7 +41,7 @@ export class NavbarComponent implements OnInit, AfterViewInit {
     ) { }
 
   ngOnInit() {
-    this.items$.subscribe((menu)=>{this.items = menu})
+    // this.items$.subscribe((menu)=>{console.log(menu);this.items = menu})
     this.logIn();
 
 
@@ -55,7 +55,7 @@ export class NavbarComponent implements OnInit, AfterViewInit {
    logIn(){
      this.showLogin = true;
      if (this.isUserLoggedIn) {
-       this.setearMenu()
+       this.setearMenu(true)
 
        this.showMenu(true);
      } else {
@@ -78,18 +78,21 @@ export class NavbarComponent implements OnInit, AfterViewInit {
 
 
   }
-  setearMenu():any{
-    this.cliente = this.store.selectSnapshot(ClienteState.getCliente);
-    this.administrativo = this.store.selectSnapshot(AdministrativoState.getAdministrativo);
-    console.log('cliente: '+this.cliente)
-    console.log('administrativo: '+ this.administrativo)
-    if (this.isUserLoggedIn) {
+  async setearMenu(event:any):Promise<any>{
+    await new Promise(r => setTimeout(r, 500));
+    if(event == true){
+      this.isUserLoggedIn = true
+      this.cliente = this.store.selectSnapshot(ClienteState.getCliente);
+      this.administrativo = this.store.selectSnapshot(AdministrativoState.getAdministrativo);
 
-      this.showMenu(true);
-    } else {
-      this.isUserLoggedIn = false;
-      this.showMenu(false);
+      if (this.isUserLoggedIn) {
+        this.showMenu(true);
+      } else {
+        this.isUserLoggedIn = false;
+        this.showMenu(false);
+      }
     }
+
   }
 
   logOut() {
