@@ -22,9 +22,13 @@
         </td>
         <td>
           <div class="m-3">
-          <label for="idCliente">Cliente</label>
-          <p-dropdown id="idCliente" [options]="clientes" [(ngModel)]="evento.cliente"
+          <label for="idCliente" *ngIf="isAdm$|async">Cliente</label>
+          <p-dropdown id="idCliente" *ngIf="isAdm$|async" [options]="clientes" [(ngModel)]="evento.cliente"
                       optionLabel="apellido" class="form-control" name="evento.salon" appendTo="body" display="chip"></p-dropdown>
+            <label for="idClienteselected" *ngIf="!(isAdm$|async)">Cliente</label>
+            <input id="idClienteselected" *ngIf="!(isAdm$|async)" disabled [(ngModel)]="evento.cliente.apellido"
+                 pInputText  class="form-control" name="evento.salon"  display="chip">
+
           </div>
         </td>
       </tr>

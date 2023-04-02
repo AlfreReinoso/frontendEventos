@@ -13,7 +13,7 @@ export class AddEvento {
 export class AddSalon {
   static readonly type = '[SALON] Add'
 
-  constructor(public salon  : Salon) {
+   constructor(public salon  : Salon) {
   }
 }
 export class AddServicio {

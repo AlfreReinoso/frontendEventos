@@ -17,7 +17,7 @@ import {MenuState} from "../../State/menu.state";
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit, AfterViewInit {
+export class NavbarComponent implements OnInit {
 
   // @Select(ClienteState.getCliente) isCliente$: Observable<Cliente>;
   // @Select(MenuState.getMenu) items$: Observable<MenuItem[]>;
@@ -43,10 +43,6 @@ export class NavbarComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     // this.items$.subscribe((menu)=>{console.log(menu);this.items = menu})
     this.logIn();
-
-
-  }
-  ngAfterViewInit(){
 
 
   }

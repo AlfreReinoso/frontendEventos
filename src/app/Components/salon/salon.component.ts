@@ -3,7 +3,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {SalaService} from "../../Services/sala.service";
 import {Salon} from "../../model/salon";
 import {Store} from "@ngxs/store";
-import {AddSalon, EventosState} from "../../State/evento.state";
+import {AddEvento, AddSalon, EventosState} from "../../State/evento.state";
 import {Cliente} from "../../model/cliente";
 import {ClienteState} from "../../State/cliente.state";
 import {AdministrativoState} from "../../State/adm.state";

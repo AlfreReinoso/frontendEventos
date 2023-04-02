@@ -9,7 +9,7 @@ export class Evento {
     fechaEvento: Date ;
     cantidadPersonas: number = 0;
     salon : Salon = new Salon();
-    cliente : Cliente = new Cliente();
+    cliente : Cliente ;
     servicios: Servicio[] = [];
 
     constructor(){

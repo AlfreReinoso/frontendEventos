@@ -10,8 +10,12 @@ import {SalaService} from "../../../Services/sala.service";
 import {ClientesService} from "../../../Services/clientes.service";
 import {Cliente} from "../../../model/cliente";
 import {ActivatedRoute, Router} from "@angular/router";
-import {Store} from "@ngxs/store";
+import {Select, Store} from "@ngxs/store";
 import {EventosState} from "../../../State/evento.state";
+import {ClienteState} from "../../../State/cliente.state";
+import {AdministrativoState} from "../../../State/adm.state";
+import {Administrativo} from "../../../model/administrativo";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-evento-form',
@@ -19,6 +23,8 @@ import {EventosState} from "../../../State/evento.state";
   styleUrls: ['./evento-form.component.css']
 })
 export class EventoFormComponent implements OnInit {
+
+  @Select(AdministrativoState.getAdministrativo)isAdm$:Observable<boolean>;
 
   id:number = 0;
   eventos:Evento[]= [];
@@ -43,36 +49,32 @@ export class EventoFormComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this._servicioService.findAll().subscribe(
+      (response: any)=>{
+        this.servicios = response;
+      })
+    this._salonesService.getSalas().subscribe(
+      (response : any)=>{
+        this.salones = response;
+      }
+    )
+    this._clienteService.getClientes().subscribe(
+      (data:any)=>{
+        this.clientes = data;
+      }
+    )
+
     this.id = this.route.snapshot.params['id'];
 
     if(this.id>0){
-      console.log("id mayor a 1")
+      console.log("id mayor a 1");
       this.evento.salon = this.store.selectSnapshot(EventosState.getSalon);
       this.evento.servicios = this.store.selectSnapshot(EventosState.getServicio);
+      this.evento.cliente = this.store.selectSnapshot(ClienteState.getCliente);
+
       console.log(this.evento);
 
     }
-      this._servicioService.findAll().subscribe(
-        (response: any)=>{
-          this.servicios = response;
-        })
-      this._salonesService.getSalas().subscribe(
-        (response : any)=>{
-          this.salones = response;
-        }
-      )
-      this._clienteService.getClientes().subscribe(
-        (data:any)=>{
-          this.clientes = data;
-        }
-      )
-
-    // this.service.getDataEventos().subscribe(
-    //   (response: any) =>{
-    //     this.eventos = response;
-    //     }
-    // );
-
   }
 
   saveEvento() {
@@ -104,11 +106,5 @@ export class EventoFormComponent implements OnInit {
         }
       );
     }
-
-
     }
-
-
-
-
 }
