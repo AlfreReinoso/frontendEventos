@@ -1,6 +1,6 @@
 
-<div class="m-3 flex justify-content-center">
-  <button pButton (click)="selectSalon(0)" class="mt-4 p-button-success " icon="pi pi-plus" label="Nuevo"></button>
+<div class="m-3 flex justify-content-center" >
+  <button pButton *ngIf="(isAdministrativo$|async)" (click)="selectSalon(0)" class="mt-4 p-button-success " icon="pi pi-plus" label="Nuevo"></button>
 </div>
 <div class="grid">
   <div class="col-4" *ngFor="let sala of salas">

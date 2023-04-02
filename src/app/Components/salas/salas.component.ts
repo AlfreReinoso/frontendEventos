@@ -1,24 +1,38 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import { Salon } from '../../model/salon';
 import { SalaService } from '../../Services/sala.service';
 import { AUTHENTICATED_USER } from "../../Services/basic-jwtauth-services.service";
 import { Router } from "@angular/router";
+import {Cliente} from "../../model/cliente";
+import {Administrativo} from "../../model/administrativo";
+import {ClienteState} from "../../State/cliente.state";
+import {AdministrativoState} from "../../State/adm.state";
+import {Select, Selector, Store} from "@ngxs/store";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-salas',
   templateUrl: './salas.component.html',
   styleUrls: ['./salas.component.css']
 })
-export class SalasComponent implements OnInit {
+export class SalasComponent implements OnInit , OnDestroy{
+
+  @Select(AdministrativoState.getAdministrativo)isAdministrativo$:Observable<Cliente>;
 
   salas: Salon[] = [];
+  cliente: Cliente;
+  administrativo:Administrativo;
 
   constructor(
     private salaservice: SalaService,
-    private router:Router
+    private router:Router,
+    private store:Store,
     ) { }
 
   ngOnInit(): void {
+    // this.cliente = this.store.selectSnapshot(ClienteState.getCliente)
+    // this.administrativo = this.store.selectSnapshot(AdministrativoState.getAdministrativo)
+
     if(sessionStorage.getItem(AUTHENTICATED_USER)){
       this.salaservice.getSalas().subscribe(
         (response: Salon[]) => {
@@ -32,5 +46,7 @@ export class SalasComponent implements OnInit {
     this.router.navigate(['/salon',idSala]);
   }
 
-
+  ngOnDestroy() {
+    this.salas=[];
+  }
 }

@@ -7,6 +7,10 @@ import { TipoServicioService } from 'src/app/Services/tipo-servicio.service';
 import {Store} from "@ngxs/store";
 // import {AddServicios} from "../../State/servicio.state";
 import {AddServicio, EventosState} from "../../State/evento.state";
+import {ClienteState} from "../../State/cliente.state";
+import {AdministrativoState} from "../../State/adm.state";
+import {Cliente} from "../../model/cliente";
+import {Administrativo} from "../../model/administrativo";
 
 @Component({
   selector: 'app-servicios',
@@ -17,6 +21,8 @@ export class ServiciosComponent implements OnInit {
   servicios: Servicio[] = [];
   tiposDeServicios: String[] = [];
   servicioSinModificar: Servicio = new Servicio();
+  cliente: Cliente;
+  administrativo:Administrativo;
 
   constructor(
     private router : Router,
@@ -27,6 +33,8 @@ export class ServiciosComponent implements OnInit {
     ) { }
 
   ngOnInit() {
+    this.cliente = this.store.selectSnapshot(ClienteState.getCliente)
+    this.administrativo = this.store.selectSnapshot(AdministrativoState.getAdministrativo)
     this._servicioService.findAll().subscribe(serviciosBack => {
       this.servicios = serviciosBack;
     })

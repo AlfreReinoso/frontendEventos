@@ -42,9 +42,9 @@
             </p-cellEditor>
             </td>
             <td style="text-align:center">
-                <button *ngIf="!editing" pButton pRipple type="button" (click)="editar(servicio)" pInitEditableRow icon="pi pi-pencil" class="p-button-rounded p-button-text"></button>
+                <button *ngIf="!editing && administrativo" pButton pRipple type="button" (click)="editar(servicio)" pInitEditableRow icon="pi pi-pencil" class="p-button-rounded p-button-text"></button>
                 <button *ngIf="!editing" pButton pRipple type="button" (click)="eliminar(servicio)" icon="pi pi-trash" class="p-button-rounded p-button-text p-button-danger"></button>
-                <button *ngIf="editing" pButton pRipple type="button" (click)="guardar(servicio)" pSaveEditableRow icon="pi pi-check" class="p-button-rounded p-button-text p-button-success mr-2"></button>
+                <button *ngIf="editing " pButton pRipple type="button" (click)="guardar(servicio)" pSaveEditableRow icon="pi pi-check" class="p-button-rounded p-button-text p-button-success mr-2"></button>
                 <button *ngIf="editing" pButton pRipple type="button" (click)="cancelar(servicio, indiceFila)" pCancelEditableRow icon="pi pi-times" class="p-button-rounded p-button-text p-button-danger"></button>
             </td>
         </tr>

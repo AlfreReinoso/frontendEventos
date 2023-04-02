@@ -4,6 +4,10 @@ import {SalaService} from "../../Services/sala.service";
 import {Salon} from "../../model/salon";
 import {Store} from "@ngxs/store";
 import {AddSalon, EventosState} from "../../State/evento.state";
+import {Cliente} from "../../model/cliente";
+import {ClienteState} from "../../State/cliente.state";
+import {AdministrativoState} from "../../State/adm.state";
+import {Administrativo} from "../../model/administrativo";
 
 @Component({
   selector: 'app-salon',
@@ -14,10 +18,14 @@ export class SalonComponent implements OnInit {
 
   id:number = 0;
   salon: Salon = new Salon;
+  cliente: Cliente;
+  administrativo:Administrativo;
 
   constructor(private store: Store,private router:Router,private route : ActivatedRoute, private _salaService : SalaService) { }
 
   ngOnInit(): void {
+    this.cliente = this.store.selectSnapshot(ClienteState.getCliente)
+    this.administrativo = this.store.selectSnapshot(AdministrativoState.getAdministrativo)
     this.id = this.route.snapshot.params['id'];
 
     if(this.id > 0){

@@ -47,7 +47,6 @@ export class NavbarComponent implements OnInit, AfterViewInit {
 
   }
   ngAfterViewInit(){
-    console.log('estoy en el afterinit')
 
 
   }
@@ -61,20 +60,6 @@ export class NavbarComponent implements OnInit, AfterViewInit {
      } else {
        this.showMenu(false);
      }
-    // this.loginDialog = this._dialogService.open(LoginComponent, {
-    //   header: 'Ingresar',
-    //   width: '18rem',
-    // });
-    // this.loginDialog.onClose.subscribe(isUserLoggedIn => {
-    //   if (isUserLoggedIn) {
-    //     setTimeout(this.setearMenu(), 500)
-    //     this.isUserLoggedIn = isUserLoggedIn;
-    //     this.showMenu(true);
-    //   } else {
-    //     this.isUserLoggedIn = false;
-    //     this.showMenu(false);
-    //   }
-    // })
 
 
   }
@@ -106,7 +91,6 @@ export class NavbarComponent implements OnInit, AfterViewInit {
   showMenu(b: Boolean) {
     if (b) {
       if(this.administrativo != undefined){
-        console.log('estoy dentro del if '+this.administrativo)
         this.items = [
           {
             label: 'Inicio',
@@ -144,7 +128,6 @@ export class NavbarComponent implements OnInit, AfterViewInit {
           }
         ];
       } else if(this.cliente != undefined){
-        console.log('estoy dentro del if '+this.cliente)
           this.items = [
             {
               label: 'Inicio',

@@ -31,7 +31,6 @@ BasicJWTAuthServicesService {
           sessionStorage.setItem(TOKEN, `Bearer ${data.token}`);
           this._clienteService.getCliente(username).subscribe(
             (response)=>{
-              console.log(response)
               if(response){
                 this.store.dispatch(new AddCliente(response))
               }
@@ -39,13 +38,11 @@ BasicJWTAuthServicesService {
           );
           this._administrativoService.getAdministrativo(username).subscribe(
             (response)=>{
-              console.log(response)
               if(response){
                 this.store.dispatch(new AddAdministrativo(response))
               }
             }
           )
-          console.log(username);
 
           return data;
         }

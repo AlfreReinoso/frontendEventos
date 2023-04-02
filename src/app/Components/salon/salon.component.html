@@ -22,9 +22,9 @@
            name="capacidad" required="required" >
   </fieldset>
   <div class="flex justify-content-center m-2">
-    <button pButton type="submit" class="m-2 p-button-success " >Save</button>
-    <button pButton class="m-2 p-button-info justify-content-between" (click)="selectSalon()">Select</button>
-    <button pButton *ngIf="id>0" class="m-2 p-button-danger justify-content-end" (click)="deleteSalon()">Delete</button>
+    <button pButton *ngIf="administrativo" type="submit" class="m-2 p-button-success " >Save</button>
+    <button pButton *ngIf="cliente || administrativo" class="m-2 p-button-info justify-content-between" (click)="selectSalon()">Select</button>
+    <button pButton *ngIf="id>0 && administrativo" class="m-2 p-button-danger justify-content-end" (click)="deleteSalon()">Delete</button>
   </div>
   </form>
 </div>
