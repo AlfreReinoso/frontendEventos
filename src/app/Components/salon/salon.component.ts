@@ -9,6 +9,7 @@ import {ClienteState} from "../../State/cliente.state";
 import {AdministrativoState} from "../../State/adm.state";
 import {Administrativo} from "../../model/administrativo";
 
+
 @Component({
   selector: 'app-salon',
   templateUrl: './salon.component.html',
@@ -22,6 +23,7 @@ export class SalonComponent implements OnInit {
   administrativo:Administrativo;
 
   constructor(private store: Store,private router:Router,private route : ActivatedRoute, private _salaService : SalaService) { }
+
 
   ngOnInit(): void {
     this.cliente = this.store.selectSnapshot(ClienteState.getCliente)
@@ -39,20 +41,44 @@ export class SalonComponent implements OnInit {
   }
 
   saveSalon(){
-    if(this.id > 1 ){
-      this._salaService.updateSalon(this.salon).subscribe(
-          (data: any) => {});
-    }else {
-      this._salaService.createSalon(this.salon).subscribe(
-        (data:any)=> {});
+    if(this.salon.denominacion != " " && this.salon.capacidad > 0 && this.salon.costoPorDia > 0){
+      if(this.id > 1 ){
+        this._salaService.updateSalon(this.salon).subscribe(
+          (data:any)=> {
+            this._messageService.add({
+              severity: 'success',
+              summary: 'Éxito',
+              detail: `Salon guardado correctamente`
+            });
+            this.router.navigate(['salas']);
+          }, (error: any) =>{
+            this._messageService.add({  key: 'atencion', severity:'warn', summary: 'Atención', detail: `${error.error.message}` }
+            );
+          })
+      }else {
+        this._salaService.createSalon(this.salon).subscribe(
+          (data:any)=> {
+            this._messageService.add({
+              severity: 'success',
+              summary: 'Éxito',
+              detail: `Salon guardado correctamente`
+            });
+            this.router.navigate(['salas']);
+          }, (error: any) =>{
+            this._messageService.add({  key: 'atencion', severity:'warn', summary: 'Atención', detail: `${error.error.message}` }
+            );
+          })
+      }
+    } else {
+      this._messageService.add({  key: 'atencion', severity:'warn', summary: 'Atención',
+        detail: `Datos incorrectos` }
+      );
     }
-    this.router.navigate(['salas']);;
-
   }
 
   deleteSalon() {
     this._salaService.deleteSalon(this.id).subscribe(
-      (data:any)=> console.log(data)
+      (data:any)=> this.router.navigate(['salas'])
     );
   }
 

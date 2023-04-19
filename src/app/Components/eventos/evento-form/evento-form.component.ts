@@ -9,6 +9,7 @@ import {Salon} from "../../../model/salon";
 import {SalaService} from "../../../Services/sala.service";
 import {ClientesService} from "../../../Services/clientes.service";
 import {Cliente} from "../../../model/cliente";
+
 import {ActivatedRoute, Router} from "@angular/router";
 import {Select, Store} from "@ngxs/store";
 import {EventosState} from "../../../State/evento.state";
@@ -16,6 +17,7 @@ import {ClienteState} from "../../../State/cliente.state";
 import {AdministrativoState} from "../../../State/adm.state";
 import {Administrativo} from "../../../model/administrativo";
 import {Observable} from "rxjs";
+
 
 @Component({
   selector: 'app-evento-form',
@@ -78,7 +80,6 @@ export class EventoFormComponent implements OnInit {
   }
 
   saveEvento() {
-
     if(this.evento.fechaEvento == null || this.evento.cantidadPersonas === 0 ||
       this.evento.salon == null || this.evento.cliente == null ){
       console.log("error al guardar");
@@ -107,4 +108,5 @@ export class EventoFormComponent implements OnInit {
       );
     }
     }
+
 }

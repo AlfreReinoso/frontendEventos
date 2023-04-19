@@ -8,7 +8,7 @@
               <input type="text" id="eventoCantPersonas" pInputText maxlength="5"
               [(ngModel)]="evento.cantidadPersonas"
               class="form-control"
-              name="cantidadPersonas" required="required">
+              name="cantidadPersonas" required="required" maxlength="6">
           </div>
         </td>
         <td >
@@ -54,8 +54,7 @@
           </div>
         </td>
       </tr>
-
-        <button pButton type="submit" class="p-button-succes mt-2" (click)="saveEvento()">Save</button>
+      <button pButton type="submit" class="p-button-success mt-2">Save</button>
     </form>
   </div>
 </p-card>

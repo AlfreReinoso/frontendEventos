@@ -6,6 +6,7 @@
   <div class="col-4" *ngFor="let sala of salas">
         <p-card header="{{sala.denominacion}}" styleClass="shadow-2 ">
 
+
             <ng-template pTemplate="body">
               Costo: {{sala.costoPorDia}} <br>
               Cant Personas:{{sala.capacidad}}
@@ -16,5 +17,4 @@
         </p-card>
   </div>
 </div>
-
 

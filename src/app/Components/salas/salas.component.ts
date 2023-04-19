@@ -27,6 +27,7 @@ export class SalasComponent implements OnInit , OnDestroy{
     private _basicJwtAuthServices: BasicJWTAuthServicesService,
     private salaservice: SalaService,
     private router:Router,
+
     ) { }
 
   ngOnInit(): void {
