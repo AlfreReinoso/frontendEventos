@@ -1,7 +1,6 @@
 
 import {Action, Selector, State, StateContext} from "@ngxs/store";
 import {Cliente} from "../model/cliente";
-import {Evento} from "../model/evento";
 import {Injectable} from "@angular/core";
 
 export class AddCliente {

@@ -3,21 +3,34 @@
 <div class="flex justify-content-center m-4 centrar">
 <form (ngSubmit)="!todoForm.invalid && saveSalon()" #todoForm="ngForm">
   <fieldset >
-    <label for="salonDenominacion">Nombre</label>
-    <input type="text" id="salonDenominacion" pInputText
+    <label  *ngIf="administrativo" for="salonDenominacion">Nombre</label>
+    <input  *ngIf="administrativo" type="text" id="salonDenominacion" pInputText
+           [(ngModel)]="salon.denominacion"
+           class="form-control"
+           name="denominacion" required="required">
+    <label *ngIf="cliente" disabled for="salonDenominacionCliente">Nombre</label>
+    <input *ngIf="cliente" disabled type="text" id="salonDenominacionCliente" pInputText
            [(ngModel)]="salon.denominacion"
            class="form-control"
            name="denominacion" required="required">
   </fieldset>
   <fieldset >
-    <label for="salonCostoPorDia">Precio p/dia</label>
-    <input type="text" id="salonCostoPorDia" pInputText [(ngModel)]="salon.costoPorDia"
+    <label *ngIf="administrativo"  for="salonCostoPorDia">Precio p/dia</label>
+    <input *ngIf="administrativo"  type="text" id="salonCostoPorDia" pInputText [(ngModel)]="salon.costoPorDia"
+           class="form-control"
+           name="costoPorDia" required="required" >
+    <label *ngIf="cliente" disabled for="salonCostoPorDia2">Precio p/dia</label>
+    <input *ngIf="cliente" disabled type="text" id="salonCostoPorDia2" pInputText [(ngModel)]="salon.costoPorDia"
            class="form-control"
            name="costoPorDia" required="required" >
   </fieldset>
   <fieldset >
-    <label for="capacidad">Capacidad</label>
-    <input type="text" id="capacidad" pInputText [(ngModel)]="salon.capacidad"
+    <label *ngIf="administrativo" for="capacidad">Capacidad</label>
+    <input *ngIf="administrativo" type="text" id="capacidad" pInputText [(ngModel)]="salon.capacidad"
+           class="form-control"
+           name="capacidad" required="required" >
+    <label *ngIf="cliente" disabled for="capacidad2">Capacidad</label>
+    <input *ngIf="cliente" disabled type="text" id="capacidad2" pInputText [(ngModel)]="salon.capacidad"
            class="form-control"
            name="capacidad" required="required" >
   </fieldset>

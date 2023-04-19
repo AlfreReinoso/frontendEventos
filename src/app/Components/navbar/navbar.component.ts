@@ -1,14 +1,14 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import { MenuItem } from "primeng/api";
 import { BasicJWTAuthServicesService } from "../../Services/basic-jwtauth-services.service";
 import { Router } from "@angular/router";
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { LoginComponent } from '../login/login.component';
 import {Select, Store} from "@ngxs/store";
-import {AdministrativoState} from "../../State/adm.state";
+import {AdministrativoState, AdmResetAction} from "../../State/adm.state";
 import {Administrativo} from "../../model/administrativo";
 import {Cliente} from "../../model/cliente";
-import {ClienteState} from "../../State/cliente.state";
+import {ClienteResetAction, ClienteState} from "../../State/cliente.state";
 import {Observable} from "rxjs";
 import {MenuState} from "../../State/menu.state";
 
@@ -17,7 +17,7 @@ import {MenuState} from "../../State/menu.state";
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit, OnDestroy {
 
   // @Select(ClienteState.getCliente) isCliente$: Observable<Cliente>;
   // @Select(MenuState.getMenu) items$: Observable<MenuItem[]>;
@@ -40,26 +40,45 @@ export class NavbarComponent implements OnInit {
     private store:Store,
     ) { }
 
+
   ngOnInit() {
-    // this.items$.subscribe((menu)=>{console.log(menu);this.items = menu})
     this.logIn();
-
-
   }
 
-   logIn(){
-     this.showLogin = true;
-     if (this.isUserLoggedIn) {
-       this.setearMenu(true)
-
-       this.showMenu(true);
-     } else {
-       this.showMenu(false);
-     }
-
-
+  ngOnDestroy() {
+    console.log("deberia borrar el usuario")
+    this.logOut();
   }
-  async setearMenu(event:any):Promise<any>{
+
+  logIn(){
+
+      this.verificarElUserState();
+    console.log('estoy en el login')
+    console.log(this.administrativo)
+    console.log(this.cliente)
+      if(this.cliente.idUsuario != 0|| this.administrativo.idUsuario!=0){
+        console.log('hay usuario')
+        this.isUserLoggedIn = true;
+      }else{
+        this.isUserLoggedIn = false;
+        this.showLogin = true;
+      }
+       if (this.isUserLoggedIn) {
+         // this.setearMenu(true)
+
+         this.showMenu(true);
+       } else {
+         this.showMenu(false);
+       }
+  }
+
+   verificarElUserState() {
+      // await new Promise(r => setTimeout(r, 500));
+      this.cliente = this.store.selectSnapshot(ClienteState.getCliente);
+      this.administrativo = this.store.selectSnapshot(AdministrativoState.getAdministrativo);
+  }
+
+  async setearMenu(event:any){
     await new Promise(r => setTimeout(r, 500));
     if(event == true){
       this.isUserLoggedIn = true
@@ -80,6 +99,8 @@ export class NavbarComponent implements OnInit {
     this.showLogin = false;
     this._basicJwtAuthServices.logout();
     this.isUserLoggedIn = false;
+    this.cliente = new Cliente();
+    this.administrativo = new Administrativo();
     this.showMenu(false);
     this.router.navigate(['']);
   }
@@ -145,16 +166,15 @@ export class NavbarComponent implements OnInit {
               items: [
                 { label: 'Ver servicios', icon:'pi pi-list', routerLink:['/servicios'] },
               ]
-            },{
-              label: 'Tipos de servicio',
-              items: [
-                { label: 'Ver tipos', icon:'pi pi-list', routerLink:['/tipoServicio'] },
-              ]
             }
           ]
       }
+      this.router.navigate(['/salas']);
     } else {
       this.items = [];
+      this.router.navigate(['']);
+
     }
+
   }
 }

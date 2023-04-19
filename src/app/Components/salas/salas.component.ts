@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import { Salon } from '../../model/salon';
 import { SalaService } from '../../Services/sala.service';
-import { AUTHENTICATED_USER } from "../../Services/basic-jwtauth-services.service";
+import {AUTHENTICATED_USER, BasicJWTAuthServicesService} from "../../Services/basic-jwtauth-services.service";
 import { Router } from "@angular/router";
 import {Cliente} from "../../model/cliente";
 import {Administrativo} from "../../model/administrativo";
@@ -24,15 +24,13 @@ export class SalasComponent implements OnInit , OnDestroy{
   administrativo:Administrativo;
 
   constructor(
+    private _basicJwtAuthServices: BasicJWTAuthServicesService,
     private salaservice: SalaService,
     private router:Router,
-    private store:Store,
     ) { }
 
   ngOnInit(): void {
-    // this.cliente = this.store.selectSnapshot(ClienteState.getCliente)
-    // this.administrativo = this.store.selectSnapshot(AdministrativoState.getAdministrativo)
-
+    this.isAdministrativo$.subscribe((adm)=>{});
     if(sessionStorage.getItem(AUTHENTICATED_USER)){
       this.salaservice.getSalas().subscribe(
         (response: Salon[]) => {
@@ -48,5 +46,7 @@ export class SalasComponent implements OnInit , OnDestroy{
 
   ngOnDestroy() {
     this.salas=[];
+    // this._basicJwtAuthServices.logout();
+
   }
 }

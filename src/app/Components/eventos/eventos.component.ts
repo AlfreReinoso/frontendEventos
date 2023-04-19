@@ -9,6 +9,10 @@ import {Salon} from "../../model/salon";
 import {SalaService} from "../../Services/sala.service";
 import {ClientesService} from "../../Services/clientes.service";
 import {Cliente} from "../../model/cliente";
+import {ClienteState} from "../../State/cliente.state";
+import {AdministrativoState} from "../../State/adm.state";
+import {Administrativo} from "../../model/administrativo";
+import {Store} from "@ngxs/store";
 
 @Component({
   selector: 'app-eventos',
@@ -28,6 +32,9 @@ export class EventosComponent implements OnInit {
   salas : Salon[]=[]
   clientes: Cliente[]=[];
 
+  administrativo: Administrativo;
+  cliente: Cliente;
+
   constructor(private route:ActivatedRoute,
               private service:EventoServicesService,
               private _messageService: MessageService,
@@ -35,32 +42,52 @@ export class EventosComponent implements OnInit {
               private _servicioService: ServicioService,
               private _salasService: SalaService,
               private _clienteService: ClientesService,
+              private store:Store,
   ) {
 
   }
 
   ngOnInit(): void {
-    this.listar();
-    this._servicioService.findAll().subscribe((servicioBackend) => {
-      this.servicios = servicioBackend;
-    })
-    this._salasService.getSalas().subscribe(
-      (response: Salon[]) => {
-        console.log(response)
-        this.salas = response;
+    this.pedirStateUser();
+    console.log(this.cliente)
+      if(this.administrativo){
+        this.listar();
+        this._servicioService.findAll().subscribe((servicioBackend) => {
+          this.servicios = servicioBackend;
+        })
+        this._salasService.getSalas().subscribe(
+          (response: Salon[]) => {
+            console.log(response)
+            this.salas = response;
+          }
+        )
+        this._clienteService.getClientes().subscribe(
+          (data:any)=>{
+            this.clientes = data;
+          }
+        )
+
+      }else if(this.cliente.idUsuario !=0){
+        console.log(this.cliente.idUsuario)
+
+        this._eventoService.getDataEventosForCliente(this.cliente).subscribe((eventos)=>{
+          this.eventos = eventos
+          console.log(eventos)
+        });
       }
-    )
-    this._clienteService.getClientes().subscribe(
-      (data:any)=>{
-        this.clientes = data;
-      }
-    )
+  }
+
+   pedirStateUser(){
+    // await new Promise(r => setTimeout(r, 500));
+    this.cliente = this.store.selectSnapshot(ClienteState.getCliente);
+    this.administrativo = this.store.selectSnapshot(AdministrativoState.getAdministrativo);
 
   }
+
   listar(){
     this.service.getDataEventos().subscribe(
       (response: any) =>{
-        console.log(response)
+        // console.log(response)
         this.eventos = response;
         this.message = response.message;}
     );

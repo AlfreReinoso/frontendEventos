@@ -33,6 +33,7 @@ BasicJWTAuthServicesService {
             (response)=>{
               if(response){
                 this.store.dispatch(new AddCliente(response))
+                this.store.dispatch(new AdmResetAction())
               }
             }
           );
@@ -40,6 +41,8 @@ BasicJWTAuthServicesService {
             (response)=>{
               if(response){
                 this.store.dispatch(new AddAdministrativo(response))
+                this.store.dispatch(new ClienteResetAction())
+
               }
             }
           )
@@ -70,6 +73,8 @@ BasicJWTAuthServicesService {
     sessionStorage.removeItem(AUTHENTICATED_USER);
     this.store.dispatch(new ClienteResetAction())
     this.store.dispatch(new AdmResetAction())
+    console.log(this.store.selectSnapshot(ClienteState.getCliente))
+    console.log(this.store.selectSnapshot(AdministrativoState.getAdministrativo))
   }
 }
 export class AuthenticationBean {
