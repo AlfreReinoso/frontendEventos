@@ -8,6 +8,7 @@ import {Cliente} from "../../model/cliente";
 import {ClienteState} from "../../State/cliente.state";
 import {AdministrativoState} from "../../State/adm.state";
 import {Administrativo} from "../../model/administrativo";
+import {MessageService} from "primeng/api";
 
 
 @Component({
@@ -22,7 +23,9 @@ export class SalonComponent implements OnInit {
   cliente: Cliente;
   administrativo:Administrativo;
 
-  constructor(private store: Store,private router:Router,private route : ActivatedRoute, private _salaService : SalaService) { }
+  constructor(private store: Store,private router:Router,private route : ActivatedRoute, private _salaService : SalaService,
+              private _messageService: MessageService,
+  ) { }
 
 
   ngOnInit(): void {
