@@ -19,8 +19,8 @@ export class TipoServicioService {
     return this.http.put<TipoServicio>("http://localhost:8080/tipoServicio/update", tipoServicio);
   }
 
-  delete(tipoServicio: TipoServicio): Observable<TipoServicio> {
-    return this.http.post<TipoServicio>("http://localhost:8080/tipoServicio/delete", tipoServicio);
+  delete(id: number): Observable<TipoServicio> {
+    return this.http.delete<TipoServicio>(`http://localhost:8080/tipoServicio/delete/${id}`);
   }
 
   findAll(): Observable<TipoServicio[]>{

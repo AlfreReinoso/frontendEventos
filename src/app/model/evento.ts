@@ -5,11 +5,11 @@ import {Servicio} from "./servicio";
 
 export class Evento {
     nroReserva: number = 0 ;
-    fechaReserva?: Date;
-    fechaEvento?: Date ;
+    fechaReserva: Date;
+    fechaEvento: Date ;
     cantidadPersonas: number = 0;
     salon : Salon = new Salon();
-    cliente : Cliente = new Cliente();
+    cliente : Cliente ;
     servicios: Servicio[] = [];
 
     constructor(){

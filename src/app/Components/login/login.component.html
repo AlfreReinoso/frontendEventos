@@ -1,21 +1,33 @@
-<div class="grid flex">
-  <div class="col-12" [style]="{'padding-top':'2rem'}">
+
+<p-card class="flex justify-content-center m-2">
+<div class="flex justify-content-center m-2">
+  <form (ngSubmit)="!todoForm.invalid" #todoForm="ngForm">
+  <div class="" [style]="{'padding-top':'2rem'}">
       <div class="field p-fluid">
           <span class="p-float-label">
-              <input id="float-username" pInputText [(ngModel)]="username"/>
+              <input id="float-username"  class="form-control"
+                     name="username" required="required"
+                     pInputText [(ngModel)]="username"/>
               <label for="float-username">Usuario</label>
           </span>
       </div>
   </div>
-  <div class="col-12">
+  <div class="">
       <div class="field p-fluid">
           <span class="p-float-label">
-              <input id="float-password" pInputText type="password" [(ngModel)]="password"/>
+              <input id="float-password" class="form-control"
+                     name="password" required="required"
+                     pInputText type="password" [(ngModel)]="password"/>
               <label for="float-password">Contraseña</label>
           </span>
       </div>
   </div>
-  <div class="col-12 centrar">
-    <button (click)="handleJWTAuthLogin()" pButton type="button" label="Aceptar"></button>
+
+
+  <div class=" centrar">
+    <button type="submit" (click)="handleJWTAuthLogin()" pButton label="Aceptar"></button>
   </div>
+  </form>
 </div>
+  </p-card>
+

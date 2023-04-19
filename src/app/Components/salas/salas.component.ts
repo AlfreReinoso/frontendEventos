@@ -1,37 +1,53 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import { Salon } from '../../model/salon';
 import { SalaService } from '../../Services/sala.service';
-import { AUTHENTICATED_USER } from "../../Services/basic-jwtauth-services.service";
+import {AUTHENTICATED_USER, BasicJWTAuthServicesService} from "../../Services/basic-jwtauth-services.service";
 import { Router } from "@angular/router";
+import {Cliente} from "../../model/cliente";
+import {Administrativo} from "../../model/administrativo";
+import {ClienteState} from "../../State/cliente.state";
+import {AdministrativoState} from "../../State/adm.state";
+import {Select, Selector, Store} from "@ngxs/store";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-salas',
   templateUrl: './salas.component.html',
   styleUrls: ['./salas.component.css']
 })
-export class SalasComponent implements OnInit {
+export class SalasComponent implements OnInit , OnDestroy{
+
+  @Select(AdministrativoState.getAdministrativo)isAdministrativo$:Observable<Cliente>;
 
   salas: Salon[] = [];
+  cliente: Cliente;
+  administrativo:Administrativo;
 
   constructor(
+    private _basicJwtAuthServices: BasicJWTAuthServicesService,
     private salaservice: SalaService,
-    private router:Router
+    private router:Router,
+
     ) { }
 
   ngOnInit(): void {
+    this.isAdministrativo$.subscribe((adm)=>{});
     if(sessionStorage.getItem(AUTHENTICATED_USER)){
       this.salaservice.getSalas().subscribe(
         (response: Salon[]) => {
           this.salas = response;
-          // console.log(this.salas);
-          // console.log(response);
         }
       )
     }
   }
 
   selectSalon(idSala: number) : void{
-    // console.log('navegando al saloncomponent', idSala);
     this.router.navigate(['/salon',idSala]);
+  }
+
+  ngOnDestroy() {
+    this.salas=[];
+    // this._basicJwtAuthServices.logout();
+
   }
 }

@@ -2,7 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {SalaService} from "../../Services/sala.service";
 import {Salon} from "../../model/salon";
-import {MessageService} from "primeng/api";
+import {Store} from "@ngxs/store";
+import {AddEvento, AddSalon, EventosState} from "../../State/evento.state";
+import {Cliente} from "../../model/cliente";
+import {ClienteState} from "../../State/cliente.state";
+import {AdministrativoState} from "../../State/adm.state";
+import {Administrativo} from "../../model/administrativo";
+
 
 @Component({
   selector: 'app-salon',
@@ -13,12 +19,15 @@ export class SalonComponent implements OnInit {
 
   id:number = 0;
   salon: Salon = new Salon;
+  cliente: Cliente;
+  administrativo:Administrativo;
 
-  constructor(private router:Router,
-              private _messageService: MessageService,
-              private route : ActivatedRoute, private _salaService : SalaService) { }
+  constructor(private store: Store,private router:Router,private route : ActivatedRoute, private _salaService : SalaService) { }
+
 
   ngOnInit(): void {
+    this.cliente = this.store.selectSnapshot(ClienteState.getCliente)
+    this.administrativo = this.store.selectSnapshot(AdministrativoState.getAdministrativo)
     this.id = this.route.snapshot.params['id'];
 
     if(this.id > 0){
@@ -74,6 +83,9 @@ export class SalonComponent implements OnInit {
   }
 
   selectSalon() {
+    this.store.dispatch(new AddSalon(this.salon))
+    // console.log(this.store.selectSnapshot(EventosState))
     this.router.navigate(['servicios', this.salon.idSalon]);
   }
+
 }

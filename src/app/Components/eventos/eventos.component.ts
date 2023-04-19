@@ -5,6 +5,14 @@ import { EventoServicesService } from 'src/app/Services/evento-services.service'
 import {Servicio} from "../../model/servicio";
 import {MessageService} from "primeng/api";
 import {ServicioService} from "../../Services/servicios.service";
+import {Salon} from "../../model/salon";
+import {SalaService} from "../../Services/sala.service";
+import {ClientesService} from "../../Services/clientes.service";
+import {Cliente} from "../../model/cliente";
+import {ClienteState} from "../../State/cliente.state";
+import {AdministrativoState} from "../../State/adm.state";
+import {Administrativo} from "../../model/administrativo";
+import {Store} from "@ngxs/store";
 
 @Component({
   selector: 'app-eventos',
@@ -20,32 +28,69 @@ export class EventosComponent implements OnInit {
   message: String = '' +
     '';
   eventos : Evento[] = [];
-  servicios: String[]=[];
-  selectedServicios: Servicio[]=[];
+  servicios: Servicio[]=[];
+  salas : Salon[]=[]
+  clientes: Cliente[]=[];
+
+  administrativo: Administrativo;
+  cliente: Cliente;
 
   constructor(private route:ActivatedRoute,
               private service:EventoServicesService,
               private _messageService: MessageService,
               private _eventoService: EventoServicesService,
               private _servicioService: ServicioService,
+              private _salasService: SalaService,
+              private _clienteService: ClientesService,
+              private store:Store,
   ) {
 
   }
 
   ngOnInit(): void {
-    this.listar();
-    this._servicioService.findAll().subscribe((servicioBackend) => {
-      this.servicios = servicioBackend.map(value => value.denominacion);
-    })
+    this.pedirStateUser();
+    console.log(this.cliente)
+      if(this.administrativo){
+        this.listar();
+        this._servicioService.findAll().subscribe((servicioBackend) => {
+          this.servicios = servicioBackend;
+        })
+        this._salasService.getSalas().subscribe(
+          (response: Salon[]) => {
+            console.log(response)
+            this.salas = response;
+          }
+        )
+        this._clienteService.getClientes().subscribe(
+          (data:any)=>{
+            this.clientes = data;
+          }
+        )
+
+      }else if(this.cliente.idUsuario !=0){
+        console.log(this.cliente.idUsuario)
+
+        this._eventoService.getDataEventosForCliente(this.cliente).subscribe((eventos)=>{
+          this.eventos = eventos
+          console.log(eventos)
+        });
+      }
+  }
+
+   pedirStateUser(){
+    // await new Promise(r => setTimeout(r, 500));
+    this.cliente = this.store.selectSnapshot(ClienteState.getCliente);
+    this.administrativo = this.store.selectSnapshot(AdministrativoState.getAdministrativo);
 
   }
+
   listar(){
     this.service.getDataEventos().subscribe(
       (response: any) =>{
+        // console.log(response)
         this.eventos = response;
         this.message = response.message;}
     );
-    // this.selectedServicios = this.eventos.map(evento=>evento.servicios);
   }
 
   editar(evento: Evento) {
@@ -56,7 +101,7 @@ export class EventosComponent implements OnInit {
   eliminar(evento: Evento) {
     this.eventoSinModificar = evento;
     this._messageService.clear();
-    this._messageService.add({ key: 'confirmar-c', sticky: true, severity:'warn', summary:'Desea eliminar el servicio?', detail:'Confirma para proceder' });
+    this._messageService.add({ key: 'confirmar-c', sticky: true, severity:'warn', summary:'Desea eliminar el evnto?', detail:'Confirma para proceder' });
   }
 
   guardar(evento: Evento) {
@@ -97,10 +142,10 @@ export class EventosComponent implements OnInit {
   }
 
   aceptarMsj() {
-    this._eventoService.deleteEventos(this.eventoSinModificar).subscribe(value => {
+    this._eventoService.deleteEventos(this.eventoSinModificar.nroReserva).subscribe(value => {
       this.eventos.splice(this.eventos.indexOf(this.eventoSinModificar), 1);
       this._messageService.clear();
-      this._messageService.add({ severity:'success', summary: 'Éxito', detail: 'Servicio eliminado correctamente' })
+      this._messageService.add({ severity:'success', summary: 'Éxito', detail: 'Evento eliminado correctamente' })
     });
   }
 

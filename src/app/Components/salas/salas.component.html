@@ -1,20 +1,20 @@
 
-<div class="flex m-3 justify-content-center">
-  <button pButton (click)="selectSalon(0)" class="mt-2 " icon="pi pi-plus" label="Nuevo"></button>
+<div class="m-3 flex justify-content-center" >
+  <button pButton *ngIf="(isAdministrativo$|async)" (click)="selectSalon(0)" class="mt-4 p-button-success " icon="pi pi-plus" label="Nuevo"></button>
 </div>
-<div>
-  <div class="flex-1 md:flex-none flex align-items-center justify-content-center font-bold text-white m-2 px-5 py-3 border-round" *ngFor="let sala of salas">
-        <p-card class="col-5 text-center" styleClass="shadow-2">
-            <ng-template pTemplate="header" >
-              Nombre: {{sala.denominacion}}
-            </ng-template>
+<div class="grid">
+  <div class="col-4" *ngFor="let sala of salas">
+        <p-card header="{{sala.denominacion}}" styleClass="shadow-2 ">
+
+
             <ng-template pTemplate="body">
               Costo: {{sala.costoPorDia}} <br>
               Cant Personas:{{sala.capacidad}}
             </ng-template>
             <ng-template pTemplate="footer">
-              <button (click)="selectSalon(sala.idSalon)" pButton type="button" label="Ver" icon="pi pi-angle-right" iconPos="right" class="p-button-sm"></button>
+              <button (click)="selectSalon(sala.idSalon)" pButton type="button" label="Mas Info" icon="pi pi-angle-right" iconPos="right" class="p-button-sm"></button>
             </ng-template>
         </p-card>
   </div>
 </div>
+

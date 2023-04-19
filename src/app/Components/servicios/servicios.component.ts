@@ -4,6 +4,13 @@ import { MessageService } from 'primeng/api';
 import { Servicio } from 'src/app/model/servicio';
 import { ServicioService } from 'src/app/Services/servicios.service';
 import { TipoServicioService } from 'src/app/Services/tipo-servicio.service';
+import {Store} from "@ngxs/store";
+// import {AddServicios} from "../../State/servicio.state";
+import {AddServicio, EventosState} from "../../State/evento.state";
+import {ClienteState} from "../../State/cliente.state";
+import {AdministrativoState} from "../../State/adm.state";
+import {Cliente} from "../../model/cliente";
+import {Administrativo} from "../../model/administrativo";
 
 @Component({
   selector: 'app-servicios',
@@ -14,15 +21,20 @@ export class ServiciosComponent implements OnInit {
   servicios: Servicio[] = [];
   tiposDeServicios: String[] = [];
   servicioSinModificar: Servicio = new Servicio();
+  cliente: Cliente;
+  administrativo:Administrativo;
 
   constructor(
     private router : Router,
+    private store: Store,
     private _messageService: MessageService,
     private _servicioService : ServicioService,
     private _tipoServicioService: TipoServicioService,
     ) { }
 
   ngOnInit() {
+    this.cliente = this.store.selectSnapshot(ClienteState.getCliente)
+    this.administrativo = this.store.selectSnapshot(AdministrativoState.getAdministrativo)
     this._servicioService.findAll().subscribe(serviciosBack => {
       this.servicios = serviciosBack;
     })
@@ -64,9 +76,14 @@ export class ServiciosComponent implements OnInit {
   volver() {
     this.router.navigate(['salas']);
   }
+  siguiente(){
+    this.store.dispatch(new AddServicio(this.servicios));
+    // console.log(this.store.selectSnapshot(EventosState));
+    this.router.navigate(['eventoForm/1'])
+  }
 
   aceptarMsj() {
-    this._servicioService.delete(this.servicioSinModificar).subscribe(value => {
+    this._servicioService.delete(this.servicioSinModificar.idServicio).subscribe(value => {
       this.servicios.splice(this.servicios.indexOf(this.servicioSinModificar), 1);
       this._messageService.clear();
       this._messageService.add({ severity:'success', summary: 'Éxito', detail: 'Servicio eliminado correctamente' })

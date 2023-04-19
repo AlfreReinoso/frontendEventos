@@ -32,6 +32,9 @@ import { TipoServicioComponent } from 'src/app/Components/tipo-servicio/tipo-ser
 import { TipoServicioFormComponent } from 'src/app/Components/tipo-servicio/tipo-servicio-form/tipo-servicio-form.component';
 import { EventoFormComponent } from 'src/app/Components/eventos/evento-form/evento-form.component';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
+import {VolverComponent} from "../../Components/volver/volver.component";
+import {ErrorComponent} from "../../Components/error/error.component";
+import {CalendarModule} from "primeng/calendar";
 
 
 @NgModule({
@@ -47,37 +50,41 @@ import { DynamicDialogModule } from 'primeng/dynamicdialog';
     TipoServicioComponent,
     TipoServicioFormComponent,
     EventoFormComponent,
+    VolverComponent,
+    ErrorComponent,
+
   ],
-    imports: [
-        CommonModule,
-        PrimeNgModule,
-        CardModule,
-        RouterModule,
-        ButtonModule,
-        MenubarModule,
-        DialogModule,
-        DynamicDialogModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        DataViewModule,
-        TableModule,
-        InputTextModule,
-        PasswordModule,
-        CardModule,
-        InputTextModule,
-        FormsModule,
-        ButtonModule,
-        ReactiveFormsModule,
-        InputNumberModule,
-        DropdownModule,
-        MessagesModule,
-        MessageModule,
-        ToastModule,
-        TableModule,
-        RippleModule,
-        BadgeModule,
-        MultiSelectModule
-    ],
+  imports: [
+    CommonModule,
+    PrimeNgModule,
+    CardModule,
+    RouterModule,
+    ButtonModule,
+    MenubarModule,
+    DialogModule,
+    DynamicDialogModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    DataViewModule,
+    TableModule,
+    InputTextModule,
+    PasswordModule,
+    CardModule,
+    InputTextModule,
+    FormsModule,
+    ButtonModule,
+    ReactiveFormsModule,
+    InputNumberModule,
+    DropdownModule,
+    MessagesModule,
+    MessageModule,
+    ToastModule,
+    TableModule,
+    RippleModule,
+    BadgeModule,
+    MultiSelectModule,
+    CalendarModule
+  ],
   exports:[
     EventosComponent,
     LoginComponent,
@@ -90,7 +97,10 @@ import { DynamicDialogModule } from 'primeng/dynamicdialog';
     ToastModule,
     EventoFormComponent,
     TipoServicioComponent,
-    TipoServicioFormComponent
+    TipoServicioFormComponent,
+    VolverComponent,
+    ErrorComponent,
+
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

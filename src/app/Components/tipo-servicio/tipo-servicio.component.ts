@@ -76,7 +76,7 @@ export class TipoServicioComponent implements OnInit {
   }
 
   aceptarMsj() {
-    this._tipoServicioService.delete(this.tipoServicioSinModificar).subscribe(value => {
+    this._tipoServicioService.delete(this.tipoServicioSinModificar.idTipoServicio).subscribe(value => {
       this.tiposDeServicios.splice(this.tiposDeServicios.indexOf(this.tipoServicioSinModificar), 1);
       this._messageService.clear();
       this._messageService.add({ severity:'success', summary: 'Éxito', detail: 'Tipo de servicio eliminado correctamente' })

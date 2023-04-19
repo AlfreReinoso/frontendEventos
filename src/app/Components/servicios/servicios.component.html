@@ -42,19 +42,22 @@
             </p-cellEditor>
             </td>
             <td style="text-align:center">
-                <button *ngIf="!editing" pButton pRipple type="button" (click)="editar(servicio)" pInitEditableRow icon="pi pi-pencil" class="p-button-rounded p-button-text"></button>
+                <button *ngIf="!editing && administrativo" pButton pRipple type="button" (click)="editar(servicio)" pInitEditableRow icon="pi pi-pencil" class="p-button-rounded p-button-text"></button>
                 <button *ngIf="!editing" pButton pRipple type="button" (click)="eliminar(servicio)" icon="pi pi-trash" class="p-button-rounded p-button-text p-button-danger"></button>
-                <button *ngIf="editing" pButton pRipple type="button" (click)="guardar(servicio)" pSaveEditableRow icon="pi pi-check" class="p-button-rounded p-button-text p-button-success mr-2"></button>
+                <button *ngIf="editing " pButton pRipple type="button" (click)="guardar(servicio)" pSaveEditableRow icon="pi pi-check" class="p-button-rounded p-button-text p-button-success mr-2"></button>
                 <button *ngIf="editing" pButton pRipple type="button" (click)="cancelar(servicio, indiceFila)" pCancelEditableRow icon="pi pi-times" class="p-button-rounded p-button-text p-button-danger"></button>
             </td>
         </tr>
     </ng-template>
   </p-table>
   <div class="flex justify-content-center" [style]="{'margin-top':'2rem'}">
-    <button pButton pRipple type="button" (click)="nuevoServicio()" label="Agregar" class="p-button-raised"></button>
+    <button pButton pRipple type="button" (click)="nuevoServicio()" label="Agregar" class="p-button-success"></button>
   </div>
   </p-card>
-  <button id="volver" pButton type="button" label="Volver" (click)="volver()" class="p-button-outlined"></button>
+</div>
+<div class="flex justify-content-center">
+  <button id="volver" pButton type="button" label="Volver" (click)="volver()" class="m-2 p-button-secondary"></button>
+  <button id="siguiente" pButton type="button" label="Siguiente" (click)="siguiente()" class="m-2 p-button-info justify-content-end"></button>
 </div>
 
 <p-toast position="center" key="confirmar-c" (onClose)="cancelarMsj()" [baseZIndex]="5000">

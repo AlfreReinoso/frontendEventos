@@ -1,7 +1,14 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import { BasicJWTAuthServicesService } from "../../Services/basic-jwtauth-services.service";
 import { MessageService } from 'primeng/api';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
+import {Router} from "@angular/router";
+import {AddCliente} from "../../State/cliente.state";
+import {AddAdministrativo, AdministrativoState} from "../../State/adm.state";
+import {ClientesService} from "../../Services/clientes.service";
+import {AdministrativoService} from "../../Services/administrativo.service";
+import {Store} from "@ngxs/store";
+import {AddMenu} from "../../State/menu.state";
 
 @Component({
   selector: 'app-login',
@@ -10,23 +17,34 @@ import { DynamicDialogRef } from 'primeng/dynamicdialog';
 })
 export class LoginComponent {
 
+  @Input() islogeado: boolean;
+  @Output() estaLogeado = new EventEmitter<boolean>();
+
   username: string = '';
   password: string = '';
 
   constructor(
+    private store:Store,
     private basicAuthenticationServices: BasicJWTAuthServicesService,
-    private _messageService: MessageService, 
+    private _messageService: MessageService,
     public loginDialog: DynamicDialogRef,
+    private router: Router,
+    private _clienteService: ClientesService,
+    private _administrativoService: AdministrativoService
     ) { }
 
   handleJWTAuthLogin(){
     this.basicAuthenticationServices.executeJWTAuthenticationService(this.username, this.password)
       .subscribe(
           (data: any) => {
-          this.loginDialog.close(true);
+            this.islogeado = true;
+            this.estaLogeado.emit(true)
+            this.router.navigate(['/salas']);
         },
         (error: any) => {
           this.mensajeError();
+          this.islogeado= false
+          this.estaLogeado.emit(false)
         }
       );
   }

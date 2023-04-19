@@ -13,4 +13,8 @@ export class ClientesService {
   getClientes(){
     return this.http.get("http://localhost:8080/clientes/findClientes");
   }
+  getCliente(nameUsuario: string): Observable<Cliente>{
+    return this.http.get<Cliente>(`http://localhost:8080/clientes/findCliente/${nameUsuario}`);
+  }
+
 }
