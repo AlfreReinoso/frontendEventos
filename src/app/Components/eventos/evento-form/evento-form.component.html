@@ -1,5 +1,5 @@
 <p-card class="flex justify-content-center mt-5">
-  <div class="grid flex">
+  <div class="flex">
     <form (ngSubmit)="!FormEventos.invalid && saveEvento()" #FormEventos="ngForm">
       <tr>
         <td >
@@ -32,7 +32,7 @@
           </div>
         </td>
       </tr>
-      <tr>
+      <tr class="flex">
         <td>
           <div class="m-3 ">
           <label for="idServicio">Servicios</label>
@@ -44,13 +44,13 @@
           </div>
         </td>
         <td>
-          <div class="m-3">
+          <div class="m-1 justify-content-end">
           <label for="idSalon" *ngIf="(isAdm$|async)">Salon</label>
           <p-dropdown id="idSalon" *ngIf="(isAdm$|async)" [options]="salones" [(ngModel)]="evento.salon"
                          optionLabel="denominacion" class="form-control" name="evento.salon" appendTo="body" display="chip" ></p-dropdown>
             <label for="idSalonselected" *ngIf="!(isAdm$|async)">Salon</label>
             <input id="idSalonselected" *ngIf="!(isAdm$|async)" disabled [(ngModel)]="evento.salon.denominacion"
-                   pInputText  class="form-control" name="evento.salon.denominacion"  display="chip">
+                   pInputText  class="form-control" name="evento.salon.denominacion" >
           </div>
         </td>
       </tr>

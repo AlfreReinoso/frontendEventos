@@ -49,29 +49,27 @@ export class EventosComponent implements OnInit {
 
   ngOnInit(): void {
     this.pedirStateUser();
+    this._servicioService.findAll().subscribe((servicioBackend) => {
+      this.servicios = servicioBackend;
+    })
+    this._salasService.getSalas().subscribe(
+      (response: Salon[]) => {
+        console.log(response)
+        this.salas = response;
+      }
+    )
+    
       if(this.administrativo){
         this.listar();
-        this._servicioService.findAll().subscribe((servicioBackend) => {
-          this.servicios = servicioBackend;
-        })
-        this._salasService.getSalas().subscribe(
-          (response: Salon[]) => {
-            console.log(response)
-            this.salas = response;
-          }
-        )
         this._clienteService.getClientes().subscribe(
           (data:any)=>{
             this.clientes = data;
           }
         )
-
       }else if(this.cliente.idUsuario !=0){
-        // console.log(this.cliente.idUsuario)
-
+        this.clientes.push(this.cliente);
         this._eventoService.getDataEventosForCliente(this.cliente).subscribe((eventos)=>{
           this.eventos = eventos
-          // console.log(eventos)
         });
       }
   }

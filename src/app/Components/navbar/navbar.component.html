@@ -3,4 +3,3 @@
   <button *ngIf="isUserLoggedIn" (click)="logOut()" pButton type="button" label="LogOut" icon="pi pi-power-off" class="p-button-outlined"></button>
 </p-menubar>
 <app-login [islogeado]="isUserLoggedIn" (estaLogeado)="setearMenu($event)" *ngIf="!isUserLoggedIn" ></app-login>
-<!--(click)="logIn()-->

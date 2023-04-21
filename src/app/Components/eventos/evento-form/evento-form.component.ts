@@ -39,7 +39,6 @@ export class EventoFormComponent implements OnInit {
   clientes : Cliente[]=[];
 
   constructor(private router:Router,
-    private service:EventoServicesService,
     private _messageService: MessageService,
     private _eventoService: EventoServicesService,
     private _servicioService: ServicioService,
@@ -83,16 +82,12 @@ export class EventoFormComponent implements OnInit {
     }else{
       this.evento.fechaReserva = new Date();
       this.evento.cantidadPersonas = Number(this.evento.cantidadPersonas);
-      // console.log('evento antes de insertar',this.evento);
-      // this._messageService.
       this._eventoService.insertEvento(this.evento).subscribe(
         (data)=> {
           this._messageService.clear();
           this._messageService.add({ severity:'success', summary:'Exito!',detail: 'Se guardo correctamente'});
           this.router.navigate(['eventos'])
-          // console.log('Evento del backend',data)
         }, error =>{
-          // console.log(error)
           this._messageService.clear();
           this._messageService.add({ severity:'error', summary: 'Error!',
             detail: error.error.message }

@@ -3,12 +3,9 @@ import { BasicJWTAuthServicesService } from "../../Services/basic-jwtauth-servic
 import { MessageService } from 'primeng/api';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import {Router} from "@angular/router";
-import {AddCliente} from "../../State/cliente.state";
-import {AddAdministrativo, AdministrativoState} from "../../State/adm.state";
 import {ClientesService} from "../../Services/clientes.service";
 import {AdministrativoService} from "../../Services/administrativo.service";
 import {Store} from "@ngxs/store";
-import {AddMenu} from "../../State/menu.state";
 
 @Component({
   selector: 'app-login',
@@ -29,14 +26,13 @@ export class LoginComponent {
     private _messageService: MessageService,
     public loginDialog: DynamicDialogRef,
     private router: Router,
-    private _clienteService: ClientesService,
-    private _administrativoService: AdministrativoService
     ) { }
 
   handleJWTAuthLogin(){
     this.basicAuthenticationServices.executeJWTAuthenticationService(this.username, this.password)
       .subscribe(
           (data: any) => {
+            console.log(data)
             this.islogeado = true;
             this.estaLogeado.emit(true)
             this.router.navigate(['/salas']);
