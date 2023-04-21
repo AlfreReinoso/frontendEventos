@@ -49,7 +49,6 @@ export class EventosComponent implements OnInit {
 
   ngOnInit(): void {
     this.pedirStateUser();
-    console.log(this.cliente)
       if(this.administrativo){
         this.listar();
         this._servicioService.findAll().subscribe((servicioBackend) => {
@@ -68,11 +67,11 @@ export class EventosComponent implements OnInit {
         )
 
       }else if(this.cliente.idUsuario !=0){
-        console.log(this.cliente.idUsuario)
+        // console.log(this.cliente.idUsuario)
 
         this._eventoService.getDataEventosForCliente(this.cliente).subscribe((eventos)=>{
           this.eventos = eventos
-          console.log(eventos)
+          // console.log(eventos)
         });
       }
   }

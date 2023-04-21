@@ -8,7 +8,7 @@ export class Evento {
     fechaReserva: Date;
     fechaEvento: Date ;
     cantidadPersonas: number = 0;
-    salon : Salon = new Salon();
+    salon : Salon ;
     cliente : Cliente ;
     servicios: Servicio[] = [];
 

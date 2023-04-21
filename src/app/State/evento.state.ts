@@ -32,8 +32,8 @@ export class EventoStateModel {
    public servicios : Servicio[] = [];
 }
 const resumenEventosModel :  EventoStateModel = {
-  eventos: new Evento,
-  salones : new Salon,
+  eventos: new Evento(),
+  salones : new Salon(),
   servicios : [],
 };
 
@@ -68,8 +68,6 @@ export class EventosState {
     setEventoAction(ctx: StateContext<EventoStateModel>, action: AddEvento) {
         ctx.patchState({eventos: action.evento});
     }
-
-
   @Action(AddSalon)
   setSalonAction(ctx: StateContext<EventoStateModel>, action:AddSalon) {
     ctx.setState({...ctx.getState(), salones: action.salon});

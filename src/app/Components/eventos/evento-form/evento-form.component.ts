@@ -33,10 +33,8 @@ export class EventoFormComponent implements OnInit {
   evento: Evento = new Evento();
 
   servicios: Servicio[] = [];
-  selectedServicios : Servicio[] = [];
 
   salones : Salon [] = [];
-  selectedSalones: Salon [] = [];
 
   clientes : Cliente[]=[];
 
@@ -69,20 +67,15 @@ export class EventoFormComponent implements OnInit {
     this.id = this.route.snapshot.params['id'];
 
     if(this.id>0){
-      console.log("id mayor a 1");
       this.evento.salon = this.store.selectSnapshot(EventosState.getSalon);
       this.evento.servicios = this.store.selectSnapshot(EventosState.getServicio);
       this.evento.cliente = this.store.selectSnapshot(ClienteState.getCliente);
-
-      console.log(this.evento);
-
     }
   }
 
   saveEvento() {
     if(this.evento.fechaEvento == null || this.evento.cantidadPersonas === 0 ||
       this.evento.salon == null || this.evento.cliente == null ){
-      console.log("error al guardar");
       this._messageService.clear();
       this._messageService.add({severity:'error', summary: 'Atención',
         detail: `Faltan ingresar datos` }
@@ -90,16 +83,16 @@ export class EventoFormComponent implements OnInit {
     }else{
       this.evento.fechaReserva = new Date();
       this.evento.cantidadPersonas = Number(this.evento.cantidadPersonas);
-      console.log('evento antes de insertar',this.evento);
+      // console.log('evento antes de insertar',this.evento);
       // this._messageService.
       this._eventoService.insertEvento(this.evento).subscribe(
         (data)=> {
           this._messageService.clear();
           this._messageService.add({ severity:'success', summary:'Exito!',detail: 'Se guardo correctamente'});
           this.router.navigate(['eventos'])
-          console.log('Evento del backend',data)
+          // console.log('Evento del backend',data)
         }, error =>{
-          console.log(error)
+          // console.log(error)
           this._messageService.clear();
           this._messageService.add({ severity:'error', summary: 'Error!',
             detail: error.error.message }

@@ -1,6 +1,6 @@
 <p-card class="flex justify-content-center mt-5">
   <div class="grid">
-    <form (ngSubmit)="!todoForm.invalid && saveEvento()" #todoForm="ngForm">
+    <form (ngSubmit)="!FormEventos.invalid && saveEvento()" #FormEventos="ngForm">
       <tr>
         <td >
           <div  class="m-3">
@@ -24,10 +24,10 @@
           <div class="m-3">
           <label for="idCliente" *ngIf="isAdm$|async">Cliente</label>
           <p-dropdown id="idCliente" *ngIf="isAdm$|async" [options]="clientes" [(ngModel)]="evento.cliente"
-                      optionLabel="apellido" class="form-control" name="evento.salon" appendTo="body" display="chip"></p-dropdown>
+                      optionLabel="apellido" class="form-control" name="evento.cliente.apellido" appendTo="body" display="chip"></p-dropdown>
             <label for="idClienteselected" *ngIf="!(isAdm$|async)">Cliente</label>
             <input id="idClienteselected" *ngIf="!(isAdm$|async)" disabled [(ngModel)]="evento.cliente.apellido"
-                 pInputText  class="form-control" name="evento.salon"  display="chip">
+                 pInputText  class="form-control" name="evento.cliente.apellido"  display="chip">
 
           </div>
         </td>
@@ -36,10 +36,7 @@
         <td>
           <div class="m-3 ">
           <label for="idServicio">Servicios</label>
-<!--          <p-multiSelect id="idServicio" [options]="servicios" [(ngModel)]="evento.servicios"-->
-<!--                         optionLabel="denominacion" class="form-control absolute"-->
-<!--                         name="evento.servicios" appendTo="body"-->
-<!--                         display="chip" [selectedItemsLabel]="'{servicios.length} items selected'"></p-multiSelect>-->
+
             <p-multiSelect id="idServicio" [options]="servicios" [(ngModel)]="evento.servicios"
                            optionLabel="denominacion" class="form-control absolute" [maxSelectedLabels]="4"
                            [selectedItemsLabel]="'{0} items selected'"
@@ -48,9 +45,14 @@
         </td>
         <td>
           <div class="m-3">
-          <label for="idSalon">Salon</label>
-          <p-dropdown id="idSalon" [options]="salones" [(ngModel)]="evento.salon"
+          <label for="idSalon" *ngIf="(isAdm$|async)">Salon</label>
+          <p-dropdown id="idSalon" *ngIf="(isAdm$|async)" [options]="salones" [(ngModel)]="evento.salon"
                          optionLabel="denominacion" class="form-control" name="evento.salon" appendTo="body" display="chip" ></p-dropdown>
+            <label for="idSalonselected" *ngIf="!(isAdm$|async)">Salon</label>
+            <input id="idSalonselected" *ngIf="!(isAdm$|async)" disabled [(ngModel)]="evento.salon.denominacion"
+                   pInputText  class="form-control" name="evento.salon.denominacion"  display="chip">
+
+
           </div>
         </td>
       </tr>
