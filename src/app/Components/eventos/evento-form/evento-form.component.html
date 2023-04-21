@@ -1,5 +1,5 @@
 <p-card class="flex justify-content-center mt-5">
-  <div class="grid">
+  <div class="grid flex">
     <form (ngSubmit)="!FormEventos.invalid && saveEvento()" #FormEventos="ngForm">
       <tr>
         <td >
@@ -51,12 +51,12 @@
             <label for="idSalonselected" *ngIf="!(isAdm$|async)">Salon</label>
             <input id="idSalonselected" *ngIf="!(isAdm$|async)" disabled [(ngModel)]="evento.salon.denominacion"
                    pInputText  class="form-control" name="evento.salon.denominacion"  display="chip">
-
-
           </div>
         </td>
       </tr>
-      <button pButton type="submit" class="p-button-success mt-2">Save</button>
+      <tr>
+        <button pButton type="submit" class="p-button-success mt-2">Save</button>
+      </tr>
     </form>
   </div>
 </p-card>
