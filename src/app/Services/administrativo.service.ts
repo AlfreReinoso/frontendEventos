@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import {API_URL} from '../app.constants';
+
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Administrativo} from "../model/administrativo";
@@ -11,6 +13,6 @@ export class AdministrativoService {
   constructor(private http:HttpClient) { }
 
   getAdministrativo(nameUsuario: string): Observable<Administrativo>{
-    return this.http.get<Administrativo>(`http://localhost:8080/administrativos/findAdministrativo/${nameUsuario}`);
+    return this.http.get<Administrativo>(`${API_URL}/administrativos/findAdministrativo/${nameUsuario}`);
   }
 }
