@@ -105,7 +105,8 @@ export class EventosComponent implements OnInit {
     this.mostrarButtonAgregar = false;
     if (evento.salon.denominacion != '' &&
         evento.cliente.apellido != '' &&
-        evento.cantidadPersonas !== 0)
+        evento.cantidadPersonas !== 0 
+        )
     {
       this._eventoService.updateEventos(evento).subscribe((eventoBackend) => {
           // console.log("evento del backend",eventoBackend);
@@ -115,7 +116,7 @@ export class EventosComponent implements OnInit {
             detail: `Evento del dia ${eventoBackend.fechaEvento} actualizado correctamente`
           });
         },(error)=>{
-          this._messageService.add({  key: 'atencion', severity:'warn', summary: 'Atención', detail: `${error.error.message}` }
+          this._messageService.add({  key: 'atencion', severity:'warn', summary: 'Atención', detail: `Error al guardar` }
           );
         });
       //this.listar();

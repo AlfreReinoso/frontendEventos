@@ -32,19 +32,19 @@
           </div>
         </td>
       </tr>
-      <tr class="flex">
-        <td>
+      <tr >
+        <td class="primeracol">
           <div class="m-3 ">
           <label for="idServicio">Servicios</label>
 
-            <p-multiSelect id="idServicio" [options]="servicios" [(ngModel)]="evento.servicios"
-                           optionLabel="denominacion" class="form-control absolute" [maxSelectedLabels]="4"
+          <p-multiSelect id="idServicio" [options]="servicios" [(ngModel)]="evento.servicios"
+                           optionLabel="denominacion" class="form-control" [maxSelectedLabels]="3"
                            [selectedItemsLabel]="'{0} items selected'"
                             name="evento.servicios"></p-multiSelect>
           </div>
         </td>
-        <td>
-          <div class="m-1 justify-content-end">
+        <td class="segundacol">
+          <div >
           <label for="idSalon" *ngIf="(isAdm$|async)">Salon</label>
           <p-dropdown id="idSalon" *ngIf="(isAdm$|async)" [options]="salones" [(ngModel)]="evento.salon"
                          optionLabel="denominacion" class="form-control" name="evento.salon" appendTo="body" display="chip" ></p-dropdown>
@@ -54,8 +54,8 @@
           </div>
         </td>
       </tr>
-      <tr>
-        <button pButton type="submit" class="p-button-success mt-2">Save</button>
+      <tr class="flex justify-content-center">
+        <button  pButton type="submit" class="p-button-success mt-2">Save</button>
       </tr>
     </form>
   </div>

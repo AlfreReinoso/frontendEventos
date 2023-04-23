@@ -74,7 +74,7 @@ export class EventoFormComponent implements OnInit {
 
   saveEvento() {
     if(this.evento.fechaEvento == null || this.evento.cantidadPersonas === 0 ||
-      this.evento.salon == null || this.evento.cliente == null ){
+      this.evento.salon == null || this.evento.cliente == null || this.evento.fechaEvento > new Date() ){
       this._messageService.clear();
       this._messageService.add({severity:'error', summary: 'Atención',
         detail: `Faltan ingresar datos` }
