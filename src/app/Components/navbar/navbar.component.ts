@@ -19,12 +19,6 @@ import {MenuState} from "../../State/menu.state";
 })
 export class NavbarComponent implements OnInit, OnDestroy {
 
-  // @Select(ClienteState.getCliente) isCliente$: Observable<Cliente>;
-  // @Select(MenuState.getMenu) items$: Observable<MenuItem[]>;
-
-
-
-  loginDialog: DynamicDialogRef;
 
   isUserLoggedIn: boolean = false;
   showLogin: boolean = false;
@@ -46,18 +40,14 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    console.log("deberia borrar el usuario")
     this.logOut();
   }
 
   logIn(){
 
       this.verificarElUserState();
-    console.log('estoy en el login')
-    console.log(this.administrativo)
-    console.log(this.cliente)
+
       if(this.cliente.idUsuario != 0|| this.administrativo.idUsuario!=0){
-        console.log('hay usuario')
         this.isUserLoggedIn = true;
       }else{
         this.isUserLoggedIn = false;
@@ -73,7 +63,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
    verificarElUserState() {
-      // await new Promise(r => setTimeout(r, 500));
       this.cliente = this.store.selectSnapshot(ClienteState.getCliente);
       this.administrativo = this.store.selectSnapshot(AdministrativoState.getAdministrativo);
   }
@@ -92,7 +81,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
         this.showMenu(false);
       }
     }
-
   }
 
   logOut() {

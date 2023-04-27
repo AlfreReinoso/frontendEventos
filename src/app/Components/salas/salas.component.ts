@@ -17,21 +17,26 @@ import {Observable} from "rxjs";
 })
 export class SalasComponent implements OnInit , OnDestroy{
 
-  @Select(AdministrativoState.getAdministrativo)isAdministrativo$:Observable<Cliente>;
+  @Select(AdministrativoState.getAdministrativo)isAdministrativo$:Observable<Administrativo>;
+
 
   salas: Salon[] = [];
   cliente: Cliente;
   administrativo:Administrativo;
 
+  showButtonNew: boolean = false;
+
   constructor(
-    private _basicJwtAuthServices: BasicJWTAuthServicesService,
     private salaservice: SalaService,
     private router:Router,
-
     ) { }
 
   ngOnInit(): void {
-    this.isAdministrativo$.subscribe((adm)=>{});
+    this.isAdministrativo$.subscribe((adm)=>{
+      if(adm){
+        this.showButtonNew = adm.idUsuario > 0;
+      }
+    });
     if(sessionStorage.getItem(AUTHENTICATED_USER)){
       this.salaservice.getSalas().subscribe(
         (response: Salon[]) => {
@@ -47,7 +52,5 @@ export class SalasComponent implements OnInit , OnDestroy{
 
   ngOnDestroy() {
     this.salas=[];
-    // this._basicJwtAuthServices.logout();
-
   }
 }

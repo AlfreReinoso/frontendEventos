@@ -1,4 +1,4 @@
-<div class="centrar">
+<div class="flex justify-content-center m-2">
   <p-card header="Eventos">
     <p-table [value]="eventos" dataKey="nroReserva" editMode="row" responsiveLayout="stack" sortMode="multiple">
       <ng-template pTemplate="header">
@@ -50,7 +50,15 @@
           <td>
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <input pInputText type="date" [(ngModel)]="evento.fechaReserva">
+                <input *ngIf="administrativo" pInputText type="date" [(ngModel)]="evento.fechaReserva">
+                
+                <div>
+                  <span *ngIf="cliente" disabled type="date">
+                    {{evento.fechaReserva}}
+                  </span>
+  
+                </div>
+
               </ng-template>
               <ng-template pTemplate="output">
                 {{evento.fechaReserva}}
@@ -85,7 +93,7 @@
               </p-cellEditor>
           </td>
           <td style="text-align:center">
-            <button *ngIf="!editing" pButton pRipple type="button" (click)="editar(evento)" pInitEditableRow icon="pi pi-pencil" class="p-button-rounded p-button-text"></button>
+            <button *ngIf="!editing " pButton pRipple type="button" (click)="editar(evento)" pInitEditableRow icon="pi pi-pencil" class="p-button-rounded p-button-text"></button>
             <button *ngIf="!editing" pButton pRipple type="button" (click)="eliminar(evento)" icon="pi pi-trash" class="p-button-rounded p-button-text p-button-danger"></button>
             <button *ngIf="editing" pButton pRipple type="button" (click)="guardar(evento)" pSaveEditableRow icon="pi pi-check" class="p-button-rounded p-button-text p-button-success mr-2"></button>
             <button *ngIf="editing" pButton pRipple type="button" (click)="cancelar(evento, indiceFila)" pCancelEditableRow icon="pi pi-times" class="p-button-rounded p-button-text p-button-danger"></button>

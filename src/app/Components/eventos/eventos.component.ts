@@ -49,30 +49,27 @@ export class EventosComponent implements OnInit {
 
   ngOnInit(): void {
     this.pedirStateUser();
-    console.log(this.cliente)
+    this._servicioService.findAll().subscribe((servicioBackend) => {
+      this.servicios = servicioBackend;
+    })
+    this._salasService.getSalas().subscribe(
+      (response: Salon[]) => {
+        console.log(response)
+        this.salas = response;
+      }
+    )
+    
       if(this.administrativo){
         this.listar();
-        this._servicioService.findAll().subscribe((servicioBackend) => {
-          this.servicios = servicioBackend;
-        })
-        this._salasService.getSalas().subscribe(
-          (response: Salon[]) => {
-            console.log(response)
-            this.salas = response;
-          }
-        )
         this._clienteService.getClientes().subscribe(
           (data:any)=>{
             this.clientes = data;
           }
         )
-
       }else if(this.cliente.idUsuario !=0){
-        console.log(this.cliente.idUsuario)
-
+        this.clientes.push(this.cliente);
         this._eventoService.getDataEventosForCliente(this.cliente).subscribe((eventos)=>{
           this.eventos = eventos
-          console.log(eventos)
         });
       }
   }
@@ -108,7 +105,8 @@ export class EventosComponent implements OnInit {
     this.mostrarButtonAgregar = false;
     if (evento.salon.denominacion != '' &&
         evento.cliente.apellido != '' &&
-        evento.cantidadPersonas !== 0)
+        evento.cantidadPersonas !== 0 
+        )
     {
       this._eventoService.updateEventos(evento).subscribe((eventoBackend) => {
           // console.log("evento del backend",eventoBackend);
@@ -118,7 +116,7 @@ export class EventosComponent implements OnInit {
             detail: `Evento del dia ${eventoBackend.fechaEvento} actualizado correctamente`
           });
         },(error)=>{
-          this._messageService.add({  key: 'atencion', severity:'warn', summary: 'Atención', detail: `${error.error.message}` }
+          this._messageService.add({  key: 'atencion', severity:'warn', summary: 'Atención', detail: `Error al guardar` }
           );
         });
       //this.listar();

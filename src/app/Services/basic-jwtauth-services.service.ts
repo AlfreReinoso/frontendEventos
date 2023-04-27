@@ -4,11 +4,9 @@ import {HttpClient} from "@angular/common/http";
 import {map} from "rxjs";
 import {ClientesService} from "./clientes.service";
 import {Store} from "@ngxs/store";
-import {AddSalon} from "../State/evento.state";
 import {AddCliente, ClienteResetAction, ClienteState} from "../State/cliente.state";
 import {AdministrativoService} from "./administrativo.service";
 import {AddAdministrativo, AdministrativoState, AdmResetAction} from "../State/adm.state";
-import {AddMenu, MenuState} from "../State/menu.state";
 export const TOKEN = 'token';
 export const AUTHENTICATED_USER = 'authenticateUser';
 
@@ -26,7 +24,6 @@ BasicJWTAuthServicesService {
     (`${API_URL}/authenticate`, {username, password}).pipe(
       map(
         data => {
-          // console.log(data);
           sessionStorage.setItem(AUTHENTICATED_USER, username);
           sessionStorage.setItem(TOKEN, `Bearer ${data.token}`);
           this._clienteService.getCliente(username).subscribe(
@@ -42,11 +39,9 @@ BasicJWTAuthServicesService {
               if(response){
                 this.store.dispatch(new AddAdministrativo(response))
                 this.store.dispatch(new ClienteResetAction())
-
               }
             }
           )
-
           return data;
         }
       )
@@ -76,7 +71,4 @@ BasicJWTAuthServicesService {
     console.log(this.store.selectSnapshot(ClienteState.getCliente))
     console.log(this.store.selectSnapshot(AdministrativoState.getAdministrativo))
   }
-}
-export class AuthenticationBean {
-  constructor(public message: String) { }
 }

@@ -78,6 +78,7 @@ export class ServiciosComponent implements OnInit {
   }
   siguiente(){
     this.store.dispatch(new AddServicio(this.servicios));
+    console.log(this.store.selectSnapshot(EventosState.getSalon))
     // console.log(this.store.selectSnapshot(EventosState));
     this.router.navigate(['eventoForm/1'])
   }
