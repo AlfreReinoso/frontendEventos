@@ -68,7 +68,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   async setearMenu(event:any){
-    await new Promise(r => setTimeout(r, 500));
+    await new Promise(r => setTimeout(r, 1000));
     if(event == true){
       this.isUserLoggedIn = true
       this.cliente = this.store.selectSnapshot(ClienteState.getCliente);
