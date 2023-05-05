@@ -54,7 +54,7 @@ export class EventosComponent implements OnInit {
     })
     this._salasService.getSalas().subscribe(
       (response: Salon[]) => {
-        console.log(response)
+        // console.log(response)
         this.salas = response;
       }
     )

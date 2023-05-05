@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { MessageService } from 'primeng/api';
 import { Servicio } from 'src/app/model/servicio';
 import { ServicioService } from 'src/app/Services/servicios.service';
@@ -27,6 +27,7 @@ export class ServiciosComponent implements OnInit {
   constructor(
     private router : Router,
     private store: Store,
+    private route : ActivatedRoute,
     private _messageService: MessageService,
     private _servicioService : ServicioService,
     private _tipoServicioService: TipoServicioService,
@@ -35,9 +36,23 @@ export class ServiciosComponent implements OnInit {
   ngOnInit() {
     this.cliente = this.store.selectSnapshot(ClienteState.getCliente)
     this.administrativo = this.store.selectSnapshot(AdministrativoState.getAdministrativo)
-    this._servicioService.findAll().subscribe(serviciosBack => {
-      this.servicios = serviciosBack;
-    })
+    let id = this.route.snapshot.params['id'] ;
+    if(id!=null){
+      this._servicioService.findOne(id).subscribe((servicioAgregado:Servicio)=>{this.servicios.push(servicioAgregado)})
+    };
+
+
+    if(this.store.selectSnapshot(EventosState.getServicio).length!=0){
+      console.log('hay servicios en el state')
+      console.log(this.store.selectSnapshot(EventosState.getServicio))
+      this.servicios = this.store.selectSnapshot(EventosState.getServicio);
+    }else{
+      this._servicioService.findAll().subscribe(serviciosBack => {
+        this.servicios = serviciosBack;
+        console.log(this.servicios)
+      })
+    }
+   
 
     this._tipoServicioService.findAll().subscribe(tipos => {
       this.tiposDeServicios = tipos.map(tipo => { return tipo.denominacion});
@@ -49,7 +64,7 @@ export class ServiciosComponent implements OnInit {
   }
 
   eliminar(servicio: Servicio) {
-    this.servicioSinModificar = servicio;
+    this.servicioSinModificar = {...servicio};
     this._messageService.clear();
     this._messageService.add({ key: 'confirmar-c', sticky: true, severity:'warn', summary:'Desea eliminar el servicio?', detail:'Confirma para proceder' });
   }
@@ -84,11 +99,20 @@ export class ServiciosComponent implements OnInit {
   }
 
   aceptarMsj() {
-    this._servicioService.delete(this.servicioSinModificar.idServicio).subscribe(value => {
+    if(this.administrativo){
+      this._servicioService.delete(this.servicioSinModificar.idServicio).subscribe(value => {
+        console.log(this.servicios)
+        this.servicios.splice(this.servicios.indexOf(this.servicioSinModificar), 1);
+        this._messageService.clear();
+        this._messageService.add({ severity:'success', summary: 'Éxito', detail: 'Servicio eliminado correctamente' })
+      });
+    }else if ( this.cliente){
+      console.log(this.servicios.indexOf(this.servicioSinModificar))
       this.servicios.splice(this.servicios.indexOf(this.servicioSinModificar), 1);
       this._messageService.clear();
       this._messageService.add({ severity:'success', summary: 'Éxito', detail: 'Servicio eliminado correctamente' })
-    });
+      this.store.dispatch(new AddServicio(this.servicios));
+    } 
   }
 
   cancelarMsj() {

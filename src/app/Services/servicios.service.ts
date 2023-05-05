@@ -26,4 +26,8 @@ export class ServicioService {
   findAll(): Observable<Servicio[]> {
     return this.http.get<Servicio[]>(`${API_URL}/servicio/findAll`);
   }
+
+  findOne(id: number): Observable<Servicio> {
+    return this.http.get<Servicio>(`${API_URL}/servicio/find/${id}`);
+  }
 }
