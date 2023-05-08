@@ -74,7 +74,7 @@ export class EventosState {
   }
   @Action(EventoResetAction)
   resetEvento(ctx: StateContext<EventoStateModel>, action: EventoResetAction) {
-    ctx.patchState({ servicios: [] });
+    ctx.patchState({ servicios: [], salones: undefined, eventos: undefined });
   }
 
 }
