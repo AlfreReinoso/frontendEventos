@@ -23,7 +23,9 @@ export class AddServicio {
   }
 }
 
-
+export class EventoResetAction {
+  static readonly type = '[EVENTO] ResetEvento';
+}
 
 
 export class EventoStateModel {
@@ -57,13 +59,7 @@ export class EventosState {
     return state.servicios;
   }
 
-  /* @Action(AddEvento)
-  add({getState, patchState}: StateContext<EventoStateModel>, {evento}:AddEvento){
-    const state = getState();
-    patchState({
-      eventos:[...state.eventos, evento]
-    })
-  } */
+
   @Action(AddEvento)
     setEventoAction(ctx: StateContext<EventoStateModel>, action: AddEvento) {
         ctx.patchState({eventos: action.evento});

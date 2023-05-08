@@ -73,5 +73,6 @@ BasicJWTAuthServicesService {
 
     console.log(this.store.selectSnapshot(ClienteState.getCliente))
     console.log(this.store.selectSnapshot(AdministrativoState.getAdministrativo))
+
   }
 }

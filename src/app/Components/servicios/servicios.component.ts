@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { MessageService } from 'primeng/api';
 import { Servicio } from 'src/app/model/servicio';
 import { ServicioService } from 'src/app/Services/servicios.service';
@@ -32,6 +32,7 @@ export class ServiciosComponent implements OnInit {
   constructor(
     private router : Router,
     private store: Store,
+    private route : ActivatedRoute,
     private _messageService: MessageService,
     private _servicioService : ServicioService,
     private _tipoServicioService: TipoServicioService,
@@ -46,6 +47,7 @@ export class ServiciosComponent implements OnInit {
         [...this.servicios, servicioAgregado]
         // this.servicios.push(servicioAgregado)
       })
+
     };
 
 
@@ -59,6 +61,7 @@ export class ServiciosComponent implements OnInit {
       this._servicioService.findAll().subscribe(serviciosBack => {
         this.servicios = serviciosBack;
         // console.log(this.servicios)
+
       })
     }
    
@@ -79,6 +82,7 @@ export class ServiciosComponent implements OnInit {
 
     console.log('servicio a eliminar ')
     console.log(servicio)
+
     this.servicioSinModificar = {...servicio};
     this._messageService.clear();
     this._messageService.add({ key: 'confirmar-c', sticky: true, severity:'warn', summary:'Desea eliminar el servicio?', detail:'Confirma para proceder' });
@@ -163,6 +167,7 @@ export class ServiciosComponent implements OnInit {
       this._messageService.clear();
       this._messageService.add({ severity:'success', summary: 'Éxito', detail: 'Servicio eliminado correctamente' })
     };
+
   }
 
   cancelarMsj() {

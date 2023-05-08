@@ -87,8 +87,8 @@ export class SalonComponent implements OnInit {
 
   selectSalon(salon: Salon) {
     this.store.dispatch(new AddSalon(salon));
-    console.log(this.store.selectSnapshot(EventosState.getSalon));
-    this.router.navigate(['servicios', salon.idSalon]);
+    // console.log(this.store.selectSnapshot(EventosState.getSalon));
+    this.router.navigate(['servicios']);
   }
 
 }
