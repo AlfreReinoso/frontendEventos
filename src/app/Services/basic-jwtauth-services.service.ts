@@ -71,8 +71,8 @@ BasicJWTAuthServicesService {
     this.store.dispatch(new AdmResetAction())
     this.store.dispatch(new EventoResetAction())
 
-    console.log(this.store.selectSnapshot(ClienteState.getCliente))
-    console.log(this.store.selectSnapshot(AdministrativoState.getAdministrativo))
+    // console.log(this.store.selectSnapshot(ClienteState.getCliente))
+    // console.log(this.store.selectSnapshot(AdministrativoState.getAdministrativo))
 
   }
 }

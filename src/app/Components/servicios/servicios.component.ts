@@ -52,8 +52,8 @@ export class ServiciosComponent implements OnInit {
 
 
     if(this.store.selectSnapshot(EventosState.getServicio).length!=0){
-      console.log('hay servicios en el state')
-      console.log(this.store.selectSnapshot(EventosState.getServicio))
+      // console.log('hay servicios en el state')
+      // console.log(this.store.selectSnapshot(EventosState.getServicio))
       // this.serviciosState = this.store.selectSnapshot(EventosState.getServicio);
       this.servicios = _.cloneDeep(this.store.selectSnapshot(EventosState.getServicio));
       // this.servicios = this.store.selectSnapshot(EventosState.getServicio);
@@ -76,12 +76,12 @@ export class ServiciosComponent implements OnInit {
   }
 
   eliminar(servicio: Servicio) {
-    console.log('servicios')
-    console.log(this.servicios)
+    // console.log('servicios')
+    // console.log(this.servicios)
 
 
-    console.log('servicio a eliminar ')
-    console.log(servicio)
+    // console.log('servicio a eliminar ')
+    // console.log(servicio)
 
     this.servicioSinModificar = {...servicio};
     this._messageService.clear();
@@ -112,18 +112,22 @@ export class ServiciosComponent implements OnInit {
   }
   siguiente(){
     this.store.dispatch(new AddServicio(this.servicios));
-    console.log(this.store.selectSnapshot(EventosState.getSalon))
-    // console.log(this.store.selectSnapshot(EventosState));
-    this.router.navigate(['eventoForm/1'])
+    if(this.store.selectSnapshot(EventosState.getSalon)!= undefined){
+      console.log('hay salon')
+      this.router.navigate(['eventoForm/1'])
+    }else {
+      this.router.navigate(['salas']) 
+    }
+    
   }
 
   aceptarMsj() {
     if(this.administrativo){
-      console.log('eliminar por parte del administrativo')
+      // console.log('eliminar por parte del administrativo')
             // cuando entra por state rompe..
 
       this._servicioService.delete(this.servicioSinModificar.idServicio).subscribe(value => {
-        console.log(this.servicios) 
+        // console.log(this.servicios) 
 
         // this.servicios.splice(this.servicios.findIndex((value:Servicio):any=>{
         //   value.idServicio == this.servicioSinModificar.idServicio}), 1);
@@ -138,8 +142,8 @@ export class ServiciosComponent implements OnInit {
 
       // cuando entra por state rompe..
 
-      console.log(this.servicios)
-      console.log(this.servicioSinModificar)
+      // console.log(this.servicios)
+      // console.log(this.servicioSinModificar)
       // console.log(this.serviciosSinModificar.indexOf(this.servicioSinModificar))
 
       // this.servicios.forEach((serv,indexToDelete)=>{
@@ -159,7 +163,7 @@ export class ServiciosComponent implements OnInit {
       this.servicios.splice(this.servicios.findIndex((value:Servicio):any=>{
         value.idServicio === this.servicioSinModificar.idServicio}), 1);
 
-      console.log(this.servicios);
+      // console.log(this.servicios);
 
 
       // this.servicios.splice(this.servicios.indexOf(this.servicioSinModificar), 1);
