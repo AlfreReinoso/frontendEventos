@@ -140,20 +140,14 @@ export class NavbarComponent implements OnInit, OnDestroy {
               routerLink:'salas'
             },{
               label: 'Eventos',
-              items: [
-                { label: 'Ver eventos', icon:'pi pi-list', routerLink: 'eventos' },
-              ]
+              routerLink: 'eventos'
             },{
               label: 'Salones',
-              items: [
-
-                { label: 'Ver salones', icon:'pi pi-list', routerLink:'salas' },
-              ]
+              routerLink:'salas'
             },{
               label: 'Servicios',
-              items: [
-                { label: 'Ver servicios', icon:'pi pi-list', routerLink:['/servicios'] },
-              ]
+              routerLink:['/servicios']
+              
             }
           ]
       }

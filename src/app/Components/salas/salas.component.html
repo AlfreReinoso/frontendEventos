@@ -9,10 +9,11 @@
 
             <ng-template pTemplate="body">
               Costo: {{sala.costoPorDia}} <br>
-              Cant Personas:{{sala.capacidad}}
+              Cantidad de personas:{{sala.capacidad}}
             </ng-template>
             <ng-template pTemplate="footer">
-              <button (click)="selectSalon(sala.idSalon)" pButton type="button" label="Mas Info" icon="pi pi-angle-right" iconPos="right" class="p-button-sm"></button>
+              <button (click)="selectSalon(sala.idSalon)" *ngIf="showButtonNew" pButton type="button" label="Mas Info" icon="pi pi-angle-right" iconPos="right" class="p-button-sm"></button>
+              <button (click)="siguiente(sala)" *ngIf="!showButtonNew" pButton type="button" label="Siguiente" icon="pi pi-angle-right" iconPos="right" class="p-button-sm"></button>
             </ng-template>
         </p-card>
   </div>

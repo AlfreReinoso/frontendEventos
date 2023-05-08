@@ -76,6 +76,9 @@ export class EventosState {
   setServicioAction(ctx: StateContext<EventoStateModel>, action:AddServicio) {
     ctx.setState({...ctx.getState(), servicios: action.servicio});
   }
-
+  @Action(EventoResetAction)
+  resetEvento(ctx: StateContext<EventoStateModel>, action: EventoResetAction) {
+    ctx.patchState({ servicios: [], salones: undefined, eventos: undefined });
+  }
 
 }
