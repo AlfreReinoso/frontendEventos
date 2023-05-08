@@ -12,7 +12,7 @@ import {Cliente} from "../../../model/cliente";
 
 import {ActivatedRoute, Router} from "@angular/router";
 import {Select, Store} from "@ngxs/store";
-import {EventosState} from "../../../State/evento.state";
+import {EventoResetAction, EventosState} from "../../../State/evento.state";
 import {ClienteState} from "../../../State/cliente.state";
 import {AdministrativoState} from "../../../State/adm.state";
 import {Administrativo} from "../../../model/administrativo";
@@ -80,13 +80,15 @@ export class EventoFormComponent implements OnInit {
         detail: `Faltan ingresar datos` }
       );
     }else{
+      console.log(this.evento)
       this.evento.fechaReserva = new Date();
       this.evento.cantidadPersonas = Number(this.evento.cantidadPersonas);
       this._eventoService.insertEvento(this.evento).subscribe(
         (data)=> {
           this._messageService.clear();
           this._messageService.add({ severity:'success', summary:'Exito!',detail: 'Se guardo correctamente'});
-          this.router.navigate(['eventos'])
+          this.router.navigate(['eventos']);
+          this.store.dispatch(new EventoResetAction());
         }, error =>{
           this._messageService.clear();
           this._messageService.add({ severity:'error', summary: 'Error!',

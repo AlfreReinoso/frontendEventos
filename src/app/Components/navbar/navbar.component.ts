@@ -68,7 +68,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   async setearMenu(event:any){
-    await new Promise(r => setTimeout(r, 500));
+    await new Promise(r => setTimeout(r, 1000));
     if(event == true){
       this.isUserLoggedIn = true
       this.cliente = this.store.selectSnapshot(ClienteState.getCliente);
@@ -140,20 +140,14 @@ export class NavbarComponent implements OnInit, OnDestroy {
               routerLink:'salas'
             },{
               label: 'Eventos',
-              items: [
-                { label: 'Ver eventos', icon:'pi pi-list', routerLink: 'eventos' },
-              ]
+              routerLink: 'eventos'
             },{
               label: 'Salones',
-              items: [
-
-                { label: 'Ver salones', icon:'pi pi-list', routerLink:'salas' },
-              ]
+              routerLink:'salas'
             },{
               label: 'Servicios',
-              items: [
-                { label: 'Ver servicios', icon:'pi pi-list', routerLink:['/servicios'] },
-              ]
+              routerLink:['/servicios']
+              
             }
           ]
       }

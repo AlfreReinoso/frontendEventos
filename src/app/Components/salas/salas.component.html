@@ -1,6 +1,6 @@
 
 <div class="m-3 flex justify-content-center" >
-  <button pButton *ngIf="showButtonNew" class="mt-4 p-button-success " icon="pi pi-plus" label="Nuevo"></button>
+  <button pButton *ngIf="showButtonNew" class="mt-4 p-button-success " [routerLink]="['/salon',0]" icon="pi pi-plus" label="Nuevo"></button>
 </div>
 <div class="grid">
   <div class="col-4" *ngFor="let sala of salas">
@@ -9,10 +9,11 @@
 
             <ng-template pTemplate="body">
               Costo: {{sala.costoPorDia}} <br>
-              Cant Personas:{{sala.capacidad}}
+              Cantidad de personas:{{sala.capacidad}}
             </ng-template>
             <ng-template pTemplate="footer">
-              <button (click)="selectSalon(sala.idSalon)" pButton type="button" label="Mas Info" icon="pi pi-angle-right" iconPos="right" class="p-button-sm"></button>
+              <button (click)="selectSalon(sala.idSalon)" *ngIf="showButtonNew" pButton type="button" label="Mas Info" icon="pi pi-angle-right" iconPos="right" class="p-button-sm"></button>
+              <button (click)="siguiente(sala)" *ngIf="!showButtonNew" pButton type="button" label="Siguiente" icon="pi pi-angle-right" iconPos="right" class="p-button-sm"></button>
             </ng-template>
         </p-card>
   </div>

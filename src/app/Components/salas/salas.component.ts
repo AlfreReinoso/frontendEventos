@@ -9,6 +9,7 @@ import {ClienteState} from "../../State/cliente.state";
 import {AdministrativoState} from "../../State/adm.state";
 import {Select, Selector, Store} from "@ngxs/store";
 import {Observable} from "rxjs";
+import { AddSalon, EventosState } from 'src/app/State/evento.state';
 
 @Component({
   selector: 'app-salas',
@@ -27,6 +28,7 @@ export class SalasComponent implements OnInit , OnDestroy{
   showButtonNew: boolean = false;
 
   constructor(
+    private store:Store,
     private salaservice: SalaService,
     private router:Router,
     ) { }
@@ -48,6 +50,15 @@ export class SalasComponent implements OnInit , OnDestroy{
 
   selectSalon(idSala: number) : void{
     this.router.navigate(['/salon',idSala]);
+  }
+
+  siguiente(sala:Salon){
+    this.store.dispatch(new AddSalon(sala));
+    if(this.store.selectSnapshot(EventosState.getServicio).length>0){
+      this.router.navigate(['eventoForm/1'])
+    }else{
+      this.router.navigate(['/servicios']) 
+    }
   }
 
   ngOnDestroy() {

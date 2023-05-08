@@ -7,6 +7,7 @@ import {Store} from "@ngxs/store";
 import {AddCliente, ClienteResetAction, ClienteState} from "../State/cliente.state";
 import {AdministrativoService} from "./administrativo.service";
 import {AddAdministrativo, AdministrativoState, AdmResetAction} from "../State/adm.state";
+import { EventoResetAction } from '../State/evento.state';
 export const TOKEN = 'token';
 export const AUTHENTICATED_USER = 'authenticateUser';
 
@@ -68,7 +69,10 @@ BasicJWTAuthServicesService {
     sessionStorage.removeItem(AUTHENTICATED_USER);
     this.store.dispatch(new ClienteResetAction())
     this.store.dispatch(new AdmResetAction())
+    this.store.dispatch(new EventoResetAction())
+
     console.log(this.store.selectSnapshot(ClienteState.getCliente))
     console.log(this.store.selectSnapshot(AdministrativoState.getAdministrativo))
+
   }
 }

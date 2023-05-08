@@ -32,7 +32,7 @@ export class LoginComponent {
     this.basicAuthenticationServices.executeJWTAuthenticationService(this.username, this.password)
       .subscribe(
           (data: any) => {
-            console.log(data)
+            // console.log(data)
             this.islogeado = true;
             this.estaLogeado.emit(true)
             this.router.navigate(['/salas']);
