@@ -9,6 +9,9 @@ import {ClienteState} from "../../State/cliente.state";
 import {AdministrativoState} from "../../State/adm.state";
 import {Administrativo} from "../../model/administrativo";
 import {MessageService} from "primeng/api";
+import { MediaService } from 'src/app/Services/media.service';
+import { HttpHeaders } from '@angular/common/http';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 
 @Component({
@@ -18,13 +21,16 @@ import {MessageService} from "primeng/api";
 })
 export class SalonComponent implements OnInit {
 
+
   id:number = 0;
   salon: Salon = new Salon;
   cliente: Cliente;
   administrativo:Administrativo;
+  urlimg?:SafeUrl;
 
   constructor(private store: Store,private router:Router,private route : ActivatedRoute, private _salaService : SalaService,
-              private _messageService: MessageService,
+              private _messageService: MessageService, private mediaService: MediaService,
+              private sanitizer: DomSanitizer,
   ) { }
 
 
@@ -91,4 +97,25 @@ export class SalonComponent implements OnInit {
     this.router.navigate(['servicios']);
   }
 
+  upload(evento: any) {
+    console.log(evento)
+
+    const file = evento.target.files[0];
+
+    if(file){
+      const formData = new FormData();
+      formData.append('file', file);
+      console.log('yendo a guardar el file')
+      this.mediaService.uploadFile(formData)
+      .subscribe(response => { 
+        console.log('response', response);
+        
+      
+      this.mediaService.mostrarFile( response.url).subscribe((blob: Blob) => {
+        this.urlimg = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(blob));
+         
+      })
+      })
+    }
+  }
 }

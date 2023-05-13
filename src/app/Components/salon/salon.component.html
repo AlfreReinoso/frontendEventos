@@ -42,8 +42,16 @@
     <button pButton *ngIf="administrativo" type="submit" class="m-2 p-button-success " >Save</button>
     <button pButton *ngIf="cliente || administrativo" class="m-2 p-button-info justify-content-between" (click)="selectSalon(salon)">Select</button>
     <button pButton *ngIf="id>0 && administrativo" class="m-2 p-button-danger justify-content-end" (click)="deleteSalon()">Delete</button>
-
   </div>
+
+  <div>
+       <label for="image">Imagen</label>
+       <input type="file" id="image" class="form-control" accept="image/*" (change)="upload($event)">
+  </div>
+  <div *ngIf="urlimg">
+       <img [src]="urlimg" alt="">
+  </div>
+
   </form>
 </div>
 </p-card>
