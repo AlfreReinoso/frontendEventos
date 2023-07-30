@@ -41,29 +41,29 @@ export class ServiciosComponent implements OnInit {
   ngOnInit() {
     this.cliente = this.store.selectSnapshot(ClienteState.getCliente)
     this.administrativo = this.store.selectSnapshot(AdministrativoState.getAdministrativo)
-    let id = this.route.snapshot.params['id'] ;
-    if(id!=null){
-      this._servicioService.findOne(id).subscribe((servicioAgregado:Servicio)=>{
-        [...this.servicios, servicioAgregado]
-        // this.servicios.push(servicioAgregado)
-      })
-
-    };
-
-
+  
     if(this.store.selectSnapshot(EventosState.getServicio).length!=0){
       // console.log('hay servicios en el state')
-      // console.log(this.store.selectSnapshot(EventosState.getServicio))
+      console.log(this.store.selectSnapshot(EventosState.getServicio))
       // this.serviciosState = this.store.selectSnapshot(EventosState.getServicio);
       this.servicios = _.cloneDeep(this.store.selectSnapshot(EventosState.getServicio));
       // this.servicios = this.store.selectSnapshot(EventosState.getServicio);
+      
     }else{
       this._servicioService.findAll().subscribe(serviciosBack => {
         this.servicios = serviciosBack;
         // console.log(this.servicios)
-
+        
       })
     }
+    let id = this.route.snapshot.params['id'] ;
+        if(id!=null){
+          this._servicioService.findOne(id).subscribe((servicioAgregado:Servicio)=>{
+            this.servicios = [...this.servicios, servicioAgregado]
+            // this.servicios.push(servicioAgregado)
+          })
+    
+        };
    
 
     this._tipoServicioService.findAll().subscribe(tipos => {
@@ -113,7 +113,7 @@ export class ServiciosComponent implements OnInit {
   siguiente(){
     this.store.dispatch(new AddServicio(this.servicios));
     if(this.store.selectSnapshot(EventosState.getSalon)!= undefined){
-      console.log('hay salon')
+      // console.log('hay salon')
       this.router.navigate(['eventoForm/1'])
     }else {
       this.router.navigate(['salas']) 
@@ -134,6 +134,7 @@ export class ServiciosComponent implements OnInit {
 
         this.servicios.splice(this.servicios.indexOf(this.servicioSinModificar), 1);
 
+        this.store.dispatch(new AddServicio(this.servicios));
 
         this._messageService.clear();
         this._messageService.add({ severity:'success', summary: 'Éxito', detail: 'Servicio eliminado correctamente' })
@@ -167,12 +168,13 @@ export class ServiciosComponent implements OnInit {
 
 
       // this.servicios.splice(this.servicios.indexOf(this.servicioSinModificar), 1);
+      this.store.dispatch(new AddServicio(this.servicios));
 
       this._messageService.clear();
       this._messageService.add({ severity:'success', summary: 'Éxito', detail: 'Servicio eliminado correctamente' })
     };
 
-  }
+  } 
 
   cancelarMsj() {
     this._messageService.clear();
