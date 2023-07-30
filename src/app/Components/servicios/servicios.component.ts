@@ -132,7 +132,10 @@ export class ServiciosComponent implements OnInit {
         // this.servicios.splice(this.servicios.findIndex((value:Servicio):any=>{
         //   value.idServicio == this.servicioSinModificar.idServicio}), 1);
 
-        this.servicios.splice(this.servicios.indexOf(this.servicioSinModificar), 1);
+        this.servicios = this.servicios.filter(item => item !== this.servicioSinModificar);
+
+
+        // this.servicios.splice(this.servicios.indexOf(this.servicioSinModificar), 1);
 
         this.store.dispatch(new AddServicio(this.servicios));
 
@@ -158,13 +161,19 @@ export class ServiciosComponent implements OnInit {
       // console.log(this.servicios.findIndex((value:Servicio):any=>{
       //   value.idServicio === this.servicioSinModificar.idServicio}))
 
-      Object.defineProperty( this.servicios, this.servicios.indexOf(this.servicioSinModificar),{  configurable: true });
+      console.log(this.servicioSinModificar)
+
+      this.servicios = this.servicios.filter(item => 
+        item.idServicio !== this.servicioSinModificar.idServicio);
 
 
-      this.servicios.splice(this.servicios.findIndex((value:Servicio):any=>{
-        value.idServicio === this.servicioSinModificar.idServicio}), 1);
+      // Object.defineProperty( this.servicios, this.servicios.indexOf(this.servicioSinModificar),{  configurable: true });
 
-      // console.log(this.servicios);
+
+      // this.servicios.splice(this.servicios.findIndex((value:Servicio):any=>{
+      //   value.idServicio === this.servicioSinModificar.idServicio}), 1);
+
+      console.log(this.servicios);
 
 
       // this.servicios.splice(this.servicios.indexOf(this.servicioSinModificar), 1);
