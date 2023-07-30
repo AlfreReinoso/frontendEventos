@@ -41,29 +41,29 @@ export class ServiciosComponent implements OnInit {
   ngOnInit() {
     this.cliente = this.store.selectSnapshot(ClienteState.getCliente)
     this.administrativo = this.store.selectSnapshot(AdministrativoState.getAdministrativo)
-    let id = this.route.snapshot.params['id'] ;
-    if(id!=null){
-      this._servicioService.findOne(id).subscribe((servicioAgregado:Servicio)=>{
-        [...this.servicios, servicioAgregado]
-        // this.servicios.push(servicioAgregado)
-      })
-
-    };
-
-
+  
     if(this.store.selectSnapshot(EventosState.getServicio).length!=0){
-      console.log('hay servicios en el state')
+      // console.log('hay servicios en el state')
       console.log(this.store.selectSnapshot(EventosState.getServicio))
       // this.serviciosState = this.store.selectSnapshot(EventosState.getServicio);
       this.servicios = _.cloneDeep(this.store.selectSnapshot(EventosState.getServicio));
       // this.servicios = this.store.selectSnapshot(EventosState.getServicio);
+      
     }else{
       this._servicioService.findAll().subscribe(serviciosBack => {
         this.servicios = serviciosBack;
         // console.log(this.servicios)
-
+        
       })
     }
+    let id = this.route.snapshot.params['id'] ;
+        if(id!=null){
+          this._servicioService.findOne(id).subscribe((servicioAgregado:Servicio)=>{
+            this.servicios = [...this.servicios, servicioAgregado]
+            // this.servicios.push(servicioAgregado)
+          })
+    
+        };
    
 
     this._tipoServicioService.findAll().subscribe(tipos => {
@@ -76,12 +76,12 @@ export class ServiciosComponent implements OnInit {
   }
 
   eliminar(servicio: Servicio) {
-    console.log('servicios')
-    console.log(this.servicios)
+    // console.log('servicios')
+    // console.log(this.servicios)
 
 
-    console.log('servicio a eliminar ')
-    console.log(servicio)
+    // console.log('servicio a eliminar ')
+    // console.log(servicio)
 
     this.servicioSinModificar = {...servicio};
     this._messageService.clear();
@@ -112,24 +112,29 @@ export class ServiciosComponent implements OnInit {
   }
   siguiente(){
     this.store.dispatch(new AddServicio(this.servicios));
-    console.log(this.store.selectSnapshot(EventosState.getSalon))
-    // console.log(this.store.selectSnapshot(EventosState));
-    this.router.navigate(['eventoForm/1'])
+    if(this.store.selectSnapshot(EventosState.getSalon)!= undefined){
+      // console.log('hay salon')
+      this.router.navigate(['eventoForm/1'])
+    }else {
+      this.router.navigate(['salas']) 
+    }
+    
   }
 
   aceptarMsj() {
     if(this.administrativo){
-      console.log('eliminar por parte del administrativo')
+      // console.log('eliminar por parte del administrativo')
             // cuando entra por state rompe..
 
       this._servicioService.delete(this.servicioSinModificar.idServicio).subscribe(value => {
-        console.log(this.servicios) 
+        // console.log(this.servicios) 
 
         // this.servicios.splice(this.servicios.findIndex((value:Servicio):any=>{
         //   value.idServicio == this.servicioSinModificar.idServicio}), 1);
 
         this.servicios.splice(this.servicios.indexOf(this.servicioSinModificar), 1);
 
+        this.store.dispatch(new AddServicio(this.servicios));
 
         this._messageService.clear();
         this._messageService.add({ severity:'success', summary: 'Éxito', detail: 'Servicio eliminado correctamente' })
@@ -138,8 +143,8 @@ export class ServiciosComponent implements OnInit {
 
       // cuando entra por state rompe..
 
-      console.log(this.servicios)
-      console.log(this.servicioSinModificar)
+      // console.log(this.servicios)
+      // console.log(this.servicioSinModificar)
       // console.log(this.serviciosSinModificar.indexOf(this.servicioSinModificar))
 
       // this.servicios.forEach((serv,indexToDelete)=>{
@@ -159,16 +164,17 @@ export class ServiciosComponent implements OnInit {
       this.servicios.splice(this.servicios.findIndex((value:Servicio):any=>{
         value.idServicio === this.servicioSinModificar.idServicio}), 1);
 
-      console.log(this.servicios);
+      // console.log(this.servicios);
 
 
       // this.servicios.splice(this.servicios.indexOf(this.servicioSinModificar), 1);
+      this.store.dispatch(new AddServicio(this.servicios));
 
       this._messageService.clear();
       this._messageService.add({ severity:'success', summary: 'Éxito', detail: 'Servicio eliminado correctamente' })
     };
 
-  }
+  } 
 
   cancelarMsj() {
     this._messageService.clear();
