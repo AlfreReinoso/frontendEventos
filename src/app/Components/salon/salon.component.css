@@ -3,3 +3,9 @@
   margin-top: 4rem;
   max-width: 95%;
 }
+.centrarBtn {
+  flex: 0 0 auto;
+  padding: 0.5rem;
+  width: 50%;
+  text-align: center;
+}

@@ -48,6 +48,7 @@ export class SalonComponent implements OnInit {
       if(this.id > 1 ){
         this._salaService.updateSalon(this.salon).subscribe(
           (data:any)=> {
+            this._messageService.clear();
             this._messageService.add({
               severity: 'success',
               summary: 'Éxito',
@@ -55,12 +56,14 @@ export class SalonComponent implements OnInit {
             });
             this.router.navigate(['salas']);
           }, (error: any) =>{
+            this._messageService.clear();
             this._messageService.add({  key: 'atencion', severity:'warn', summary: 'Atención', detail: `${error.error.message}` }
             );
           })
       }else {
         this._salaService.createSalon(this.salon).subscribe(
           (data:any)=> {
+            this._messageService.clear();
             this._messageService.add({
               severity: 'success',
               summary: 'Éxito',
@@ -68,11 +71,13 @@ export class SalonComponent implements OnInit {
             });
             this.router.navigate(['salas']);
           }, (error: any) =>{
+            this._messageService.clear();
             this._messageService.add({  key: 'atencion', severity:'warn', summary: 'Atención', detail: `${error.error.message}` }
             );
           })
       }
     } else {
+      this._messageService.clear();
       this._messageService.add({  key: 'atencion', severity:'warn', summary: 'Atención',
         detail: `Datos incorrectos` }
       );
@@ -80,9 +85,8 @@ export class SalonComponent implements OnInit {
   }
 
   deleteSalon() {
-    this._salaService.deleteSalon(this.id).subscribe(
-      (data:any)=> this.router.navigate(['salas'])
-    );
+    this._messageService.clear();
+    this._messageService.add({ key: 'confirmar-c', sticky: true, severity:'warn', summary:'Desea eliminar el salon?', detail:'Confirma para proceder' });
   }
 
   selectSalon(salon: Salon) {
@@ -94,4 +98,24 @@ export class SalonComponent implements OnInit {
     }
   }
 
+  cancelarMsj() {
+    this._messageService.clear();
+  }
+
+  aceptarMsj() {
+    this._salaService.deleteSalon(this.id).subscribe(
+      (data:any)=> {
+        this._messageService.clear();
+        this._messageService.add({
+          severity: 'success',
+          summary: 'Éxito',
+          detail: `Salon borrado correctamente`
+        });
+        this.router.navigate(['salas']);
+      }, (error: any) =>{
+        this._messageService.clear();
+        this._messageService.add({  key: 'atencion', severity:'warn', summary: 'Atención', detail: 'Error! Existen eventos para este salon' }
+        );
+      });
+  } 
 }
