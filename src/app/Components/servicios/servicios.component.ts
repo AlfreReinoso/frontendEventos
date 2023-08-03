@@ -76,12 +76,6 @@ export class ServiciosComponent implements OnInit {
   }
 
   eliminar(servicio: Servicio) {
-    // console.log('servicios')
-    // console.log(this.servicios)
-
-
-    // console.log('servicio a eliminar ')
-    // console.log(servicio)
 
     this.servicioSinModificar = {...servicio};
     this._messageService.clear();
@@ -123,61 +117,25 @@ export class ServiciosComponent implements OnInit {
 
   aceptarMsj() {
     if(this.administrativo){
-      // console.log('eliminar por parte del administrativo')
-            // cuando entra por state rompe..
-
+     
       this._servicioService.delete(this.servicioSinModificar.idServicio).subscribe(value => {
-        // console.log(this.servicios) 
-
-        // this.servicios.splice(this.servicios.findIndex((value:Servicio):any=>{
-        //   value.idServicio == this.servicioSinModificar.idServicio}), 1);
-
-        this.servicios = this.servicios.filter(item => item !== this.servicioSinModificar);
-
-
-        // this.servicios.splice(this.servicios.indexOf(this.servicioSinModificar), 1);
-
+     
+        this.servicios = this.servicios.filter(item => 
+          item.idServicio !== this.servicioSinModificar.idServicio);
+  
         this.store.dispatch(new AddServicio(this.servicios));
-
+ 
         this._messageService.clear();
         this._messageService.add({ severity:'success', summary: 'Éxito', detail: 'Servicio eliminado correctamente' })
+        
       }); 
     }else if ( this.cliente){
-
-      // cuando entra por state rompe..
-
-      // console.log(this.servicios)
-      // console.log(this.servicioSinModificar)
-      // console.log(this.serviciosSinModificar.indexOf(this.servicioSinModificar))
-
-      // this.servicios.forEach((serv,indexToDelete)=>{
-      //   if( this.servicioSinModificar.idServicio === serv.idServicio){
-      //   console.log(serv+' '+indexToDelete);
-      //   this.servicios.splice(indexToDelete, 1);
-      //   }
-      // })
-
-
-      // console.log(this.servicios.findIndex((value:Servicio):any=>{
-      //   value.idServicio === this.servicioSinModificar.idServicio}))
-
-      console.log(this.servicioSinModificar)
 
       this.servicios = this.servicios.filter(item => 
         item.idServicio !== this.servicioSinModificar.idServicio);
 
-
-      // Object.defineProperty( this.servicios, this.servicios.indexOf(this.servicioSinModificar),{  configurable: true });
-
-
-      // this.servicios.splice(this.servicios.findIndex((value:Servicio):any=>{
-      //   value.idServicio === this.servicioSinModificar.idServicio}), 1);
-
-      console.log(this.servicios);
-
-
-      // this.servicios.splice(this.servicios.indexOf(this.servicioSinModificar), 1);
       this.store.dispatch(new AddServicio(this.servicios));
+
 
       this._messageService.clear();
       this._messageService.add({ severity:'success', summary: 'Éxito', detail: 'Servicio eliminado correctamente' })
