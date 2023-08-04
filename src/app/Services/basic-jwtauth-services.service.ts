@@ -2,11 +2,9 @@ import { Injectable } from '@angular/core';
 import {API_URL} from '../app.constants';
 import {HttpClient} from "@angular/common/http";
 import {map} from "rxjs";
-import {ClientesService} from "./clientes.service";
 import {Store} from "@ngxs/store";
-import {AddCliente, ClienteResetAction, ClienteState} from "../State/cliente.state";
-import {AdministrativoService} from "./administrativo.service";
-import {AddAdministrativo, AdministrativoState, AdmResetAction} from "../State/adm.state";
+import {ClienteResetAction} from "../State/cliente.state";
+import { AdmResetAction} from "../State/adm.state";
 import { EventoResetAction } from '../State/evento.state';
 export const TOKEN = 'token';
 export const AUTHENTICATED_USER = 'authenticateUser';
@@ -17,8 +15,8 @@ export const AUTHENTICATED_USER = 'authenticateUser';
 export class
 BasicJWTAuthServicesService {
 
-  constructor(private http: HttpClient, private _clienteService: ClientesService, private store:Store,
-              private _administrativoService: AdministrativoService) { }
+  constructor(private http: HttpClient, private store:Store,
+              ) { }
 
   executeJWTAuthenticationService(username: string, password: string) {
     return this.http.post<any>
@@ -27,23 +25,7 @@ BasicJWTAuthServicesService {
         data => {
           sessionStorage.setItem(AUTHENTICATED_USER, username);
           sessionStorage.setItem(TOKEN, `Bearer ${data.token}`);
-          this._clienteService.getCliente(username).subscribe(
-            (response)=>{
-              if(response){
-                this.store.dispatch(new AddCliente(response))
-                this.store.dispatch(new AdmResetAction())
-              }
-            }
-          );
-          this._administrativoService.getAdministrativo(username).subscribe(
-            (response)=>{
-              if(response){
-                this.store.dispatch(new AddAdministrativo(response))
-                this.store.dispatch(new ClienteResetAction())
-              }
-            }
-          )
-          return data;
+          return data
         }
       )
     );

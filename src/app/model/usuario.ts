@@ -1,3 +1,5 @@
+import { TipoUsuario } from "./tipousuario";
+
 export class Usuario {
   idUsuario: number = 0 ;
   tipoDocumento : string = '';
@@ -7,6 +9,7 @@ export class Usuario {
   mail : string = '';
   telefono : string = '';
   usuarioName: string ='';
+  tipoUsuario: TipoUsuario;
 
   constructor() {
   }

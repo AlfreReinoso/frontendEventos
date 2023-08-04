@@ -11,6 +11,7 @@ import {Cliente} from "../../model/cliente";
 import {ClienteResetAction, ClienteState} from "../../State/cliente.state";
 import {Observable} from "rxjs";
 import {MenuState} from "../../State/menu.state";
+import { Usuario } from 'src/app/model/usuario';
 
 @Component({
   selector: 'app-navbar',
@@ -56,9 +57,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
          if (this.isUserLoggedIn) {
            // this.setearMenu(true) 
   
-           this.showMenu(true);
+           this.showMenu(true,'');
          } else {
-           this.showMenu(false);
+           this.showMenu(false,'');
          }
       }
       
@@ -69,18 +70,18 @@ export class NavbarComponent implements OnInit, OnDestroy {
       this.administrativo = this.store.selectSnapshot(AdministrativoState.getAdministrativo);
   }
 
-  async setearMenu(event:any){
-    await new Promise(r => setTimeout(r, 1500));
-    if(event == true){
+  async setearMenu(usuario:Usuario){
+    // await new Promise(r => setTimeout(r, 1500));
+    if(usuario != null){
       this.isUserLoggedIn = true
       this.cliente = this.store.selectSnapshot(ClienteState.getCliente);
       this.administrativo = this.store.selectSnapshot(AdministrativoState.getAdministrativo);
 
       if (this.isUserLoggedIn) {
-        this.showMenu(true);
+        this.showMenu(true, usuario.tipoUsuario);
       } else {
         this.isUserLoggedIn = false;
-        this.showMenu(false);
+        this.showMenu(false, '');
       }
     }
   }
@@ -91,13 +92,13 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.isUserLoggedIn = false;
     this.cliente = new Cliente();
     this.administrativo = new Administrativo();
-    this.showMenu(false);
+    this.showMenu(false,'');
     this.router.navigate(['']);
   }
 
-  showMenu(b: Boolean) {
+  showMenu(b: Boolean, tipoUsuario:String) {
     if (b) {
-      if(this.administrativo != undefined){
+      if(tipoUsuario == 'ADMINISTRATIVO'){
         this.items = [
           {
             label: 'Inicio',
@@ -134,7 +135,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
             ]
           }
         ];
-      } else if(this.cliente != undefined){
+        this.router.navigate(['/salas']);
+
+      } else if(tipoUsuario == 'CLIENTE'){
           this.items = [
             {
               label: 'Inicio',
@@ -152,8 +155,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
               
             }
           ]
+          this.router.navigate(['/salas']);
       }
-      this.router.navigate(['/salas']);
+
     } else {
       this.items = [];
       this.router.navigate(['']);

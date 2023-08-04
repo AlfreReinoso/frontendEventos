@@ -6,6 +6,8 @@ import {Router} from "@angular/router";
 import {ClientesService} from "../../Services/clientes.service";
 import {AdministrativoService} from "../../Services/administrativo.service";
 import {Store} from "@ngxs/store";
+import { AddCliente, ClienteResetAction } from 'src/app/State/cliente.state';
+import { AddAdministrativo, AdmResetAction } from 'src/app/State/adm.state';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +17,7 @@ import {Store} from "@ngxs/store";
 export class LoginComponent {
 
   @Input() islogeado: boolean;
-  @Output() estaLogeado = new EventEmitter<boolean>();
+  @Output() estaLogeado = new EventEmitter<any>();
 
   username: string = '';
   password: string = '';
@@ -26,18 +28,44 @@ export class LoginComponent {
     private _messageService: MessageService,
     public loginDialog: DynamicDialogRef,
     private router: Router,
+    private _clienteService: ClientesService,
+    private _administrativoService: AdministrativoService,
     ) { }
 
   handleJWTAuthLogin(){
+
     this.basicAuthenticationServices.executeJWTAuthenticationService(this.username, this.password)
       .subscribe(
           (data: any) => {
-            // console.log(data)
+          
+            let user = this.basicAuthenticationServices.getAuthenticatedUser();
+            if(user){
+              this._clienteService.getCliente(user).subscribe(
+                (response)=>{
+                  if(response){
+                    this.store.dispatch(new AddCliente(response))
+                    this.store.dispatch(new AdmResetAction())
+                    
+                    this.estaLogeado.emit(response)
+                  }
+                }
+              );
+              this._administrativoService.getAdministrativo(user).subscribe(
+                (response)=>{
+                  if(response){
+                    this.store.dispatch(new AddAdministrativo(response))
+                    this.store.dispatch(new ClienteResetAction())
+                   
+                    this.estaLogeado.emit(response)
+                  }
+                }
+              )
+            }
             this.islogeado = true;
-            this.estaLogeado.emit(true)
+           
             this.router.navigate(['/salas']);
         },
-        (error: any) => {
+        (error: any) => { 
           this.mensajeError();
           this.islogeado= false
           this.estaLogeado.emit(false)
