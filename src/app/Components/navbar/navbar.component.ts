@@ -46,20 +46,22 @@ export class NavbarComponent implements OnInit, OnDestroy {
   logIn(){
 
       this.verificarElUserState();
-
-      if(this.cliente.idUsuario != 0|| this.administrativo.idUsuario!=0){
-        this.isUserLoggedIn = true;
-      }else{
-        this.isUserLoggedIn = false;
-        this.showLogin = true;
+      if(this.cliente || this.administrativo){
+        if(this.cliente.idUsuario != 0|| this.administrativo.idUsuario!=0){
+          this.isUserLoggedIn = true;
+        }else{
+          this.isUserLoggedIn = false;
+          this.showLogin = true;
+        }
+         if (this.isUserLoggedIn) {
+           // this.setearMenu(true) 
+  
+           this.showMenu(true);
+         } else {
+           this.showMenu(false);
+         }
       }
-       if (this.isUserLoggedIn) {
-         // this.setearMenu(true)
-
-         this.showMenu(true);
-       } else {
-         this.showMenu(false);
-       }
+      
   }
 
    verificarElUserState() {
